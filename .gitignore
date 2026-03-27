@@ -55,6 +55,11 @@ ExportedObj/
 *.opendb
 *.VC.db
 
+# Specifically ignore auto-generated project files in root
+/Assembly-CSharp.csproj
+/Assembly-CSharp-Editor.csproj
+/BranchingLEDanimator.sln
+
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta

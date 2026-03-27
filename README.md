@@ -31,29 +31,39 @@ A **clean, simplified** LED visualization system for complex geometries in Unity
 - **Real-time Updates**: Both Scene view and Game view update simultaneously
 - **Event-driven**: Clean communication between components
 
-## 📁 Clean File Structure
+## 📁 Project Structure
 ```
-Assets/
-├── Scripts/
-│   ├── Core/
-│   │   ├── LEDGraphManager.cs          ← Geometry data & import
-│   │   ├── LEDAnimationSystem.cs       ← Animation logic
-│   │   └── LEDVisualizationEvents.cs   ← Event system
-│   ├── Animation/
-│   │   ├── LEDAnimationType.cs         ← Base animation class
-│   │   ├── WaveAnimation.cs           ← Wave animation
-│   │   ├── PulseAnimation.cs          ← Pulse animation
-│   │   ├── SparkleAnimation.cs        ← Sparkle animation
-│   │   └── *.asset                    ← Animation asset files
-│   ├── Visualization/
-│   │   ├── LEDSceneVisualizer.cs      ← Scene view gizmos
-│   │   └── LEDGameVisualizer.cs       ← Game view 3D objects
-│   └── UI/
-│       └── LEDControlPanel.cs         ← Simple unified controls
-├── Data/
-│   └── grasshopper_export.txt         ← Geometry data
-└── Scenes/
-    └── SampleScene.unity
+BranchingLEDanimator/
+├── Assets/
+│   ├── Scripts/
+│   │   ├── Core/                      ← Core system (Graph, Animation, Events)
+│   │   ├── Animation/                 ← Animation types & assets
+│   │   ├── Audio/                     ← Audio generation & playback
+│   │   ├── Hardware/                  ← ESP32 communication & mapping
+│   │   ├── Visualization/             ← Scene & Game view rendering
+│   │   ├── Player/                    ← Player interaction
+│   │   ├── UI/                        ← User interface
+│   │   ├── Mapping/                   ← Physical LED mapping
+│   │   └── Setup/                     ← Setup utilities
+│   ├── Data/
+│   │   ├── GrasshopperExports/        ← Geometry data from Rhino/GH
+│   │   ├── ledLayout2D.dxf            ← 2D layout reference
+│   │   └── led_mapping.json           ← Physical LED mapping config
+│   ├── Scenes/
+│   │   ├── Main/                      ← Primary scenes (G3, G6, SampleScene)
+│   │   └── Tests/                     ← Test scenes
+│   ├── Audio/                         ← Audio assets (bird calls, etc.)
+│   ├── AudioExports/                  ← Generated audio files
+│   └── Settings/                      ← Project settings & input actions
+├── Documentation/
+│   ├── Setup/                         ← Setup guides
+│   ├── Architecture/                  ← Technical architecture docs
+│   ├── Features/                      ← Feature-specific guides
+│   └── Proposals/                     ← Design proposals
+└── Firmware/
+    ├── ESP32_Live_Controller/         ← Real-time Unity streaming
+    ├── ESP32_Animation_Player/        ← Standalone playback
+    └── ESP32_Audio_SD_Test/           ← Audio hardware testing
 ```
 
 ## 🚀 Quick Setup (2 minutes)
@@ -219,12 +229,24 @@ The system includes comprehensive testing:
 
 ## 📖 Documentation
 
-- **`CLEAN_SETUP_GUIDE.md`** - Complete setup instructions for 9-component system
-- **`ESP32_SETUP_GUIDE.md`** - Hardware setup and LED configuration
-- **`DUAL_FIRMWARE_GUIDE.md`** - ESP32 firmware options (Live vs Standalone)
-- **`ANIMATION_EXPORT_GUIDE.md`** - Future playlist and sound sync features
-- **`SIMPLIFIED_ARCHITECTURE.md`** - Technical architecture overview
-- **`AUDIO_INTEGRATION_ROADMAP.md`** - 🎵 **NEW**: Audio hardware integration guide and roadmap
+All documentation is organized in the `Documentation/` folder:
+
+- **Setup Guides**: `Documentation/Setup/`
+  - Complete setup instructions for 9-component system
+  - ESP32 hardware setup and LED configuration
+  
+- **Architecture**: `Documentation/Architecture/`
+  - Technical architecture overview and system design
+  
+- **Feature Guides**: `Documentation/Features/`
+  - Animation export for standalone playback
+  - Audio hardware integration (SD card + I2S)
+  - Audio system roadmap
+  
+- **Design Proposals**: `Documentation/Proposals/`
+  - Workflow improvements and future features
+
+See `Documentation/README.md` for a complete index.
 
 ## ⚡ Keyboard Shortcuts
 - **Tab** - Toggle UI

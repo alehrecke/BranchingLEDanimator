@@ -15,7 +15,7 @@ namespace BranchingLEDAnimator.Core
     public class LEDGraphManager : MonoBehaviour
     {
         [Header("Import Settings")]
-        public string grasshopperDataPath = "Assets/Data/grasshopper_export.txt";
+        public string grasshopperDataPath = "Assets/Data/GrasshopperExports/grasshopper_export.txt";
         public bool autoImportOnStart = true;
         public bool autoReloadOnFileChange = true; // Monitor file changes and auto-reload
         
