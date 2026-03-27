@@ -1,7 +1,29 @@
 # Branching LED Animator - Unity 6 Project
 
+**Unity Version:** 6000.0.36f1 (Unity 6)
+
 ## Project Overview
 A **clean, simplified** LED visualization system for complex geometries in Unity 6. Import graph structures from Rhino/Grasshopper and create custom animations with an easy-to-use modular system. Designed for ESP32 integration and physical LED control.
+
+## 🚀 Getting Started (For Collaborators)
+
+### Clone & Open:
+```bash
+git clone https://github.com/alehrecke/BranchingLEDanimator.git
+```
+
+1. Open **Unity Hub**
+2. Click **Add** → Select the cloned folder
+3. Open with **Unity 6000.0.36f1** (or compatible Unity 6 version)
+4. Unity will automatically import all assets (~1-2 minutes first time)
+5. Open any scene in `Assets/Scenes/Main/`
+6. You're ready to go!
+
+### What Gets Auto-Generated:
+Unity will automatically create:
+- `Library/` folder (asset cache)
+- `.csproj` and `.sln` files (IDE integration)
+- `Logs/` and `UserSettings/` folders
 
 ## ✨ Core Features
 - **Complete Hardware Integration**: Full ESP32 integration with 9 specialized components
