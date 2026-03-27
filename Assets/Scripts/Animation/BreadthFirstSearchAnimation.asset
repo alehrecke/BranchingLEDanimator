@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea601214fed3454c80158f91751a117, type: 3}
+  m_Name: BreadthFirstSearchAnimation
+  m_EditorClassIdentifier: 
+  animationName: Base Animation
+  speed: 5
+  primaryColor: {r: 1, g: 0.7354885, b: 0, a: 1}
+  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
+  brightness: 2
+  saturation: 2
+  enhanceColors: 1
+  duration: 164.8
+  loop: 0
+  searchSpeed: 74
+  pauseBetweenSearches: 1
+  stepInterval: 0.07
+  showProgressiveFill: 1
+  autoCalculateDuration: 1
+  durationBuffer: 148.8
+  _seedNodeCount: 10
+  _estimatedMaxDepth: 10
+  _estimatedRuntime: 164.8
+  _timingBreakdown: "10 seeds \xD7 (10 steps \xD7 0.07s + 1s pause) + 148.8s buffer"
+  useComplementaryColors: 1
+  colorProgression: 2.67
+  searchSaturation: 0.9
+  searchBrightness: 0.9
+  persistentBackground: 1
+  backgroundFadeRate: 0.3
+  highlightCurrentFrontier: 1
+  frontierIntensity: 1.2

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eddce8aa148af645baaa6a7d64d0827, type: 3}
+  m_Name: WaveAnimation
+  m_EditorClassIdentifier: 
+  animationName: Wave
+  speed: 1.8
+  primaryColor: {r: 0.84059954, g: 1, b: 0, a: 1}
+  secondaryColor: {r: 1, g: 0.50585276, b: 0, a: 1}
+  inactiveColor: {r: 0, g: 0.12919855, b: 1, a: 1}
+  brightness: 2
+  saturation: 2
+  enhanceColors: 1
+  duration: 15
+  loop: 1
+  waveSpeed: 12.4
+  waveWidth: 11.4
+  multipleWaves: 1
+  waveSeparation: 34.5

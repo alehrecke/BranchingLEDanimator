@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1675220122ac8ef4995c8a2954b62730, type: 3}
+  m_Name: PathFinderAnimation
+  m_EditorClassIdentifier: 
+  animationName: Base Animation
+  speed: 1
+  primaryColor: {r: 1, g: 0, b: 0, a: 1}
+  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
+  brightness: 1
+  saturation: 1
+  enhanceColors: 1
+  duration: 10
+  loop: 1
+  pathDuration: 5.12
+  recedeDuration: 1.267
+  fillStyle: 3
+  leadingEdgeWidth: 8
+  trailPersistence: 0.8
+  maxSimultaneousPaths: 2
+  avoidActiveEndpoints: 1
+  colorMode: 1
+  sourceColor: {r: 0.2, g: 0.8, b: 1, a: 1}
+  destinationColor: {r: 1, g: 0, b: 0.08282852, a: 1}
+  monochromeTrailColor: {r: 0, g: 0.8, b: 1, a: 1}
+  monochromeBackground: {r: 0.02, g: 0.02, b: 0.05, a: 1}
+  multiPathHueSpacing: 0.25
+  legColorSaturation: 0.8
+  legColorBrightness: 1
+  leadingEdgeColor: {r: 1, g: 1, b: 1, a: 1}
+  idleEndpointColor: {r: 0.1, g: 0.2, b: 0.3, a: 1}
+  idlePulseSpeed: 1.07
+  idlePulseAmount: 0.105
+  chaseParticleCount: 7
+  chaseSpeed: 1.5
+  chaseSpacing: 0.2
+  enableAudio: 1
+  baseFrequency: 220
+  audioVolume: 0.415
+  audioAttack: 0.3
+  audioRelease: 1
+  destinationWindow: 4.81
+  anyEndpointCanStart: 1
+  highlightDestination: 1
+  destinationPulseSpeed: 7.35
+  showPathDebug: 1

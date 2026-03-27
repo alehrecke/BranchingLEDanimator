@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b3ac2f1467c4d47a80fcfe75efcaa2, type: 3}
+  m_Name: InteractivePanAnimation
+  m_EditorClassIdentifier: 
+  animationName: Base Animation
+  speed: 1
+  primaryColor: {r: 1, g: 0, b: 0, a: 1}
+  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
+  brightness: 2
+  saturation: 2
+  enhanceColors: 1
+  duration: 10
+  loop: 1
+  panSpeed: 0.26
+  gradientRepeats: 0.90000004
+  gradientOffset: 0
+  colorMode: 0
+  rainbowHueStart: 0.392
+  rainbowHueRange: 1
+  rainbowSaturation: 1
+  rainbowBrightness: 1
+  tertiaryColor: {r: 0, g: 1, b: 0, a: 1}
+  smoothGradient: 0
+  gradientCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  enablePulse: 0
+  pulseFrequency: 2
+  pulseMinBrightness: 0.3
+  directionSmoothSpeed: 4.24
+  defaultDirection: {x: 0, y: -0.65, z: 0}
+  showDirectionVector: 1
+  vectorDisplayLength: 50
+  vectorColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  highlightTouchedEndpoints: 1
+  endpointHighlightIntensity: 0.5
+  endpointHighlightRadius: 3
+  inputMode: 0

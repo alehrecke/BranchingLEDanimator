@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375ec206c8f6d944998226ef598f5800, type: 3}
+  m_Name: GraphJuggleAnimation
+  m_EditorClassIdentifier: 
+  animationName: Base Animation
+  speed: 19.8
+  primaryColor: {r: 0, g: 1, b: 0.09368992, a: 1}
+  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
+  brightness: 1
+  saturation: 1
+  enhanceColors: 1
+  duration: 10
+  loop: 1
+  pulseSpeed: 18.76
+  catchWindowSeconds: 0.152
+  startingLives: 17
+  autoStartPulse: 1
+  maxSimultaneousBalls: 1
+  ballSpawnInterval: 2
+  enableMomentum: 1
+  momentumGainPerCatch: 1.08
+  maxMomentumMultiplier: 2
+  momentumDecayRate: 0.05
+  momentumLossOnMiss: 0.3
+  inputMode: 2
+  ambientVolume: 0.044
+  ambientPulseAmount: 0.042
+  ambientFrequency: 47.2
+  ambientFrequency2: 104.7
+  ambientNoiseAmount: 0.044
+  toneAttack: 0.0247
+  toneDecayTime: 0.386
+  toneSustain: 0.311
+  toneRelease: 1.11
+  baseFrequency: 82.1
+  toneVolume: 0.854
+  harmonic2: 0.357
+  harmonic3: 0.12
+  pulseAudioVolume: 109.4
+  groundColor: {r: 1, g: 0.4, b: 0.1, a: 1}
+  skyColor: {r: 0.3, g: 0.6, b: 1, a: 1}
+  catchReadyColor: {r: 0, g: 1, b: 0, a: 1}
+  pulseWidth: 7.47
+  pulseShape:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.009010315
+      value: 0.16060257
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.02540426
+      value: 0.4047165
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  useRainbowColors: 1
+  rainbowSaturation: 1
+  rainbowBrightness: 1
+  pulseStyle: 0
+  trailLength: 30
+  trailIntensity: 1
+  trailStretchWithMomentum: 1
+  successFlashDuration: 0
+  successBrightnessBoost: 0.98
+  catchBrightnessBoost: 1.5
+  currentScore: 621400
+  currentLives: 12
+  streak: 95
+  gameActive: 1

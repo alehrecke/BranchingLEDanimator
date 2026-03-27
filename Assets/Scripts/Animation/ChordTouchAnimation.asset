@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4bb3dc0b1c1ccb42b6eedcd7ee6819f, type: 3}
+  m_Name: ChordTouchAnimation
+  m_EditorClassIdentifier: 
+  animationName: Base Animation
+  speed: 1
+  primaryColor: {r: 1, g: 0, b: 0, a: 1}
+  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
+  brightness: 1
+  saturation: 1
+  enhanceColors: 1
+  duration: 21.3
+  loop: 1
+  audioMode: 1
+  customClips:
+  - {fileID: 8300000, guid: c1ecc08401ddc6a4faea98de28e92bbe, type: 3}
+  - {fileID: 8300000, guid: f465fda54c33cf84099723d85e337d32, type: 3}
+  - {fileID: 8300000, guid: 1439872e40ecd6a418ca36f6da676f82, type: 3}
+  - {fileID: 8300000, guid: 42f54d82faf512a45999e9519a7a0e0e, type: 3}
+  - {fileID: 8300000, guid: 076de3a30149085448a8732b282c3346, type: 3}
+  - {fileID: 8300000, guid: 2ab7bd7610f592240b171aba8d2deab3, type: 3}
+  loopCustomClips: 1
+  scale: 1
+  baseFrequency: 73.2
+  baseOctave: 69
+  toneVolume: 1
+  toneAttack: 4.74
+  toneRelease: 0.08
+  touchGlowColor: {r: 1, g: 0.9, b: 0.5, a: 1}
+  touchGlowRadius: 99
+  touchGlowIntensity: 2.946
+  touchGlowPulseSpeed: 4.11
+  touchGlowPulseAmount: 0.084
+  pulseColor: {r: 1, g: 0.8, b: 0.2, a: 1}
+  pulseSpeed: 21.31
+  pulseInterval: 0.4
+  pulseFadeTime: 17.36
+  pulseWidth: 2.9
+  pulseRange: 19
+  pulseFalloff: 0.412
+  pulseShape:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.03678131
+      value: 1.0782013
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9581821
+      value: 0.2939701
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  distanceDecay:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.98413086
+      value: 0.9324829
+      inSlope: -0.8
+      outSlope: -0.8
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  endpointIdleColor: {r: 0.1, g: 0.2, b: 0.4, a: 1}
+  idlePulseSpeed: 1
+  idlePulseAmount: 0.3
+  showNoteAssignments: 1
+  verboseDebug: 1

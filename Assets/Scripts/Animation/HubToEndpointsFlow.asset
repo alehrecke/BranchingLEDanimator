@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae74d72d3187e24aa3d110766b9b3ff, type: 3}
+  m_Name: HubToEndpointsFlow
+  m_EditorClassIdentifier: 
+  animationName: Hub to Endpoints Flow
+  speed: 13.41
+  primaryColor: {r: 0, g: 0.8155856, b: 1, a: 1}
+  secondaryColor: {r: 0, g: 0.0564754, b: 1, a: 1}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
+  brightness: 1.072
+  saturation: 1.077
+  enhanceColors: 1
+  duration: 70
+  loop: 1
+  flowType: 2
+  particleLifetime: 23.6
+  maxParticles: 334
+  sourceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  sinkColor: {r: 1, g: 0, b: 1, a: 1}
+  flowTrail:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.013027191
+      value: 0.833271
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.0355202
+      value: 0.7178451
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  showNetworkRoles: 0
+  bidirectionalFlow: 1
