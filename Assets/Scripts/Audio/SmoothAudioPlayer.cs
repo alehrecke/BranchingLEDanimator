@@ -53,7 +53,31 @@ namespace BranchingLEDAnimator.Audio
             // Setup audio sources
             SetupAudioSources();
             
+            // Subscribe to animation change events
+            LEDVisualizationEvents.OnAnimationChanged += OnAnimationChanged;
+            
             Debug.Log("🎵 SmoothAudioPlayer initialized");
+        }
+        
+        void OnDestroy()
+        {
+            // Unsubscribe from events
+            LEDVisualizationEvents.OnAnimationChanged -= OnAnimationChanged;
+        }
+        
+        /// <summary>
+        /// Handle animation change - stop and restart audio
+        /// </summary>
+        private void OnAnimationChanged(string animationName)
+        {
+            // Stop current audio
+            StopSmoothAudio();
+            
+            // Restart audio if animation is playing
+            if (animationSystem != null && animationSystem.isPlaying)
+            {
+                StartSmoothAudio();
+            }
         }
         
         void Update()

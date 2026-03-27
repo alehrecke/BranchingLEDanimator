@@ -1219,9 +1219,15 @@ namespace BranchingLEDAnimator.Animation
             initialized = false;
         }
         
-        private void OnDisable()
+        /// <summary>
+        /// Clean up audio and state when animation is disabled or changed
+        /// </summary>
+        public void CleanupAudio()
         {
-            GraphPlayerController.OnEndpointPressed -= OnEndpointTouched;
+            if (toneSource != null)
+            {
+                toneSource.Stop();
+            }
             
             if (audioContainer != null)
             {
@@ -1230,6 +1236,12 @@ namespace BranchingLEDAnimator.Animation
             }
             
             audioInitialized = false;
+        }
+        
+        private void OnDisable()
+        {
+            GraphPlayerController.OnEndpointPressed -= OnEndpointTouched;
+            CleanupAudio();
         }
     }
 }

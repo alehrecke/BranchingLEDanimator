@@ -785,15 +785,11 @@ namespace BranchingLEDAnimator.Animation
             // Don't clear held endpoints - let them persist
         }
         
-        void OnDisable()
+        /// <summary>
+        /// Clean up audio and state when animation is disabled or changed
+        /// </summary>
+        public void CleanupAudio()
         {
-            if (subscribedToEvents)
-            {
-                GraphPlayerController.OnEndpointPressed -= OnEndpointPressed;
-                GraphPlayerController.OnEndpointReleased -= OnEndpointReleased;
-                subscribedToEvents = false;
-            }
-            
             // Stop all held tones
             foreach (var kvp in heldEndpoints)
             {
@@ -814,6 +810,18 @@ namespace BranchingLEDAnimator.Animation
                 audioContainer = null;
             }
             audioSources.Clear();
+        }
+        
+        void OnDisable()
+        {
+            if (subscribedToEvents)
+            {
+                GraphPlayerController.OnEndpointPressed -= OnEndpointPressed;
+                GraphPlayerController.OnEndpointReleased -= OnEndpointReleased;
+                subscribedToEvents = false;
+            }
+            
+            CleanupAudio();
         }
         
         // Track previous values to detect actual changes

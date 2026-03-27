@@ -889,21 +889,24 @@ namespace BranchingLEDAnimator.Animation
             }
         }
         
-        private void OnDisable()
+        /// <summary>
+        /// Clean up audio and state when animation is disabled or changed
+        /// </summary>
+        public void CleanupAudio()
         {
-            if (subscribedToEvents)
-            {
-                GraphPlayerController.OnEndpointPressed -= OnEndpointPressed;
-                subscribedToEvents = false;
-            }
-            
             // Clean up all path audio
             foreach (var path in activePaths)
             {
                 if (path.sourceAudio != null)
+                {
+                    path.sourceAudio.Stop();
                     Object.DestroyImmediate(path.sourceAudio.gameObject);
+                }
                 if (path.destAudio != null)
+                {
+                    path.destAudio.Stop();
                     Object.DestroyImmediate(path.destAudio.gameObject);
+                }
             }
             activePaths.Clear();
             
@@ -912,7 +915,17 @@ namespace BranchingLEDAnimator.Animation
                 Object.DestroyImmediate(audioContainer);
                 audioContainer = null;
             }
+        }
+        
+        private void OnDisable()
+        {
+            if (subscribedToEvents)
+            {
+                GraphPlayerController.OnEndpointPressed -= OnEndpointPressed;
+                subscribedToEvents = false;
+            }
             
+            CleanupAudio();
             analysisComplete = false;
         }
         

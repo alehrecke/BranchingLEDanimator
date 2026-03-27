@@ -1610,12 +1610,18 @@ namespace BranchingLEDAnimator.Animation
             ledMappingInitialized = false; // Reset LED mapping
         }
         
-        void OnDisable()
+        /// <summary>
+        /// Clean up audio and state when animation is disabled or changed
+        /// </summary>
+        public void CleanupAudio()
         {
-            if (subscribedToPlayerEvents)
+            if (toneSource != null)
             {
-                GraphPlayerController.OnEndpointTouched -= OnPlayerTouchedEndpoint;
-                subscribedToPlayerEvents = false;
+                toneSource.Stop();
+            }
+            if (ambientSource != null)
+            {
+                ambientSource.Stop();
             }
             
             if (audioContainer != null)
@@ -1626,6 +1632,17 @@ namespace BranchingLEDAnimator.Animation
                     Object.DestroyImmediate(audioContainer);
                 audioContainer = null;
             }
+        }
+        
+        void OnDisable()
+        {
+            if (subscribedToPlayerEvents)
+            {
+                GraphPlayerController.OnEndpointTouched -= OnPlayerTouchedEndpoint;
+                subscribedToPlayerEvents = false;
+            }
+            
+            CleanupAudio();
         }
         
         void OnValidate()

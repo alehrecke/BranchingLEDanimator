@@ -102,6 +102,35 @@ namespace BranchingLEDAnimator.Audio
             {
                 GenerateNodeFrequencyMapping();
             }
+            
+            // Subscribe to animation change events
+            LEDVisualizationEvents.OnAnimationChanged += OnAnimationChanged;
+        }
+        
+        void OnDestroy()
+        {
+            // Unsubscribe from events
+            LEDVisualizationEvents.OnAnimationChanged -= OnAnimationChanged;
+        }
+        
+        /// <summary>
+        /// Handle animation change - stop and restart audio
+        /// </summary>
+        private void OnAnimationChanged(string animationName)
+        {
+            // Stop current audio
+            StopRealtimeAudio();
+            
+            // Clear all active chimes and state
+            activeChimes.Clear();
+            previousNodeStates.Clear();
+            lastActiveNodeCount = 0;
+            
+            // Restart audio if animation is playing
+            if (animationSystem != null && animationSystem.isPlaying)
+            {
+                StartRealtimeAudio();
+            }
         }
         
         void Update()

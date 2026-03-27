@@ -902,6 +902,26 @@ namespace BranchingLEDAnimator.Core
         /// </summary>
         private void OnAnimationChanged()
         {
+            // Get the previous animation before changing
+            LEDAnimationType previousAnimation = lastAnimationIndex >= 0 && lastAnimationIndex < availableAnimations.Count 
+                ? availableAnimations[lastAnimationIndex] 
+                : null;
+            
+            // Clean up audio from previous animation if it has a CleanupAudio method
+            if (previousAnimation != null)
+            {
+                // Use reflection to call CleanupAudio if it exists (for PathFinderAnimation, etc.)
+                var cleanupMethod = previousAnimation.GetType().GetMethod("CleanupAudio");
+                if (cleanupMethod != null)
+                {
+                    cleanupMethod.Invoke(previousAnimation, null);
+                    if (showDebugInfo)
+                    {
+                        Debug.Log($"🔇 Cleaned up audio from previous animation: {previousAnimation.name}");
+                    }
+                }
+            }
+            
             ValidateAnimationIndex();
             ResetAnimation();
             
