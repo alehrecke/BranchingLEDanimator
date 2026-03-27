@@ -10,6 +10,9 @@ This folder contains all project documentation organized by category.
 
 ### Technical Documentation
 - **[Architecture Overview](Architecture/SIMPLIFIED_ARCHITECTURE.md)** - System architecture and component design
+- **[Graph Animation Explained](Architecture/GRAPH_ANIMATION_EXPLAINED.md)** - Deep dive into how graph-based animations work
+- **[Visual Examples](Architecture/VISUAL_EXAMPLES.md)** - Step-by-step visual breakdowns of animation algorithms
+- **[Creating Custom Animations](Architecture/CREATING_CUSTOM_ANIMATIONS.md)** - Code examples and patterns for building your own animations
 
 ### Feature Guides
 - **[Animation Export](Features/ANIMATION_EXPORT_GUIDE.md)** - Export animations for standalone ESP32 playback
