@@ -205,7 +205,7 @@ namespace BranchingLEDAnimator.Animation
             
             // Fire the touch event using the static helper
             Vector3 position = graphManager.NodePositions[endpoint];
-            GraphPlayerController.SimulatePress(endpoint, position);
+            GraphPlayerController.SimulatePress(graphManager, endpoint, position);
         }
         
         private void ReleaseTouchForPerson(SimulatedPerson person)
@@ -213,7 +213,7 @@ namespace BranchingLEDAnimator.Animation
             if (person.currentEndpoint >= 0)
             {
                 Vector3 position = graphManager.NodePositions[person.currentEndpoint];
-                GraphPlayerController.SimulateRelease(person.currentEndpoint, position);
+                GraphPlayerController.SimulateRelease(graphManager, person.currentEndpoint, position);
                 
                 person.lastEndpoint = person.currentEndpoint;
                 person.currentEndpoint = -1;
@@ -433,7 +433,7 @@ namespace BranchingLEDAnimator.Animation
                 if (person.isTouching && person.currentEndpoint >= 0)
                 {
                     Vector3 position = graphManager.NodePositions[person.currentEndpoint];
-                    GraphPlayerController.SimulateRelease(person.currentEndpoint, position);
+                    GraphPlayerController.SimulateRelease(graphManager, person.currentEndpoint, position);
                     person.isTouching = false;
                     person.currentEndpoint = -1;
                 }

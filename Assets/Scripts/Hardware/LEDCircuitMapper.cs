@@ -53,8 +53,9 @@ namespace BranchingLEDAnimator.Hardware
             LEDVisualizationEvents.OnGeometryUpdated -= OnGeometryUpdated;
         }
         
-        private void OnGeometryUpdated(List<Vector3> nodePositions, List<Vector2Int> edgeConnections, List<int> sourceNodes)
+        private void OnGeometryUpdated(LEDGraphManager source, List<Vector3> nodePositions, List<Vector2Int> edgeConnections, List<int> sourceNodes)
         {
+            if (source != graphManager) return;
             if (autoMapOnStart)
             {
                 CreateLEDMapping();

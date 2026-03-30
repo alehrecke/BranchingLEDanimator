@@ -284,14 +284,16 @@ namespace BranchingLEDAnimator.Animation
             }
         }
         
-        private void OnEndpointPressed(int endpointIndex, Vector3 position)
+        private void OnEndpointPressed(LEDGraphManager source, int endpointIndex, Vector3 position)
         {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
             activeEndpoints.Add(endpointIndex);
             UpdateTargetDirection();
         }
         
-        private void OnEndpointReleased(int endpointIndex, Vector3 position)
+        private void OnEndpointReleased(LEDGraphManager source, int endpointIndex, Vector3 position)
         {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
             activeEndpoints.Remove(endpointIndex);
             UpdateTargetDirection();
         }
@@ -471,7 +473,11 @@ namespace BranchingLEDAnimator.Animation
             if (endpointNodes.Contains(endpointIndex) && cachedPositions != null)
             {
                 Vector3 pos = endpointIndex < cachedPositions.Count ? cachedPositions[endpointIndex] : Vector3.zero;
-                OnEndpointPressed(endpointIndex, pos);
+                var gm = Object.FindFirstObjectByType<LEDGraphManager>();
+                if (gm != null)
+                    GraphPlayerController.SimulatePress(gm, endpointIndex, pos);
+                else
+                    OnEndpointPressed(null, endpointIndex, pos);
             }
         }
         
@@ -483,7 +489,11 @@ namespace BranchingLEDAnimator.Animation
             if (cachedPositions != null)
             {
                 Vector3 pos = endpointIndex < cachedPositions.Count ? cachedPositions[endpointIndex] : Vector3.zero;
-                OnEndpointReleased(endpointIndex, pos);
+                var gm = Object.FindFirstObjectByType<LEDGraphManager>();
+                if (gm != null)
+                    GraphPlayerController.SimulateRelease(gm, endpointIndex, pos);
+                else
+                    OnEndpointReleased(null, endpointIndex, pos);
             }
         }
         

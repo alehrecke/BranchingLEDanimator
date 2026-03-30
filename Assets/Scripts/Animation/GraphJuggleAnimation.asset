@@ -86,7 +86,10 @@ MonoBehaviour:
   successFlashDuration: 0
   successBrightnessBoost: 0.98
   catchBrightnessBoost: 1.5
-  currentScore: 621400
-  currentLives: 12
-  streak: 95
-  gameActive: 1
+  playerGlowColor: {r: 0.3, g: 1, b: 0.5, a: 1}
+  playerGlowRadius: 27
+  playerGlowIntensity: 1
+  currentScore: 0
+  currentLives: 0
+  streak: 0
+  gameActive: 0

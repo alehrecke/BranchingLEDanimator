@@ -91,8 +91,8 @@ namespace BranchingLEDAnimator.Visualization
             LEDVisualizationEvents.OnGeometryUpdated += OnGeometryUpdated;
             LEDVisualizationEvents.OnColorsUpdated += OnColorsUpdated;
             
-            // Create initial visualization if data is loaded
-            if (graphManager.DataLoaded && autoCreateOnStart)
+            // Create initial visualization if data is already loaded
+            if (graphManager.DataLoaded)
             {
                 CreateGameVisualization();
             }
@@ -116,19 +116,18 @@ namespace BranchingLEDAnimator.Visualization
         /// <summary>
         /// Handle geometry update event
         /// </summary>
-        private void OnGeometryUpdated(List<Vector3> nodePositions, List<Vector2Int> edgeConnections, List<int> sourceNodes)
+        private void OnGeometryUpdated(LEDGraphManager source, List<Vector3> nodePositions, List<Vector2Int> edgeConnections, List<int> sourceNodes)
         {
-            if (autoCreateOnStart)
-            {
-                CreateGameVisualization();
-            }
+            if (source != graphManager) return;
+            CreateGameVisualization();
         }
         
         /// <summary>
         /// Handle color update event - this is the key method for animation updates
         /// </summary>
-        private void OnColorsUpdated(Color[] colors)
+        private void OnColorsUpdated(LEDGraphManager source, Color[] colors)
         {
+            if (source != graphManager) return;
             if (showDebugInfo && colors != null)
             {
                 // Debug.Log($"🎨 Color update received: {colors.Length} colors");
@@ -391,12 +390,12 @@ namespace BranchingLEDAnimator.Visualization
             {
                 Debug.Log("No existing LED objects found, creating new ones...");
                 
-                // Create containers
+                // Create containers — worldPositionStays: false so they inherit the sculpture's transform
                 ledContainer = new GameObject("LED Objects (UnifiedGameVisualizer)");
-                ledContainer.transform.SetParent(transform);
+                ledContainer.transform.SetParent(transform, false);
                 
                 connectionContainer = new GameObject("LED Connections");
-                connectionContainer.transform.SetParent(transform);
+                connectionContainer.transform.SetParent(transform, false);
                 
                 // Create default LED material if none provided
                 if (ledMaterial == null)
@@ -418,6 +417,11 @@ namespace BranchingLEDAnimator.Visualization
             // Create connections if enabled and not already present
             if (showConnections && connectionLines.Count == 0)
             {
+                if (connectionContainer == null)
+                {
+                    connectionContainer = new GameObject("LED Connections");
+                    connectionContainer.transform.SetParent(transform, false);
+                }
                 CreateConnectionLines();
             }
         }
@@ -431,41 +435,37 @@ namespace BranchingLEDAnimator.Visualization
             ledRenderers.Clear();
             materialBlocks.Clear();
             
-            // Look for existing LED objects from LEDGameVisualizer or other sources
-            GameObject[] allObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
-            
-            foreach (GameObject obj in allObjects)
+            // Only search under this sculpture's own transform to avoid
+            // picking up LED objects belonging to other sculptures
+            foreach (Transform child in transform)
             {
-                // Check if this looks like an LED object
-                if (obj.name.Contains("LED") || obj.name.Contains("Node"))
+                // Check direct children that look like LED containers
+                if (child.name.Contains("LED") || child.name.Contains("Node"))
                 {
-                    Renderer renderer = obj.GetComponent<Renderer>();
-                    if (renderer != null)
+                    // Check the container's children for renderers
+                    foreach (Transform grandchild in child)
                     {
-                        ledObjects.Add(obj);
-                        ledRenderers.Add(renderer);
-                        materialBlocks.Add(new MaterialPropertyBlock());
+                        Renderer renderer = grandchild.GetComponent<Renderer>();
+                        if (renderer != null && !ledObjects.Contains(grandchild.gameObject))
+                        {
+                            ledObjects.Add(grandchild.gameObject);
+                            ledRenderers.Add(renderer);
+                            materialBlocks.Add(new MaterialPropertyBlock());
+                        }
                     }
-                }
-            }
-            
-            // Also look for objects under "LED Objects" container
-            GameObject ledContainer = GameObject.Find("LED Objects");
-            if (ledContainer != null)
-            {
-                foreach (Transform child in ledContainer.transform)
-                {
-                    Renderer renderer = child.GetComponent<Renderer>();
-                    if (renderer != null && !ledObjects.Contains(child.gameObject))
+                    
+                    // Also check the container itself
+                    Renderer containerRenderer = child.GetComponent<Renderer>();
+                    if (containerRenderer != null && !ledObjects.Contains(child.gameObject))
                     {
                         ledObjects.Add(child.gameObject);
-                        ledRenderers.Add(renderer);
+                        ledRenderers.Add(containerRenderer);
                         materialBlocks.Add(new MaterialPropertyBlock());
                     }
                 }
             }
             
-            Debug.Log($"🔍 Found {ledObjects.Count} existing LED objects in scene");
+            Debug.Log($"🔍 Found {ledObjects.Count} existing LED objects under {gameObject.name}");
         }
         
         /// <summary>
@@ -565,13 +565,14 @@ namespace BranchingLEDAnimator.Visualization
             
             if (ledPrefab != null)
             {
-                ledObj = Instantiate(ledPrefab, position, Quaternion.identity, ledContainer.transform);
+                ledObj = Instantiate(ledPrefab, ledContainer.transform);
+                ledObj.transform.localPosition = position;
             }
             else
             {
                 ledObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                ledObj.transform.position = position;
-                ledObj.transform.SetParent(ledContainer.transform);
+                ledObj.transform.SetParent(ledContainer.transform, false);
+                ledObj.transform.localPosition = position;
             }
             
             ledObj.name = $"LED_{index}";
@@ -601,14 +602,14 @@ namespace BranchingLEDAnimator.Visualization
                     edge.y >= 0 && edge.y < nodePositions.Count)
                 {
                     GameObject lineObj = new GameObject($"Connection_{edge.x}_{edge.y}");
-                    lineObj.transform.SetParent(connectionContainer.transform);
+                    lineObj.transform.SetParent(connectionContainer.transform, false);
                     
                     LineRenderer line = lineObj.AddComponent<LineRenderer>();
                     line.material = CreateDefaultLineMaterial();
                     line.startWidth = connectionWidth;
                     line.endWidth = connectionWidth;
                     line.positionCount = 2;
-                    line.useWorldSpace = true;
+                    line.useWorldSpace = false;
                     
                     line.SetPosition(0, nodePositions[edge.x]);
                     line.SetPosition(1, nodePositions[edge.y]);

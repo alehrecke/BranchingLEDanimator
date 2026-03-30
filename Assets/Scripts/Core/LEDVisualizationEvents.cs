@@ -4,60 +4,78 @@ using System.Collections.Generic;
 namespace BranchingLEDAnimator.Core
 {
     /// <summary>
-    /// Event system for LED visualization components to communicate
+    /// Event system for LED visualization components to communicate.
+    /// Every event carries the source LEDGraphManager so subscribers can
+    /// filter and only react to their own graph in multi-graph scenes.
     /// </summary>
     public static class LEDVisualizationEvents
     {
-        /// <summary>
-        /// Called when LED colors are updated by animation system
-        /// </summary>
-        public static System.Action<Color[]> OnColorsUpdated;
-        
-        /// <summary>
-        /// Called when geometry data is imported or changed
-        /// </summary>
-        public static System.Action<List<Vector3>, List<Vector2Int>, List<int>> OnGeometryUpdated;
-        
-        /// <summary>
-        /// Called when animation type changes
-        /// </summary>
+        public static System.Action<LEDGraphManager, Color[]> OnColorsUpdated;
+        public static System.Action<LEDGraphManager, List<Vector3>, List<Vector2Int>, List<int>> OnGeometryUpdated;
         public static System.Action<string> OnAnimationChanged;
-        
-        /// <summary>
-        /// Called when animation starts/stops
-        /// </summary>
         public static System.Action<bool> OnAnimationPlayStateChanged;
-        
-        /// <summary>
-        /// Trigger color update event
-        /// </summary>
-        public static void TriggerColorsUpdated(Color[] colors)
+
+        private static void SafeInvoke<T1, T2>(ref System.Action<T1, T2> eventField, T1 a1, T2 a2)
         {
-            OnColorsUpdated?.Invoke(colors);
+            if (eventField == null) return;
+            foreach (var d in eventField.GetInvocationList())
+            {
+                try
+                {
+                    ((System.Action<T1, T2>)d)(a1, a2);
+                }
+                catch (System.MissingMemberException) { eventField -= (System.Action<T1, T2>)d; }
+                catch (MissingReferenceException) { eventField -= (System.Action<T1, T2>)d; }
+            }
+        }
+
+        private static void SafeInvoke<T>(ref System.Action<T> eventField, T arg)
+        {
+            if (eventField == null) return;
+            foreach (var d in eventField.GetInvocationList())
+            {
+                try
+                {
+                    ((System.Action<T>)d)(arg);
+                }
+                catch (System.MissingMemberException) { eventField -= (System.Action<T>)d; }
+                catch (MissingReferenceException) { eventField -= (System.Action<T>)d; }
+            }
+        }
+
+        private static void SafeInvoke<T1, T2, T3, T4>(
+            ref System.Action<T1, T2, T3, T4> eventField, T1 a1, T2 a2, T3 a3, T4 a4)
+        {
+            if (eventField == null) return;
+            foreach (var d in eventField.GetInvocationList())
+            {
+                try
+                {
+                    ((System.Action<T1, T2, T3, T4>)d)(a1, a2, a3, a4);
+                }
+                catch (System.MissingMemberException) { eventField -= (System.Action<T1, T2, T3, T4>)d; }
+                catch (MissingReferenceException) { eventField -= (System.Action<T1, T2, T3, T4>)d; }
+            }
+        }
+
+        public static void TriggerColorsUpdated(LEDGraphManager source, Color[] colors)
+        {
+            SafeInvoke(ref OnColorsUpdated, source, colors);
         }
         
-        /// <summary>
-        /// Trigger geometry update event
-        /// </summary>
-        public static void TriggerGeometryUpdated(List<Vector3> nodePositions, List<Vector2Int> edgeConnections, List<int> sourceNodes)
+        public static void TriggerGeometryUpdated(LEDGraphManager source, List<Vector3> nodePositions, List<Vector2Int> edgeConnections, List<int> sourceNodes)
         {
-            OnGeometryUpdated?.Invoke(nodePositions, edgeConnections, sourceNodes);
+            SafeInvoke(ref OnGeometryUpdated, source, nodePositions, edgeConnections, sourceNodes);
         }
         
-        /// <summary>
-        /// Trigger animation change event
-        /// </summary>
         public static void TriggerAnimationChanged(string animationName)
         {
-            OnAnimationChanged?.Invoke(animationName);
+            SafeInvoke(ref OnAnimationChanged, animationName);
         }
         
-        /// <summary>
-        /// Trigger animation play state change event
-        /// </summary>
         public static void TriggerAnimationPlayStateChanged(bool isPlaying)
         {
-            OnAnimationPlayStateChanged?.Invoke(isPlaying);
+            SafeInvoke(ref OnAnimationPlayStateChanged, isPlaying);
         }
     }
 }

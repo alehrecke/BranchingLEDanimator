@@ -267,7 +267,7 @@ namespace BranchingLEDAnimator.Core
                 }
                 
                 // Notify other systems
-                LEDVisualizationEvents.TriggerGeometryUpdated(nodePositions, edgeConnections, sourceNodes);
+                LEDVisualizationEvents.TriggerGeometryUpdated(this, nodePositions, edgeConnections, sourceNodes);
                 
                 return true;
             }
@@ -296,7 +296,7 @@ namespace BranchingLEDAnimator.Core
             System.Array.Copy(newColors, currentNodeColors, newColors.Length);
             
             // Notify visualization systems
-            LEDVisualizationEvents.TriggerColorsUpdated(currentNodeColors);
+            LEDVisualizationEvents.TriggerColorsUpdated(this, currentNodeColors);
         }
         
         #if UNITY_EDITOR

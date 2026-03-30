@@ -153,6 +153,18 @@ namespace BranchingLEDAnimator.Animation
         [SerializeField] private float successBrightnessBoost = 1.8f;
         [SerializeField] private float catchBrightnessBoost = 1.3f;
         
+        [Header("Player Presence Glow")]
+        [Tooltip("Color of the glow zone when the player stands at an endpoint")]
+        [SerializeField] private Color playerGlowColor = new Color(0.3f, 1f, 0.5f);
+        
+        [Tooltip("How far the glow extends from the endpoint (in graph nodes)")]
+        [Range(1f, 50f)]
+        [SerializeField] private float playerGlowRadius = 4f;
+        
+        [Tooltip("Brightness of the player presence glow")]
+        [Range(0.1f, 1f)]
+        [SerializeField] private float playerGlowIntensity = 0.6f;
+        
         [Header("Game State (Read Only)")]
         [SerializeField] private int currentScore = 0;
         [SerializeField] private int currentLives = 3;
@@ -245,6 +257,7 @@ namespace BranchingLEDAnimator.Animation
         private float clickRadius = 5f;
         private bool subscribedToPlayerEvents = false;
         private Queue<int> pendingPlayerTouches = new Queue<int>();
+        private HashSet<int> playerOccupiedEndpoints = new HashSet<int>();
         
         // Init tracking
         private bool initializedThisSession = false;
@@ -662,6 +675,9 @@ namespace BranchingLEDAnimator.Animation
                 gameActive = true;
                 activePulses.Clear();
                 successRipples.Clear();
+                if (playerOccupiedEndpoints == null)
+                    playerOccupiedEndpoints = new HashSet<int>();
+                playerOccupiedEndpoints.Clear();
                 nextBallIndex = 0;
                 brightnessMultiplier = 1f;
                 currentMomentum = 1f;
@@ -714,6 +730,9 @@ namespace BranchingLEDAnimator.Animation
                     currentMomentum = Mathf.Max(1f, currentMomentum - momentumDecayRate * deltaTime);
                 }
             }
+            
+            // Render player presence glow (before pulses so ball draws on top)
+            RenderPlayerGlow(colors);
             
             // Update pulses
             UpdatePulses(deltaTime, time, colors, nodePositions);
@@ -1071,12 +1090,47 @@ namespace BranchingLEDAnimator.Animation
             if (!subscribedToPlayerEvents)
             {
                 GraphPlayerController.OnEndpointTouched += OnPlayerTouchedEndpoint;
+                GraphPlayerController.OnEndpointHeld += OnPlayerHeldEndpoint;
+                GraphPlayerController.OnEndpointPressed += OnPlayerPressedEndpoint;
+                GraphPlayerController.OnEndpointReleased += OnPlayerReleasedEndpoint;
                 subscribedToPlayerEvents = true;
             }
         }
         
-        void OnPlayerTouchedEndpoint(int endpointIndex, Vector3 position)
+        void OnPlayerHeldEndpoint(LEDGraphManager source, int endpointIndex, Vector3 position)
         {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
+            if (!gameActive) return;
+            if (inputMode == InputMode.None || inputMode == InputMode.MouseClick) return;
+            
+            // Only enqueue if there's actually a catchable ball heading to this endpoint,
+            // to avoid flooding the queue every frame for no reason.
+            foreach (var pulse in activePulses)
+            {
+                if (pulse.targetEndpoint == endpointIndex && pulse.catchable && !pulse.caught)
+                {
+                    pendingPlayerTouches.Enqueue(endpointIndex);
+                    break;
+                }
+            }
+        }
+        
+        void OnPlayerPressedEndpoint(LEDGraphManager source, int endpointIndex, Vector3 position)
+        {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
+            if (endpointNodes.Contains(endpointIndex))
+                playerOccupiedEndpoints.Add(endpointIndex);
+        }
+        
+        void OnPlayerReleasedEndpoint(LEDGraphManager source, int endpointIndex, Vector3 position)
+        {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
+            playerOccupiedEndpoints.Remove(endpointIndex);
+        }
+        
+        void OnPlayerTouchedEndpoint(LEDGraphManager source, int endpointIndex, Vector3 position)
+        {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
             if (!gameActive) return;
             if (inputMode == InputMode.None || inputMode == InputMode.MouseClick) return;
             pendingPlayerTouches.Enqueue(endpointIndex);
@@ -1142,12 +1196,9 @@ namespace BranchingLEDAnimator.Animation
                 
                 if (pulse.targetEndpoint == endpointIndex && pulse.catchable && !pulse.caught)
                 {
-                    pulse.caught = true;
-                    
                     currentScore += 10 * (streak + 1);
                     streak++;
                     
-                    // Increase momentum on catch
                     if (enableMomentum)
                     {
                         currentMomentum = Mathf.Min(maxMomentumMultiplier, currentMomentum * momentumGainPerCatch);
@@ -1156,19 +1207,52 @@ namespace BranchingLEDAnimator.Animation
                     
                     Debug.Log($"🎯 CATCH! Score: {currentScore}, Streak: {streak}, Momentum: {currentMomentum:F2}x");
                     
-                    // Play the leg's tone with harmonics
                     TriggerSuccessTone(endpointIndex);
                     
-                    // Spawn localized success ripple using the ball's color
                     Color rippleColor = useRainbowColors 
                         ? Color.HSVToRGB(pulse.hue, rainbowSaturation, rainbowBrightness)
                         : catchReadyColor;
                     SpawnSuccessRipple(endpointIndex, rippleColor, successFlashDuration);
                     brightnessMultiplier = successBrightnessBoost;
                     
-                    // Spawn new ball and remove the caught one
-                    SpawnPulseFrom(endpointIndex, Time.realtimeSinceStartup);
-                    activePulses.RemoveAt(i);
+                    bool playerPresent = playerOccupiedEndpoints != null 
+                        && playerOccupiedEndpoints.Contains(endpointIndex);
+                    
+                    if (playerPresent)
+                    {
+                        // Pick a new random target, avoiding the endpoint it just came from
+                        int originEndpoint = pulse.path[0];
+                        var candidates = endpointNodes
+                            .Where(e => e != endpointIndex && e != originEndpoint).ToList();
+                        if (candidates.Count == 0)
+                            candidates = endpointNodes.Where(e => e != endpointIndex).ToList();
+                        
+                        if (candidates.Count > 0)
+                        {
+                            int newTarget = candidates[Random.Range(0, candidates.Count)];
+                            List<int> newPath = FindPath(endpointIndex, newTarget);
+                            
+                            if (newPath.Count >= 2)
+                            {
+                                float effectiveGlow = Mathf.Min(playerGlowRadius, (newPath.Count - 1) * 0.5f);
+                                float startProgress = effectiveGlow / (newPath.Count - 1);
+                                
+                                pulse.path = newPath;
+                                pulse.targetEndpoint = newTarget;
+                                pulse.progress = startProgress;
+                                pulse.lastProgress = startProgress;
+                                pulse.catchable = false;
+                                pulse.caught = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Mouse click with no player presence — original behavior
+                        pulse.caught = true;
+                        SpawnPulseFrom(endpointIndex, Time.realtimeSinceStartup);
+                        activePulses.RemoveAt(i);
+                    }
                     break;
                 }
             }
@@ -1273,9 +1357,14 @@ namespace BranchingLEDAnimator.Animation
                     pulse.currentHeight = GetNormalizedHeight(nodePositions[currentNode]);
                 }
                 
-                // Catch window
+                // Catch window — expanded to glow zone when player is at the target
                 float distanceToEnd = 1f - pulse.progress;
                 float catchThreshold = catchWindowSeconds * progressSpeed * speed;
+                if (playerOccupiedEndpoints != null && playerOccupiedEndpoints.Contains(pulse.targetEndpoint))
+                {
+                    float glowThreshold = Mathf.Min(playerGlowRadius, pathLength * 0.5f) / pathLength;
+                    catchThreshold = Mathf.Max(catchThreshold, glowThreshold);
+                }
                 pulse.catchable = distanceToEnd <= catchThreshold && distanceToEnd > 0;
                 
                 // Missed
@@ -1453,6 +1542,54 @@ namespace BranchingLEDAnimator.Animation
             }
         }
         
+        void RenderPlayerGlow(Color[] colors)
+        {
+            if (playerOccupiedEndpoints == null || playerOccupiedEndpoints.Count == 0) return;
+            
+            float pulse = Mathf.Sin(Time.realtimeSinceStartup * 3f) * 0.15f + 0.85f;
+            int maxDepth = Mathf.CeilToInt(playerGlowRadius);
+            
+            foreach (int endpoint in playerOccupiedEndpoints)
+            {
+                if (endpoint >= colors.Length) continue;
+                
+                var visited = new Dictionary<int, int>();
+                var queue = new Queue<int>();
+                queue.Enqueue(endpoint);
+                visited[endpoint] = 0;
+                
+                while (queue.Count > 0)
+                {
+                    int current = queue.Dequeue();
+                    int dist = visited[current];
+                    
+                    if (dist > maxDepth) continue;
+                    
+                    float falloff = 1f - (dist / playerGlowRadius);
+                    if (falloff <= 0f) continue;
+                    falloff *= falloff;
+                    float intensity = playerGlowIntensity * falloff * pulse;
+                    
+                    if (current < colors.Length)
+                    {
+                        colors[current] = Color.Lerp(colors[current], playerGlowColor, intensity);
+                    }
+                    
+                    if (adjacency.ContainsKey(current))
+                    {
+                        foreach (int neighbor in adjacency[current])
+                        {
+                            if (!visited.ContainsKey(neighbor))
+                            {
+                                visited[neighbor] = dist + 1;
+                                queue.Enqueue(neighbor);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
         void ApplyVisualEffects(float deltaTime, Color[] colors)
         {
             float currentTime = Time.realtimeSinceStartup;
@@ -1546,6 +1683,7 @@ namespace BranchingLEDAnimator.Animation
             gameActive = true;
             activePulses.Clear();
             successRipples.Clear();
+            playerOccupiedEndpoints?.Clear();
             nextBallIndex = 0;
             brightnessMultiplier = 1f;
             currentMomentum = 1f;
@@ -1607,7 +1745,8 @@ namespace BranchingLEDAnimator.Animation
             analysisComplete = false;
             initializedThisSession = false;
             audioInitialized = false;
-            ledMappingInitialized = false; // Reset LED mapping
+            ledMappingInitialized = false;
+            playerOccupiedEndpoints?.Clear();
         }
         
         /// <summary>
@@ -1639,6 +1778,9 @@ namespace BranchingLEDAnimator.Animation
             if (subscribedToPlayerEvents)
             {
                 GraphPlayerController.OnEndpointTouched -= OnPlayerTouchedEndpoint;
+                GraphPlayerController.OnEndpointHeld -= OnPlayerHeldEndpoint;
+                GraphPlayerController.OnEndpointPressed -= OnPlayerPressedEndpoint;
+                GraphPlayerController.OnEndpointReleased -= OnPlayerReleasedEndpoint;
                 subscribedToPlayerEvents = false;
             }
             

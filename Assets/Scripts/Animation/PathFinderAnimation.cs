@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using BranchingLEDAnimator.Core;
 using BranchingLEDAnimator.Player;
 
 namespace BranchingLEDAnimator.Animation
@@ -348,8 +349,9 @@ namespace BranchingLEDAnimator.Animation
             subscribedToEvents = true;
         }
         
-        void OnEndpointPressed(int endpointIndex, Vector3 position)
+        void OnEndpointPressed(LEDGraphManager source, int endpointIndex, Vector3 position)
         {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
             if (!endpointNodes.Contains(endpointIndex))
             {
                 if (showPathDebug) Debug.Log($"❌ Endpoint {endpointIndex} not in endpoint list");
@@ -937,7 +939,13 @@ namespace BranchingLEDAnimator.Animation
                 Vector3 pos = cachedPositions != null && endpointIndex < cachedPositions.Count 
                     ? cachedPositions[endpointIndex] 
                     : Vector3.zero;
-                GraphPlayerController.SimulatePress(endpointIndex, pos);
+                var gm = Object.FindFirstObjectByType<LEDGraphManager>();
+                if (gm == null)
+                {
+                    Debug.LogWarning("PathFinderAnimation.SimulateTouchEndpoint: no LEDGraphManager found in scene.");
+                    return;
+                }
+                GraphPlayerController.SimulatePress(gm, endpointIndex, pos);
             }
         }
         

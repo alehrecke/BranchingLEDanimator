@@ -115,6 +115,8 @@ namespace BranchingLEDAnimator.Animation
             { 6, new int[] { 6, 1, 3 } },      // vii° chord: 7, 2, 4
         };
         
+        private LEDGraphManager graphManager;
+        
         // Cached endpoint info
         private List<int> availableEndpoints = new List<int>();
         private Dictionary<int, Vector3> endpointPositions = new Dictionary<int, Vector3>();
@@ -140,7 +142,8 @@ namespace BranchingLEDAnimator.Animation
             // Release all simulated touches
             foreach (var touch in activeTouches)
             {
-                GraphPlayerController.SimulateRelease(touch.endpointIndex, touch.position);
+                if (graphManager != null)
+                    GraphPlayerController.SimulateRelease(graphManager, touch.endpointIndex, touch.position);
             }
             activeTouches.Clear();
         }
@@ -178,7 +181,7 @@ namespace BranchingLEDAnimator.Animation
         void TryInitialize()
         {
             // Find the graph manager to get endpoint info
-            var graphManager = FindFirstObjectByType<LEDGraphManager>();
+            graphManager = FindFirstObjectByType<LEDGraphManager>();
             if (graphManager == null || graphManager.NodePositions == null) return;
             
             var nodePositions = graphManager.NodePositions;
@@ -281,7 +284,8 @@ namespace BranchingLEDAnimator.Animation
                 if (currentTime - touch.startTime >= touch.duration)
                 {
                     // Release this touch
-                    GraphPlayerController.SimulateRelease(touch.endpointIndex, touch.position);
+                    if (graphManager != null)
+                        GraphPlayerController.SimulateRelease(graphManager, touch.endpointIndex, touch.position);
                     
                     if (showDebugInfo)
                     {
@@ -363,7 +367,8 @@ namespace BranchingLEDAnimator.Animation
             };
             
             activeTouches.Add(touch);
-            GraphPlayerController.SimulatePress(endpoint, touch.position);
+            if (graphManager != null)
+                GraphPlayerController.SimulatePress(graphManager, endpoint, touch.position);
             
             if (showDebugInfo)
             {
@@ -451,7 +456,8 @@ namespace BranchingLEDAnimator.Animation
         {
             foreach (var touch in activeTouches)
             {
-                GraphPlayerController.SimulateRelease(touch.endpointIndex, touch.position);
+                if (graphManager != null)
+                    GraphPlayerController.SimulateRelease(graphManager, touch.endpointIndex, touch.position);
             }
             activeTouches.Clear();
             Debug.Log("🚶 Released all simulated touches");

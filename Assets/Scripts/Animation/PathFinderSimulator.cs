@@ -396,7 +396,7 @@ namespace BranchingLEDAnimator.Animation
                 }
             }
             
-            GraphPlayerController.SimulatePress(endpoint, position);
+            GraphPlayerController.SimulatePress(graphManager, endpoint, position);
         }
         
         // Public controls

@@ -637,8 +637,9 @@ namespace BranchingLEDAnimator.Animation
             }
         }
         
-        private void OnNodePressed(int nodeIndex, Vector3 position)
+        private void OnNodePressed(LEDGraphManager source, int nodeIndex, Vector3 position)
         {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
             if (!enableInteraction) return;
             
             touchedNodes.Add(nodeIndex);
@@ -655,8 +656,9 @@ namespace BranchingLEDAnimator.Animation
             }
         }
         
-        private void OnNodeReleased(int nodeIndex, Vector3 position)
+        private void OnNodeReleased(LEDGraphManager source, int nodeIndex, Vector3 position)
         {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
             touchedNodes.Remove(nodeIndex);
             
             // Unblock branches connected to this node
@@ -690,7 +692,7 @@ namespace BranchingLEDAnimator.Animation
                     if (closestNode >= 0 && !touchedNodes.Contains(closestNode))
                     {
                         // Simulate press
-                        OnNodePressed(closestNode, cachedPositions[closestNode]);
+                        OnNodePressed(OwnerGraphManager, closestNode, cachedPositions[closestNode]);
                     }
                 }
             }
@@ -700,7 +702,7 @@ namespace BranchingLEDAnimator.Animation
                 var nodesToRelease = touchedNodes.ToList();
                 foreach (int node in nodesToRelease)
                 {
-                    OnNodeReleased(node, cachedPositions != null && node < cachedPositions.Count ? 
+                    OnNodeReleased(OwnerGraphManager, node, cachedPositions != null && node < cachedPositions.Count ? 
                         cachedPositions[node] : Vector3.zero);
                 }
             }

@@ -5,6 +5,7 @@ using BranchingLEDAnimator.UI;
 using BranchingLEDAnimator.Hardware;
 using BranchingLEDAnimator.Mapping;
 using BranchingLEDAnimator.Player;
+using BranchingLEDAnimator.Simulation;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -329,6 +330,74 @@ namespace BranchingLEDAnimator.Setup
             Debug.Log("   - Chord Touch Animation");
             Debug.Log("   - Graph Juggle Animation");
             Debug.Log("   - Fountain Animation");
+        }
+        
+        [MenuItem("Tools/LED Animation System/Create Gallery Scene (Multi-Graph)")]
+        static void CreateGalleryScene()
+        {
+            Debug.Log("🏛️ Creating multi-graph gallery scene...");
+            
+            // Root container
+            GameObject gallery = new GameObject("Gallery");
+            
+            string[] sculptureNames = { "Sculpture A", "Sculpture B", "Sculpture C" };
+            LEDGraphManager firstGraphManager = null;
+            
+            for (int i = 0; i < sculptureNames.Length; i++)
+            {
+                GameObject sculpture = new GameObject(sculptureNames[i]);
+                sculpture.transform.SetParent(gallery.transform);
+                
+                // Core
+                var gm = sculpture.AddComponent<LEDGraphManager>();
+                gm.autoImportOnStart = true;
+                gm.grasshopperDataPath = $"Assets/Data/GrasshopperExports/sculpture_{(char)('a' + i)}_export.txt";
+                
+                var animSys = sculpture.AddComponent<LEDAnimationSystem>();
+                animSys.autoPlayOnStart = true;
+                animSys.globalSpeed = 1f;
+                animSys.showDebugInfo = false;
+                
+                // Visualization
+                var sceneVis = sculpture.AddComponent<LEDSceneVisualizer>();
+                sceneVis.showInSceneView = true;
+                sceneVis.showAnimatedColors = true;
+                
+                var gameVis = sculpture.AddComponent<UnifiedGameVisualizer>();
+                gameVis.autoCreateOnStart = false;
+                gameVis.showDebugInfo = false;
+                // Only the first sculpture sets up the shared nighttime environment
+                gameVis.applyNightEnvironment = (i == 0);
+                
+                // Hardware (one per sculpture)
+                sculpture.AddComponent<LEDCircuitMapper>();
+                sculpture.AddComponent<ESP32Communicator>();
+                
+                if (i == 0) firstGraphManager = gm;
+                
+                Debug.Log($"✓ Created {sculptureNames[i]} with full component stack");
+            }
+            
+            // Shared player
+            if (firstGraphManager != null)
+            {
+                GameObject player = CreatePlayerWithCamera(firstGraphManager);
+                player.transform.SetParent(gallery.transform);
+                Debug.Log("✓ Created shared Interactive Player");
+            }
+            
+            // Audience simulator
+            var simulator = gallery.AddComponent<GalleryAudienceSimulator>();
+            Debug.Log("✓ Added Gallery Audience Simulator");
+            
+            Selection.activeGameObject = gallery;
+            
+            Debug.Log("🎉 Gallery scene created with 3 sculpture stacks + shared player + audience simulator!");
+            Debug.Log("📋 Next steps:");
+            Debug.Log("   1. Set each sculpture's grasshopperDataPath to the correct export file");
+            Debug.Log("   2. Position/rotate each sculpture to match physical gallery layout");
+            Debug.Log("   3. Assign animation presets per sculpture");
+            Debug.Log("   4. Enter Play mode — visitors will wander and interact with all sculptures");
         }
         
         [MenuItem("Tools/LED Animation System/Help - Setup Guide")]

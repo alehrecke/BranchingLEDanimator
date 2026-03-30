@@ -388,10 +388,10 @@ namespace BranchingLEDAnimator.Animation
             {
                 // Trigger the catch
                 Vector3 position = endpointPositions[player.targetEndpoint];
-                GraphPlayerController.SimulatePress(player.targetEndpoint, position);
+                GraphPlayerController.SimulatePress(graphManager, player.targetEndpoint, position);
                 
                 // Immediately release (it's a tap, not a hold)
-                StartCoroutine(DelayedRelease(player.targetEndpoint, position, 0.1f));
+                StartCoroutine(DelayedRelease(graphManager, player.targetEndpoint, position, 0.1f));
                 
                 totalCatches++;
                 catchesSinceLastBall++;
@@ -431,10 +431,11 @@ namespace BranchingLEDAnimator.Animation
             }
         }
         
-        System.Collections.IEnumerator DelayedRelease(int endpoint, Vector3 position, float delay)
+        System.Collections.IEnumerator DelayedRelease(LEDGraphManager source, int endpoint, Vector3 position, float delay)
         {
             yield return new WaitForSeconds(delay);
-            GraphPlayerController.SimulateRelease(endpoint, position);
+            if (source != null)
+                GraphPlayerController.SimulateRelease(source, endpoint, position);
         }
         
         // Context menu actions
@@ -479,8 +480,8 @@ namespace BranchingLEDAnimator.Animation
                     ? endpointPositions[endpoint] 
                     : Vector3.zero;
                     
-                GraphPlayerController.SimulatePress(endpoint, position);
-                StartCoroutine(DelayedRelease(endpoint, position, 0.1f));
+                GraphPlayerController.SimulatePress(graphManager, endpoint, position);
+                StartCoroutine(DelayedRelease(graphManager, endpoint, position, 0.1f));
                 
                 Debug.Log($"✨ Forced catch at endpoint {endpoint}");
             }

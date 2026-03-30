@@ -79,8 +79,9 @@ namespace BranchingLEDAnimator.Visualization
         /// <summary>
         /// Handle geometry update event
         /// </summary>
-        private void OnGeometryUpdated(List<Vector3> nodePositions, List<Vector2Int> edgeConnections, List<int> sourceNodes)
+        private void OnGeometryUpdated(LEDGraphManager source, List<Vector3> nodePositions, List<Vector2Int> edgeConnections, List<int> sourceNodes)
         {
+            if (source != graphManager) return;
             if (autoCreateLEDs)
             {
                 CreateGameView();
@@ -90,8 +91,9 @@ namespace BranchingLEDAnimator.Visualization
         /// <summary>
         /// Handle color update event
         /// </summary>
-        private void OnColorsUpdated(Color[] colors)
+        private void OnColorsUpdated(LEDGraphManager source, Color[] colors)
         {
+            if (source != graphManager) return;
             UpdateLEDColors(colors);
         }
         

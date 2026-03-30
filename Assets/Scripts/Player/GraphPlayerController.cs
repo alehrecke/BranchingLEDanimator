@@ -82,33 +82,50 @@ namespace BranchingLEDAnimator.Player
         private int closestEndpoint = -1;
         private float closestDistance = float.MaxValue;
         
-        // Events for game integration
-        public delegate void EndpointInteraction(int endpointIndex, Vector3 position);
+        // Events for game integration -- source identifies which graph the endpoint belongs to
+        public delegate void EndpointInteraction(LEDGraphManager source, int endpointIndex, Vector3 position);
         public static event EndpointInteraction OnEndpointTouched;
         public static event EndpointInteraction OnEndpointInteract;
-        public static event EndpointInteraction OnEndpointPressed;  // Fired once when entering touch
-        public static event EndpointInteraction OnEndpointReleased; // Fired once when leaving touch
-        public static event EndpointInteraction OnEndpointHeld;     // Fired every frame while held
+        public static event EndpointInteraction OnEndpointPressed;
+        public static event EndpointInteraction OnEndpointReleased;
+        public static event EndpointInteraction OnEndpointHeld;
         
-        // Static methods for simulating touches (used by ChordTouchSimulator)
-        public static void SimulatePress(int endpointIndex, Vector3 position)
+        public static void SimulatePress(LEDGraphManager source, int endpointIndex, Vector3 position)
         {
-            OnEndpointPressed?.Invoke(endpointIndex, position);
-            OnEndpointTouched?.Invoke(endpointIndex, position);
+            OnEndpointPressed?.Invoke(source, endpointIndex, position);
+            OnEndpointTouched?.Invoke(source, endpointIndex, position);
         }
         
-        public static void SimulateRelease(int endpointIndex, Vector3 position)
+        public static void SimulateRelease(LEDGraphManager source, int endpointIndex, Vector3 position)
         {
-            OnEndpointReleased?.Invoke(endpointIndex, position);
+            OnEndpointReleased?.Invoke(source, endpointIndex, position);
         }
         
-        // Track currently held endpoints
-        private HashSet<int> currentlyHeldEndpoints = new HashSet<int>();
+        public static void SimulateHold(LEDGraphManager source, int endpointIndex, Vector3 position)
+        {
+            OnEndpointHeld?.Invoke(source, endpointIndex, position);
+        }
         
-        // Cached data
+        // Track currently held endpoints (keyed by graph+node)
+        private HashSet<long> currentlyHeldEndpoints = new HashSet<long>();
+        
+        // Per-endpoint tracking across all graphs
+        private struct EndpointEntry
+        {
+            public LEDGraphManager graph;
+            public int nodeIndex;
+            public Vector3 position;
+        }
+        private List<EndpointEntry> allEndpoints = new List<EndpointEntry>();
+        private List<LEDGraphManager> allGraphManagers = new List<LEDGraphManager>();
+        
+        // Cached data (legacy -- kept for single-graph compat)
         private List<int> endpointNodes = new List<int>();
         private List<Vector3> endpointPositions = new List<Vector3>();
         private bool endpointsAnalyzed = false;
+        
+        private static long EndpointKey(LEDGraphManager g, int node) =>
+            ((long)g.GetInstanceID() << 32) | (uint)node;
         
         // Graph bounds
         private Bounds graphBounds;
@@ -118,11 +135,15 @@ namespace BranchingLEDAnimator.Player
         {
             SetupPlayer();
             SetupCamera();
-            lastTouchTime = new Dictionary<int, float>();
+            lastTouchTime = new Dictionary<long, float>();
             
-            if (graphManager == null)
+            // Discover all graph managers in the scene
+            allGraphManagers.Clear();
+            allGraphManagers.AddRange(FindObjectsByType<LEDGraphManager>(FindObjectsSortMode.None));
+            
+            if (graphManager == null && allGraphManagers.Count > 0)
             {
-                graphManager = FindFirstObjectByType<LEDGraphManager>();
+                graphManager = allGraphManagers[0];
             }
             
             // Lock cursor for first person, free cursor for other modes
@@ -234,24 +255,24 @@ namespace BranchingLEDAnimator.Player
         
         void Update()
         {
-            // Analyze endpoints if graph is loaded
-            if (graphManager != null && graphManager.DataLoaded && !endpointsAnalyzed)
+            // Analyze endpoints once all graphs have loaded
+            if (!endpointsAnalyzed)
             {
-                AnalyzeEndpoints();
-                CalculateGraphBounds();
-                
-                if (autoDetectGround)
+                bool anyLoaded = false;
+                foreach (var gm in allGraphManagers)
                 {
-                    DetectGroundLevel();
+                    if (gm != null && gm.DataLoaded) { anyLoaded = true; break; }
                 }
-                
-                if (createGroundPlane)
+                if (anyLoaded)
                 {
-                    CreateGroundPlane();
+                    AnalyzeAllEndpoints();
+                    CalculateGraphBounds();
+                    
+                    if (autoDetectGround) DetectGroundLevel();
+                    if (createGroundPlane) CreateGroundPlane();
+                    
+                    SpawnPlayerInFrontOfGraph();
                 }
-                
-                // Position player in front of the graph
-                SpawnPlayerInFrontOfGraph();
             }
             
             HandleInput();
@@ -274,55 +295,64 @@ namespace BranchingLEDAnimator.Player
             }
         }
         
-        void AnalyzeEndpoints()
+        void AnalyzeAllEndpoints()
         {
+            allEndpoints.Clear();
             endpointNodes.Clear();
             endpointPositions.Clear();
             
-            var nodePositions = graphManager.NodePositions;
-            var edges = graphManager.EdgeConnections;
-            
-            // Build adjacency to find valences
-            var valences = new int[nodePositions.Count];
-            foreach (var edge in edges)
+            foreach (var gm in allGraphManagers)
             {
-                if (edge.x < valences.Length) valences[edge.x]++;
-                if (edge.y < valences.Length) valences[edge.y]++;
-            }
-            
-            // Find valence-1 nodes (endpoints/feet)
-            for (int i = 0; i < valences.Length; i++)
-            {
-                if (valences[i] == 1)
+                if (gm == null || !gm.DataLoaded) continue;
+                
+                var nodePositions = gm.NodePositions;
+                var edges = gm.EdgeConnections;
+                
+                var valences = new int[nodePositions.Count];
+                foreach (var edge in edges)
                 {
-                    endpointNodes.Add(i);
-                    endpointPositions.Add(nodePositions[i]);
+                    if (edge.x < valences.Length) valences[edge.x]++;
+                    if (edge.y < valences.Length) valences[edge.y]++;
+                }
+                
+                for (int i = 0; i < valences.Length; i++)
+                {
+                    if (valences[i] == 1)
+                    {
+                        Vector3 worldPos = gm.transform.TransformPoint(nodePositions[i]);
+                        allEndpoints.Add(new EndpointEntry { graph = gm, nodeIndex = i, position = worldPos });
+                        endpointNodes.Add(i);
+                        endpointPositions.Add(worldPos);
+                    }
                 }
             }
             
-            Debug.Log($"🦶 Found {endpointNodes.Count} endpoint 'feet' for player interaction");
+            Debug.Log($"🦶 Found {allEndpoints.Count} endpoint 'feet' across {allGraphManagers.Count} graph(s)");
             endpointsAnalyzed = true;
         }
         
         void CalculateGraphBounds()
         {
-            var nodePositions = graphManager.NodePositions;
-            if (nodePositions.Count == 0) return;
+            bool first = true;
+            Vector3 min = Vector3.zero, max = Vector3.zero;
             
-            // Calculate bounds of entire graph
-            Vector3 min = nodePositions[0];
-            Vector3 max = nodePositions[0];
-            
-            foreach (var pos in nodePositions)
+            foreach (var gm in allGraphManagers)
             {
-                min = Vector3.Min(min, pos);
-                max = Vector3.Max(max, pos);
+                if (gm == null || !gm.DataLoaded) continue;
+                foreach (var pos in gm.NodePositions)
+                {
+                    Vector3 worldPos = gm.transform.TransformPoint(pos);
+                    if (first) { min = worldPos; max = worldPos; first = false; }
+                    else { min = Vector3.Min(min, worldPos); max = Vector3.Max(max, worldPos); }
+                }
             }
+            
+            if (first) return; // no data
             
             graphBounds = new Bounds((min + max) / 2f, max - min);
             graphCenter = graphBounds.center;
             
-            Debug.Log($"📐 Graph bounds: Center={graphCenter}, Size={graphBounds.size}");
+            Debug.Log($"📐 Graph bounds (all graphs): Center={graphCenter}, Size={graphBounds.size}");
             
             // Auto-fit camera to geometry
             if (autoFitCameraToGeometry)
@@ -386,21 +416,23 @@ namespace BranchingLEDAnimator.Player
         
         void DetectGroundLevel()
         {
-            var nodePositions = graphManager.NodePositions;
-            if (nodePositions.Count == 0) return;
-            
-            // Find the absolute lowest Y position in the ENTIRE graph
             float lowestY = float.MaxValue;
-            foreach (var pos in nodePositions)
+            int totalNodes = 0;
+            
+            foreach (var gm in allGraphManagers)
             {
-                if (pos.y < lowestY)
+                if (gm == null || !gm.DataLoaded) continue;
+                foreach (var pos in gm.NodePositions)
                 {
-                    lowestY = pos.y;
+                    Vector3 worldPos = gm.transform.TransformPoint(pos);
+                    if (worldPos.y < lowestY) lowestY = worldPos.y;
+                    totalNodes++;
                 }
             }
             
+            if (totalNodes == 0) return;
             groundHeight = lowestY;
-            Debug.Log($"🌍 Auto-detected ground level: Y = {groundHeight} (from all {nodePositions.Count} nodes)");
+            Debug.Log($"🌍 Auto-detected ground level: Y = {groundHeight} (from {totalNodes} nodes across {allGraphManagers.Count} graphs)");
         }
         
         void CreateGroundPlane()
@@ -651,106 +683,90 @@ namespace BranchingLEDAnimator.Player
             closestDistance = float.MaxValue;
             
             Vector3 playerPos = transform.position;
-            HashSet<int> currentlyTouching = new HashSet<int>();
+            HashSet<long> currentlyTouching = new HashSet<long>();
             
-            for (int i = 0; i < endpointNodes.Count; i++)
+            for (int i = 0; i < allEndpoints.Count; i++)
             {
-                int nodeIndex = endpointNodes[i];
-                Vector3 endpointPos = endpointPositions[i];
+                var ep = allEndpoints[i];
+                long key = EndpointKey(ep.graph, ep.nodeIndex);
                 
-                // Check horizontal distance only (XZ plane - ignore Y difference)
-                float dx = endpointPos.x - playerPos.x;
-                float dz = endpointPos.z - playerPos.z;
+                float dx = ep.position.x - playerPos.x;
+                float dz = ep.position.z - playerPos.z;
                 float distance = Mathf.Sqrt(dx * dx + dz * dz);
                 
                 if (distance < interactionRadius)
                 {
-                    nearbyEndpoints.Add(nodeIndex);
+                    nearbyEndpoints.Add(ep.nodeIndex);
                     
                     if (distance < closestDistance)
                     {
                         closestDistance = distance;
-                        closestEndpoint = nodeIndex;
+                        closestEndpoint = ep.nodeIndex;
                     }
                     
-                    // Track endpoints within touch radius for press/hold/release
-                    // Use hysteresis: enter at touchRadius, exit at touchRadius + touchHysteresis
                     if (autoInteractOnTouch)
                     {
-                        bool wasHeld = currentlyHeldEndpoints.Contains(nodeIndex);
+                        bool wasHeld = currentlyHeldEndpoints.Contains(key);
                         float releaseRadius = touchRadius + touchHysteresis;
-                        
-                        // Enter if within touchRadius, OR stay if already held and within release radius
                         bool shouldBeHeld = distance < touchRadius || (wasHeld && distance < releaseRadius);
                         
                         if (shouldBeHeld)
                         {
-                            currentlyTouching.Add(nodeIndex);
+                            currentlyTouching.Add(key);
                             
                             if (!wasHeld)
                             {
-                                // NEW press
-                                Debug.Log($"🎹 Endpoint {nodeIndex} PRESSED (distance: {distance:F2})");
-                                OnEndpointPressed?.Invoke(nodeIndex, endpointPos);
-                                OnEndpointTouched?.Invoke(nodeIndex, endpointPos);
+                                Debug.Log($"🎹 Endpoint {ep.nodeIndex} PRESSED on {ep.graph.name} (distance: {distance:F2})");
+                                OnEndpointPressed?.Invoke(ep.graph, ep.nodeIndex, ep.position);
+                                OnEndpointTouched?.Invoke(ep.graph, ep.nodeIndex, ep.position);
                             }
                             else
                             {
-                                // Still held
-                                OnEndpointHeld?.Invoke(nodeIndex, endpointPos);
+                                OnEndpointHeld?.Invoke(ep.graph, ep.nodeIndex, ep.position);
                             }
                         }
                     }
                 }
             }
             
-            // Check for released endpoints (were held, no longer touching)
-            foreach (int heldEndpoint in currentlyHeldEndpoints)
+            // Check for released endpoints
+            foreach (long heldKey in currentlyHeldEndpoints)
             {
-                if (!currentlyTouching.Contains(heldEndpoint))
+                if (!currentlyTouching.Contains(heldKey))
                 {
-                    int idx = endpointNodes.IndexOf(heldEndpoint);
-                    Vector3 releasePos = idx >= 0 ? endpointPositions[idx] : Vector3.zero;
-                    Debug.Log($"🎹 Endpoint {heldEndpoint} RELEASED");
-                    OnEndpointReleased?.Invoke(heldEndpoint, releasePos);
+                    // Find the endpoint entry for this key
+                    for (int i = 0; i < allEndpoints.Count; i++)
+                    {
+                        var ep = allEndpoints[i];
+                        if (EndpointKey(ep.graph, ep.nodeIndex) == heldKey)
+                        {
+                            Debug.Log($"🎹 Endpoint {ep.nodeIndex} RELEASED on {ep.graph.name}");
+                            OnEndpointReleased?.Invoke(ep.graph, ep.nodeIndex, ep.position);
+                            break;
+                        }
+                    }
                 }
             }
             
-            // Update held state for next frame
             currentlyHeldEndpoints = currentlyTouching;
         }
         
-        // Debounce to prevent multiple triggers
-        private Dictionary<int, float> lastTouchTime = new Dictionary<int, float>();
-        private float touchCooldown = 0.5f; // Seconds between touches on same endpoint
-        
-        void TriggerEndpointTouch(int endpointIndex, Vector3 position)
-        {
-            // Debounce - don't trigger same endpoint too quickly
-            float currentTime = Time.time;
-            if (lastTouchTime.ContainsKey(endpointIndex))
-            {
-                if (currentTime - lastTouchTime[endpointIndex] < touchCooldown)
-                {
-                    return; // Too soon, skip
-                }
-            }
-            lastTouchTime[endpointIndex] = currentTime;
-            
-            OnEndpointTouched?.Invoke(endpointIndex, position);
-        }
+        private Dictionary<long, float> lastTouchTime = new Dictionary<long, float>();
+        private float touchCooldown = 0.5f;
         
         void TriggerEndpointInteraction(int endpointIndex)
         {
-            Vector3 position = Vector3.zero;
-            int idx = endpointNodes.IndexOf(endpointIndex);
-            if (idx >= 0 && idx < endpointPositions.Count)
+            // Find the graph this endpoint belongs to (use closest match)
+            for (int i = 0; i < allEndpoints.Count; i++)
             {
-                position = endpointPositions[idx];
+                var ep = allEndpoints[i];
+                if (ep.nodeIndex == endpointIndex)
+                {
+                    Debug.Log($"🎯 Player interacted with endpoint {endpointIndex} on {ep.graph.name}");
+                    OnEndpointInteract?.Invoke(ep.graph, ep.nodeIndex, ep.position);
+                    return;
+                }
             }
-            
-            Debug.Log($"🎯 Player interacted with endpoint {endpointIndex}");
-            OnEndpointInteract?.Invoke(endpointIndex, position);
         }
         
         void OnDrawGizmos()

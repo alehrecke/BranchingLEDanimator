@@ -428,8 +428,9 @@ namespace BranchingLEDAnimator.Hardware
         /// <summary>
         /// Handle color updates from animation system
         /// </summary>
-        private void OnColorsUpdated(Color[] colors)
+        private void OnColorsUpdated(LEDGraphManager source, Color[] colors)
         {
+            if (source != graphManager) return;
             if (isConnected && circuitMapper != null && circuitMapper.MappingComplete)
             {
                 // Rate limiting
@@ -462,9 +463,9 @@ namespace BranchingLEDAnimator.Hardware
         /// <summary>
         /// Handle geometry updates (when LED mapping changes)
         /// </summary>
-        private void OnGeometryUpdated(List<Vector3> nodePositions, List<Vector2Int> edgeConnections, List<int> sourceNodes)
+        private void OnGeometryUpdated(LEDGraphManager source, List<Vector3> nodePositions, List<Vector2Int> edgeConnections, List<int> sourceNodes)
         {
-            // Update LED configuration when geometry changes
+            if (source != graphManager) return;
             UpdateLEDConfigurationFromMapper();
             
             if (showDebugInfo)

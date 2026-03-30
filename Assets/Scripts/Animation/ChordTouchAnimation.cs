@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using BranchingLEDAnimator.Core;
 using BranchingLEDAnimator.Player;
 
 namespace BranchingLEDAnimator.Animation
@@ -390,8 +391,9 @@ namespace BranchingLEDAnimator.Animation
             Debug.Log("🎵 Subscribed to player press/release events");
         }
         
-        void OnEndpointPressed(int endpointIndex, Vector3 position)
+        void OnEndpointPressed(LEDGraphManager source, int endpointIndex, Vector3 position)
         {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
             if (!endpointNodes.Contains(endpointIndex)) return;
             if (heldEndpoints.ContainsKey(endpointIndex)) return; // Already held
             
@@ -418,10 +420,10 @@ namespace BranchingLEDAnimator.Animation
             // Start playing sustained tone with fade-in
             if (audioSources.ContainsKey(endpointIndex))
             {
-                var source = audioSources[endpointIndex];
-                source.volume = 0f; // Start silent
+                var audioSrc = audioSources[endpointIndex];
+                audioSrc.volume = 0f; // Start silent
                 held.currentVolume = 0f; // Will fade in via UpdateHeldEndpoints
-                source.Play();
+                audioSrc.Play();
                 float freq = endpointFrequencies[endpointIndex];
                 Debug.Log($"🔊 PRESS: {GetNoteName(GetSemitones(freq))} ({freq:F1} Hz) - fading in over {toneAttack}s");
             }
@@ -434,8 +436,9 @@ namespace BranchingLEDAnimator.Animation
             SpawnPulseFromEndpoint(endpointIndex, currentTime);
         }
         
-        void OnEndpointReleased(int endpointIndex, Vector3 position)
+        void OnEndpointReleased(LEDGraphManager source, int endpointIndex, Vector3 position)
         {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
             if (!heldEndpoints.ContainsKey(endpointIndex)) return;
             
             // Mark for fade out (don't remove yet - UpdateHeldEndpoints will handle that)
@@ -588,8 +591,15 @@ namespace BranchingLEDAnimator.Animation
             if (endpointNodes.Count > 0)
             {
                 int endpoint = endpointNodes[0];
+                Vector3 pos = cachedNodePositions != null && endpoint < cachedNodePositions.Count
+                    ? cachedNodePositions[endpoint]
+                    : Vector3.zero;
                 Debug.Log($"🧪 Simulating PRESS on endpoint {endpoint}");
-                OnEndpointPressed(endpoint, Vector3.zero);
+                var gm = Object.FindFirstObjectByType<LEDGraphManager>();
+                if (gm != null)
+                    GraphPlayerController.SimulatePress(gm, endpoint, pos);
+                else
+                    Debug.LogWarning("No LEDGraphManager in scene — cannot SimulatePress");
             }
             else
             {
@@ -603,8 +613,15 @@ namespace BranchingLEDAnimator.Animation
             if (endpointNodes.Count > 0)
             {
                 int endpoint = endpointNodes[0];
+                Vector3 pos = cachedNodePositions != null && endpoint < cachedNodePositions.Count
+                    ? cachedNodePositions[endpoint]
+                    : Vector3.zero;
                 Debug.Log($"🧪 Simulating RELEASE on endpoint {endpoint}");
-                OnEndpointReleased(endpoint, Vector3.zero);
+                var gm = Object.FindFirstObjectByType<LEDGraphManager>();
+                if (gm != null)
+                    GraphPlayerController.SimulateRelease(gm, endpoint, pos);
+                else
+                    Debug.LogWarning("No LEDGraphManager in scene — cannot SimulateRelease");
             }
         }
         

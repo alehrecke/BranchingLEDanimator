@@ -103,13 +103,15 @@ namespace BranchingLEDAnimator.Visualization
         /// <summary>
         /// Handle geometry update event
         /// </summary>
-        private void OnGeometryUpdated(System.Collections.Generic.List<Vector3> nodePositions, 
+        private void OnGeometryUpdated(LEDGraphManager source,
+                                     System.Collections.Generic.List<Vector3> nodePositions, 
                                      System.Collections.Generic.List<Vector2Int> edgeConnections, 
                                      System.Collections.Generic.List<int> sourceNodes)
         {
+            if (this == null) return;
+            if (source != graphManager) return;
             if (autoFocusOnLoad && showInSceneView)
             {
-                // Small delay to ensure geometry is fully processed
                 StartCoroutine(DelayedFocus());
             }
         }
@@ -117,9 +119,10 @@ namespace BranchingLEDAnimator.Visualization
         /// <summary>
         /// Handle color updates from animation system
         /// </summary>
-        private void OnColorsUpdated(Color[] colors)
+        private void OnColorsUpdated(LEDGraphManager source, Color[] colors)
         {
-            // Debug: Check if we're receiving color updates
+            if (this == null) return;
+            if (source != graphManager) return;
             if (colors != null && colors.Length > 0)
             {
                 Color firstColor = colors[0];
@@ -153,7 +156,6 @@ namespace BranchingLEDAnimator.Visualization
             // Always try to draw something for debugging
             if (graphManager == null)
             {
-                // Draw a debug sphere at origin if no graph manager
                 Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(Vector3.zero, 1f);
                 return;
@@ -161,7 +163,6 @@ namespace BranchingLEDAnimator.Visualization
             
             if (!graphManager.DataLoaded)
             {
-                // Draw a debug sphere if data not loaded
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawWireSphere(Vector3.zero, 2f);
                 return;
@@ -169,22 +170,24 @@ namespace BranchingLEDAnimator.Visualization
             
             if (!showInSceneView)
             {
-                // Draw a debug sphere if show is disabled
                 Gizmos.color = Color.gray;
                 Gizmos.DrawWireSphere(Vector3.zero, 0.5f);
                 return;
             }
             
+            // Draw relative to the sculpture's transform so geometry moves with the GameObject
+            Gizmos.matrix = transform.localToWorldMatrix;
             DrawConnections();
             DrawNodes();
+            Gizmos.matrix = Matrix4x4.identity;
         }
         
         void OnDrawGizmosSelected()
         {
-            // Always show when selected, even if showInSceneView is false
             if (graphManager == null || !graphManager.DataLoaded)
                 return;
-                
+            
+            Gizmos.matrix = transform.localToWorldMatrix;
             DrawConnections();
             DrawNodes();
             
@@ -192,6 +195,7 @@ namespace BranchingLEDAnimator.Visualization
             {
                 DrawNodeLabels();
             }
+            Gizmos.matrix = Matrix4x4.identity;
         }
         
         /// <summary>
@@ -270,7 +274,7 @@ namespace BranchingLEDAnimator.Visualization
             #if UNITY_EDITOR
             for (int i = 0; i < nodePositions.Count; i++)
             {
-                Vector3 worldPos = nodePositions[i];
+                Vector3 worldPos = transform.TransformPoint(nodePositions[i]);
                 Vector3 screenPos = UnityEditor.HandleUtility.WorldToGUIPoint(worldPos);
                 
                 UnityEditor.Handles.BeginGUI();

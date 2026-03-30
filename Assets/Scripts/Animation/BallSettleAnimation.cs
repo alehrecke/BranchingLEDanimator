@@ -513,8 +513,9 @@ namespace BranchingLEDAnimator.Animation
             }
         }
         
-        private void OnEndpointTouched(int endpointIndex, Vector3 position)
+        private void OnEndpointTouched(LEDGraphManager source, int endpointIndex, Vector3 position)
         {
+            if (OwnerGraphManager != null && source != OwnerGraphManager) return;
             pendingTouches.Enqueue(endpointIndex);
         }
         
@@ -1088,7 +1089,8 @@ namespace BranchingLEDAnimator.Animation
             {
                 audioContainer = new GameObject("BallSettleAudio");
                 audioContainer.hideFlags = HideFlags.HideAndDontSave;
-                Object.DontDestroyOnLoad(audioContainer);
+                if (Application.isPlaying)
+                    Object.DontDestroyOnLoad(audioContainer);
             }
             
             if (toneSource == null)

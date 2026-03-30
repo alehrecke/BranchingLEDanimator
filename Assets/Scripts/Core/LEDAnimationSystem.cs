@@ -79,6 +79,7 @@ namespace BranchingLEDAnimator.Core
         private int currentFrame = 0;
         private float lastUpdateTime;
         private int lastAnimationIndex = -1;
+        private List<LEDAnimationType> runtimeAnimationClones = new List<LEDAnimationType>();
         
         // Properties
         public LEDAnimationType CurrentAnimation => 
@@ -462,26 +463,81 @@ namespace BranchingLEDAnimator.Core
             LEDVisualizationEvents.OnGeometryUpdated -= OnGeometryLoaded; // Prevent double subscription
             LEDVisualizationEvents.OnGeometryUpdated += OnGeometryLoaded;
             
+            // Clone animation SOs so each LEDAnimationSystem instance has independent runtime state
+            CloneAnimationAssets();
+            
             if (showDebugInfo)
             {
                 Debug.Log($"✓ LEDAnimationSystem initialized with {availableAnimations.Count} animations");
                 Debug.Log($"✓ Graph Manager found: {(graphManager != null ? "✅" : "❌")}");
             }
+            
+            // If geometry is already loaded (event fired before we subscribed), auto-start now
+            if (autoPlayOnStart && !isPlaying && graphManager.DataLoaded && availableAnimations.Count > 0)
+            {
+                StartContinuousAnimationInternal();
+                
+                if (showDebugInfo)
+                {
+                    Debug.Log("✓ Auto-started animation (geometry was already loaded)");
+                }
+            }
         }
         
         void OnDestroy()
         {
-            // Unsubscribe from events
             LEDVisualizationEvents.OnGeometryUpdated -= OnGeometryLoaded;
+            DestroyAnimationClones();
+        }
+        
+        private List<LEDAnimationType> originalAnimationAssets = new List<LEDAnimationType>();
+        
+        private void CloneAnimationAssets()
+        {
+            DestroyAnimationClones();
+
+            // Save the original (uncloned) asset references on the first call
+            if (originalAnimationAssets.Count == 0)
+            {
+                for (int i = 0; i < availableAnimations.Count; i++)
+                {
+                    if (availableAnimations[i] != null)
+                        originalAnimationAssets.Add(availableAnimations[i]);
+                }
+            }
+
+            availableAnimations.Clear();
+            for (int i = 0; i < originalAnimationAssets.Count; i++)
+            {
+                if (originalAnimationAssets[i] == null) continue;
+                var clone = Instantiate(originalAnimationAssets[i]);
+                clone.name = originalAnimationAssets[i].name + " (Clone)";
+                clone.OwnerGraphManager = graphManager;
+                runtimeAnimationClones.Add(clone);
+                availableAnimations.Add(clone);
+            }
+        }
+        
+        private void DestroyAnimationClones()
+        {
+            foreach (var clone in runtimeAnimationClones)
+            {
+                if (clone != null)
+                    DestroyImmediate(clone);
+            }
+            runtimeAnimationClones.Clear();
         }
         
         /// <summary>
         /// Handle geometry loaded event
         /// </summary>
-        private void OnGeometryLoaded(System.Collections.Generic.List<Vector3> nodePositions, 
+        private void OnGeometryLoaded(LEDGraphManager source,
+                                    System.Collections.Generic.List<Vector3> nodePositions, 
                                     System.Collections.Generic.List<Vector2Int> edgeConnections, 
                                     System.Collections.Generic.List<int> sourceNodes)
         {
+            if (source != graphManager) return;
+
             if (autoPlayOnStart && !isPlaying && availableAnimations.Count > 0)
             {
                 // Start continuous animation automatically

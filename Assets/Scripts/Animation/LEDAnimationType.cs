@@ -29,6 +29,13 @@ namespace BranchingLEDAnimator.Animation
         public bool loop = true;
         
         /// <summary>
+        /// Set by LEDAnimationSystem after cloning. Used by interactive animations
+        /// to filter player events so they only react to their own graph.
+        /// </summary>
+        [System.NonSerialized]
+        public LEDGraphManager OwnerGraphManager;
+        
+        /// <summary>
         /// Calculate colors for all nodes at a given time
         /// </summary>
         /// <param name="nodePositions">Positions of all LED nodes</param>
