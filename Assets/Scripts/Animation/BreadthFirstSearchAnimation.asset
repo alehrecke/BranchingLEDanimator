@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BreadthFirstSearchAnimation
   m_EditorClassIdentifier: 
   animationName: Base Animation
-  speed: 5
+  speed: 10.83
   primaryColor: {r: 1, g: 0.7354885, b: 0, a: 1}
   secondaryColor: {r: 0, g: 0, b: 1, a: 1}
   inactiveColor: {r: 0, g: 0, b: 0, a: 1}

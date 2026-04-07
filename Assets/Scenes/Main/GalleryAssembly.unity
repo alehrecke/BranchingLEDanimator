@@ -119,259 +119,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &1547758
-MonoBehaviour:
+--- !u!1 &114995378
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b3a01bc5d7e1124abccf50dcd8ba532, type: 3}
-  m_Name: ProgressivePathAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-    (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 3.25
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 69.94
-  loop: 0
-  pathSpeed: 16.24
-  pathInterval: 0.24
-  maxConcurrentPaths: 1
-  useEndpointsOnly: 1
-  basePathColor: {r: 0, g: 1, b: 1, a: 1}
-  crossingColor: {r: 1, g: 1, b: 1, a: 1}
-  useColorProgression: 1
-  colorHueShift: 0.25
-  fadeTime: 3
-  showEndpoints: 1
-  endpointColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &13572423
-MonoBehaviour:
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 114995379}
+  - component: {fileID: 114995380}
+  m_Layer: 0
+  m_Name: ToneSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &114995379
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae74d72d3187e24aa3d110766b9b3ff, type: 3}
-  m_Name: HubToEndpointsFlow (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Hub to Endpoints Flow
-  speed: 13.41
-  primaryColor: {r: 0, g: 0.8155856, b: 1, a: 1}
-  secondaryColor: {r: 0, g: 0.0564754, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1.072
-  saturation: 1.077
-  enhanceColors: 1
-  duration: 70
-  loop: 1
-  flowType: 2
-  particleLifetime: 23.6
-  maxParticles: 334
-  sourceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  sinkColor: {r: 1, g: 0, b: 1, a: 1}
-  flowTrail:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.013027191
-      value: 0.833271
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1.0355202
-      value: 0.7178451
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showNetworkRoles: 0
-  bidirectionalFlow: 1
---- !u!114 &28127876
-MonoBehaviour:
+  m_GameObject: {fileID: 114995378}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 444699820}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &114995380
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 114995378}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: AllPairsShortestPaths (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: All Pairs Shortest Paths
-  speed: 1.2
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 0, a: 1}
-  inactiveColor: {r: 0.02, g: 0.05, b: 0.02, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 12
-  loop: 0
-  pathMode: 1
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 3
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 0
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 0
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 0.078505754, g: 1, b: 0, a: 1}
-    key1: {r: 0, g: 0.30475473, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 1}
-    key3: {r: 0, g: 0, b: 0, a: 1}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 5975
-    atime2: 22552
-    atime3: 65535
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 2
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 4
-  pathFadeTime: 5
---- !u!114 &55341768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc22a9b6005fa974698d02a24e423614, type: 3}
-  m_Name: PulseAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Pulse
-  speed: 6.22
-  primaryColor: {r: 0, g: 0, b: 1, a: 1}
-  secondaryColor: {r: 0, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 0
-  pulseRadius: 163.4
-  pulseCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.03522873
-      value: 1.0032349
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  synchronizedPulse: 0
-  phaseOffset: 3.4
---- !u!114 &66823060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: RadialShortestPaths (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Radial Shortest Paths
-  speed: 1
-  primaryColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  secondaryColor: {r: 1, g: 0, b: 0, a: 1}
-  inactiveColor: {r: 0.05, g: 0.05, b: 0.02, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  pathMode: 0
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.854
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -381,8 +189,8 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
@@ -390,665 +198,42 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 3
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 1
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 0
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  pathFadeTime: 5
---- !u!114 &77622315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: EndpointConnections (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Endpoint Connections
-  speed: 2.56
-  primaryColor: {r: 0, g: 0, b: 1, a: 1}
-  secondaryColor: {r: 0, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0.02, g: 0.02, b: 0.08, a: 1}
-  brightness: 0.23
-  saturation: 2
-  enhanceColors: 1
-  duration: 45.3
-  loop: 0
-  pathMode: 2
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 1
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 0
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 1
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 1
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  pathFadeTime: 5
---- !u!114 &123140785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375ec206c8f6d944998226ef598f5800, type: 3}
-  m_Name: GraphJuggleAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 19.8
-  primaryColor: {r: 0, g: 1, b: 0.09368992, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  pulseSpeed: 18.76
-  catchWindowSeconds: 0.152
-  startingLives: 17
-  autoStartPulse: 1
-  maxSimultaneousBalls: 1
-  ballSpawnInterval: 2
-  enableMomentum: 1
-  momentumGainPerCatch: 1.08
-  maxMomentumMultiplier: 2
-  momentumDecayRate: 0.05
-  momentumLossOnMiss: 0.3
-  inputMode: 2
-  ambientVolume: 0.044
-  ambientPulseAmount: 0.042
-  ambientFrequency: 47.2
-  ambientFrequency2: 104.7
-  ambientNoiseAmount: 0.044
-  toneAttack: 0.0247
-  toneDecayTime: 0.386
-  toneSustain: 0.311
-  toneRelease: 1.11
-  baseFrequency: 82.1
-  toneVolume: 0.854
-  harmonic2: 0.357
-  harmonic3: 0.12
-  pulseAudioVolume: 109.4
-  groundColor: {r: 1, g: 0.4, b: 0.1, a: 1}
-  skyColor: {r: 0.3, g: 0.6, b: 1, a: 1}
-  catchReadyColor: {r: 0, g: 1, b: 0, a: 1}
-  pulseWidth: 7.47
-  pulseShape:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.009010315
-      value: 0.16060257
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.02540426
-      value: 0.4047165
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  useRainbowColors: 1
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  pulseStyle: 0
-  trailLength: 30
-  trailIntensity: 1
-  trailStretchWithMomentum: 1
-  successFlashDuration: 0
-  successBrightnessBoost: 0.98
-  catchBrightnessBoost: 1.5
-  playerGlowColor: {r: 0.3, g: 1, b: 0.5, a: 1}
-  playerGlowRadius: 27
-  playerGlowIntensity: 1
-  currentScore: 0
-  currentLives: 0
-  streak: 0
-  gameActive: 0
---- !u!114 &134816890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60242fa35a9bd04478f994bb3b7f9604, type: 3}
-  m_Name: BallSettleAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 49.9
-  primaryColor: {r: 1, g: 0.037245974, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 1, b: 0.2011559, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 0
-  duration: 13.95
-  loop: 1
-  ballSpeed: 7.2000003
-  totalBalls: 19
-  autoSpawnAtStart: 1
-  useRainbowColors: 1
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  pulseStyle: 1
-  pulseWidth: 6.49
-  trailLength: 30
-  trailIntensity: 1
-  pulseShape:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  settledIntensity: 1.437
-  settledPulse: 1
-  settledPulseSpeed: 0.955
-  dispatchStagger: 0.065
-  enableAudio: 1
-  toneVolume: 0.3
-  inputMode: 0
---- !u!114 &175309766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f19c5abad5156bf4986a5e193b6ce887, type: 3}
-  m_Name: FountainAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1.13
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 37.8
-  loop: 0
-  spawnRate: 4.8
-  maxParticles: 44
-  particleSpeed: 20
-  gravityBias: 0.005
-  continuousFlow: 1
-  useRainbowColors: 0
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  particleWidth: 1
-  trailLength: 10
-  trailIntensity: 1
-  enableInteraction: 1
-  blockGlowIntensity: 2
-  blockExpansion: 3
-  blockGlowColor: {r: 1, g: 0.8, b: 0.3, a: 1}
-  blockFadeTime: 0.5
-  enableAudio: 1
-  audioVolume: 0.3
---- !u!114 &215564765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: RadialShortestPaths (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Radial Shortest Paths
-  speed: 1
-  primaryColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  secondaryColor: {r: 1, g: 0, b: 0, a: 1}
-  inactiveColor: {r: 0.05, g: 0.05, b: 0.02, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  pathMode: 0
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 3
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 1
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 0
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  pathFadeTime: 5
---- !u!114 &253131737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef6cae3e07280f4db5c7c37d5fdd791, type: 3}
-  m_Name: SpatialPanAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 0, g: 1, b: 0.16265583, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  positionMode: 0
-  spatialStripBlend: 1
-  panDirection: 0
-  customDirection: {x: 7.14, y: 2.38, z: 2.73}
-  reversePan: 0
-  panSpeed: 0.31
-  gradientRepeats: 0.98
-  gradientOffset: 0.383
-  colorMode: 0
-  tertiaryColor: {r: 0, g: 1, b: 1, a: 1}
-  rainbowHueStart: 0
-  rainbowHueRange: 1
-  enablePulse: 1
-  pulseFrequency: 1.86
-  pulseMinBrightness: 0.474
-  smoothGradient: 1
-  gradientCurve:
+  panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
       inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  debugLogBounds: 1
---- !u!114 &274812868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375ec206c8f6d944998226ef598f5800, type: 3}
-  m_Name: GraphJuggleAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 19.8
-  primaryColor: {r: 0, g: 1, b: 0.09368992, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  pulseSpeed: 18.76
-  catchWindowSeconds: 0.152
-  startingLives: 17
-  autoStartPulse: 1
-  maxSimultaneousBalls: 1
-  ballSpawnInterval: 2
-  enableMomentum: 1
-  momentumGainPerCatch: 1.08
-  maxMomentumMultiplier: 2
-  momentumDecayRate: 0.05
-  momentumLossOnMiss: 0.3
-  inputMode: 2
-  ambientVolume: 0.044
-  ambientPulseAmount: 0.042
-  ambientFrequency: 47.2
-  ambientFrequency2: 104.7
-  ambientNoiseAmount: 0.044
-  toneAttack: 0.0247
-  toneDecayTime: 0.386
-  toneSustain: 0.311
-  toneRelease: 1.11
-  baseFrequency: 82.1
-  toneVolume: 0.854
-  harmonic2: 0.357
-  harmonic3: 0.12
-  pulseAudioVolume: 109.4
-  groundColor: {r: 1, g: 0.4, b: 0.1, a: 1}
-  skyColor: {r: 0.3, g: 0.6, b: 1, a: 1}
-  catchReadyColor: {r: 0, g: 1, b: 0, a: 1}
-  pulseWidth: 7.47
-  pulseShape:
+  spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.009010315
-      value: 0.16060257
+      time: 0
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.02540426
-      value: 0.4047165
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  useRainbowColors: 1
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  pulseStyle: 0
-  trailLength: 30
-  trailIntensity: 1
-  trailStretchWithMomentum: 1
-  successFlashDuration: 0
-  successBrightnessBoost: 0.98
-  catchBrightnessBoost: 1.5
-  playerGlowColor: {r: 0.3, g: 1, b: 0.5, a: 1}
-  playerGlowRadius: 27
-  playerGlowIntensity: 1
-  currentScore: 0
-  currentLives: 0
-  streak: 0
-  gameActive: 0
---- !u!114 &287577577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1675220122ac8ef4995c8a2954b62730, type: 3}
-  m_Name: PathFinderAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  pathDuration: 5.12
-  recedeDuration: 1.267
-  fillStyle: 3
-  leadingEdgeWidth: 8
-  trailPersistence: 0.8
-  maxSimultaneousPaths: 2
-  avoidActiveEndpoints: 1
-  colorMode: 1
-  sourceColor: {r: 0.2, g: 0.8, b: 1, a: 1}
-  destinationColor: {r: 1, g: 0, b: 0.08282852, a: 1}
-  monochromeTrailColor: {r: 0, g: 0.8, b: 1, a: 1}
-  monochromeBackground: {r: 0.02, g: 0.02, b: 0.05, a: 1}
-  multiPathHueSpacing: 0.25
-  legColorSaturation: 0.8
-  legColorBrightness: 1
-  leadingEdgeColor: {r: 1, g: 1, b: 1, a: 1}
-  idleEndpointColor: {r: 0.1, g: 0.2, b: 0.3, a: 1}
-  idlePulseSpeed: 1.07
-  idlePulseAmount: 0.105
-  chaseParticleCount: 7
-  chaseSpeed: 1.5
-  chaseSpacing: 0.2
-  enableAudio: 1
-  baseFrequency: 220
-  audioVolume: 0.415
-  audioAttack: 0.3
-  audioRelease: 1
-  destinationWindow: 4.81
-  anyEndpointCanStart: 1
-  highlightDestination: 1
-  destinationPulseSpeed: 7.35
-  showPathDebug: 1
---- !u!114 &308602852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae74d72d3187e24aa3d110766b9b3ff, type: 3}
-  m_Name: NetworkCirculation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Network Circulation
-  speed: 9.15
-  primaryColor: {r: 0, g: 1, b: 0, a: 1}
-  secondaryColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  inactiveColor: {r: 0.02, g: 0.05, b: 0.02, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 86.2
-  loop: 1
-  flowType: 2
-  particleLifetime: 102.1
-  maxParticles: 85
-  sourceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  sinkColor: {r: 1, g: 0, b: 1, a: 1}
-  flowTrail:
+  reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -1058,22 +243,11 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  showNetworkRoles: 0
-  bidirectionalFlow: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,176 +385,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &331010099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: ShortestPathAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 3.34
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 43.78
-  loop: 0
-  pathMode: 2
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 3
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 0
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 0
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  pathFadeTime: 5
---- !u!114 &343047554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100165591cc76394182807fdd542af1a, type: 3}
-  m_Name: JunctionPulses (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Junction Pulses
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 1, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 4
-  loop: 1
-  highValenceThreshold: 2
-  lowValenceThreshold: 1
-  simultaneousPulses: 0
-  breathingMode: 1
-  breathingCycles: 2
-  pulseRadius: 5
-  pulseFalloff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  usePrimarySecondaryColors: 1
---- !u!114 &353435933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ced867edbd921654dbbd7f61f6e7f519, type: 3}
-  m_Name: SparkleAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Sparkle
-  speed: 1
-  primaryColor: {r: 1, g: 1, b: 1, a: 1}
-  secondaryColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  maxActiveSparkles: 190
-  sparkleLifetime: 0.29
-  sparkleIntensity: 1
-  colorVariation: 0
-  randomSeed: 73
 --- !u!1 &364243221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,6 +394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 364243222}
+  - component: {fileID: 364243223}
   m_Layer: 0
   m_Name: Gallery
   m_TagString: Untagged
@@ -1416,33 +421,127 @@ Transform:
   - {fileID: 789827289}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &407471445
+--- !u!114 &364243223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_GameObject: {fileID: 364243221}
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: EndpointConnections (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Endpoint Connections
-  speed: 2.56
-  primaryColor: {r: 0, g: 0, b: 1, a: 1}
-  secondaryColor: {r: 0, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0.02, g: 0.02, b: 0.08, a: 1}
-  brightness: 0.23
-  saturation: 2
-  enhanceColors: 1
-  duration: 45.3
-  loop: 0
-  pathMode: 2
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
+  m_Script: {fileID: 11500000, guid: 1598f80f965d95445ba44980947c14ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BranchingLEDAnimator.Simulation.GalleryAudienceSimulator
+  visitorCount: 6
+  walkSpeed: 1.5
+  reachDistance: 5
+  lingerDuration: {x: 3, y: 12}
+  holdDuration: {x: 0.5, y: 4}
+  pauseBetweenTouches: {x: 0.3, y: 2}
+  touchChancePerSecond: 0.7
+  maxTouchesPerVisitor: 1
+  explorerRatio: 0.4
+  lingerRatio: 0.4
+  showVisitorGizmos: 1
+  showDebugLog: 1
+  visitorColor: {r: 0, g: 1, b: 0.5, a: 0.6}
+  touchLineColor: {r: 1, g: 1, b: 0, a: 0.4}
+  simulationEnabled: 1
+--- !u!1 &444699819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 444699820}
+  m_Layer: 0
+  m_Name: BloomAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &444699820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444699819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 114995379}
+  - {fileID: 454912232}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &454912231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 454912232}
+  - component: {fileID: 454912233}
+  m_Layer: 0
+  m_Name: AmbientSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &454912232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454912231}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 444699820}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &454912233
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454912231}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.044
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -1452,8 +551,8 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
@@ -1461,222 +560,12 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 1
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 0
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 1
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 1
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  pathFadeTime: 5
---- !u!114 &411791438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: EndpointConnections (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Endpoint Connections
-  speed: 2.56
-  primaryColor: {r: 0, g: 0, b: 1, a: 1}
-  secondaryColor: {r: 0, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0.02, g: 0.02, b: 0.08, a: 1}
-  brightness: 0.23
-  saturation: 2
-  enhanceColors: 1
-  duration: 45.3
-  loop: 0
-  pathMode: 2
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 1
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 0
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 1
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 1
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  pathFadeTime: 5
---- !u!114 &471998812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100165591cc76394182807fdd542af1a, type: 3}
-  m_Name: JunctionBreathing (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Junction Breathing
-  speed: 0.57
-  primaryColor: {r: 1, g: 0.3, b: 0.1, a: 1}
-  secondaryColor: {r: 0.1, g: 0.5, b: 1, a: 1}
-  inactiveColor: {r: 0.05, g: 0.05, b: 0.1, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 16.97
-  loop: 1
-  highValenceThreshold: 2
-  lowValenceThreshold: 1
-  simultaneousPulses: 0
-  breathingMode: 1
-  breathingCycles: 1
-  pulseRadius: 35.4
-  pulseFalloff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1.0106201
-      value: 0.25811768
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  usePrimarySecondaryColors: 1
---- !u!114 &492065153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ed9f0937d6c6047a9e064fab80395e, type: 3}
-  m_Name: LEDWaveAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1.45
-  primaryColor: {r: 0.06772339, g: 1, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0.5552001, g: 0, b: 1, a: 1}
-  brightness: 2
-  saturation: 1.459
-  enhanceColors: 1
-  duration: 9.4
-  loop: 1
-  waveWidthLEDs: 4
-  waveSpeedLEDs: 7.3
-  fromEndpoints: 1
-  waveCount: 2
-  waveSpacing: 11
-  waveShape:
+  panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -1686,377 +575,41 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &520045343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc22a9b6005fa974698d02a24e423614, type: 3}
-  m_Name: PulseAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Pulse
-  speed: 6.22
-  primaryColor: {r: 0, g: 0, b: 1, a: 1}
-  secondaryColor: {r: 0, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 0
-  pulseRadius: 163.4
-  pulseCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.03522873
-      value: 1.0032349
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  synchronizedPulse: 0
-  phaseOffset: 3.4
---- !u!114 &554719016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce8e8d6aa4869a46b6cf2eba0b5a1d8, type: 3}
-  m_Name: LEDMappingTest (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  testPattern: 0
-  testColor: {r: 1, g: 0, b: 0, a: 1}
-  pulseSpeed: 2
-  enableSequentialTest: 0
-  sequentialDelay: 0.5
---- !u!114 &574115618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef6cae3e07280f4db5c7c37d5fdd791, type: 3}
-  m_Name: SpatialPanAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 0, g: 1, b: 0.16265583, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  positionMode: 0
-  spatialStripBlend: 1
-  panDirection: 0
-  customDirection: {x: 7.14, y: 2.38, z: 2.73}
-  reversePan: 0
-  panSpeed: 0.31
-  gradientRepeats: 0.98
-  gradientOffset: 0.383
-  colorMode: 0
-  tertiaryColor: {r: 0, g: 1, b: 1, a: 1}
-  rainbowHueStart: 0
-  rainbowHueRange: 1
-  enablePulse: 1
-  pulseFrequency: 1.86
-  pulseMinBrightness: 0.474
-  smoothGradient: 1
-  gradientCurve:
+  spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
       inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  debugLogBounds: 1
---- !u!114 &579564370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae74d72d3187e24aa3d110766b9b3ff, type: 3}
-  m_Name: HubToEndpointsFlow (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Hub to Endpoints Flow
-  speed: 13.41
-  primaryColor: {r: 0, g: 0.8155856, b: 1, a: 1}
-  secondaryColor: {r: 0, g: 0.0564754, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1.072
-  saturation: 1.077
-  enhanceColors: 1
-  duration: 70
-  loop: 1
-  flowType: 2
-  particleLifetime: 23.6
-  maxParticles: 334
-  sourceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  sinkColor: {r: 1, g: 0, b: 1, a: 1}
-  flowTrail:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.013027191
-      value: 0.833271
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1.0355202
-      value: 0.7178451
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showNetworkRoles: 0
-  bidirectionalFlow: 1
---- !u!114 &600154880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93b3ac2f1467c4d47a80fcfe75efcaa2, type: 3}
-  m_Name: InteractivePanAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-    (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  panSpeed: 0.26
-  gradientRepeats: 0.90000004
-  gradientOffset: 0
-  colorMode: 0
-  rainbowHueStart: 0.392
-  rainbowHueRange: 1
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  tertiaryColor: {r: 0, g: 1, b: 0, a: 1}
-  smoothGradient: 0
-  gradientCurve:
+  reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
       value: 1
-      inSlope: 1
+      inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  enablePulse: 0
-  pulseFrequency: 2
-  pulseMinBrightness: 0.3
-  directionSmoothSpeed: 4.24
-  defaultDirection: {x: 0, y: -0.65, z: 0}
-  showDirectionVector: 1
-  vectorDisplayLength: 50
-  vectorColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  highlightTouchedEndpoints: 1
-  endpointHighlightIntensity: 0.5
-  endpointHighlightRadius: 3
-  inputMode: 0
---- !u!114 &604525131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce8e8d6aa4869a46b6cf2eba0b5a1d8, type: 3}
-  m_Name: LEDMappingTest (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  testPattern: 0
-  testColor: {r: 1, g: 0, b: 0, a: 1}
-  pulseSpeed: 2
-  enableSequentialTest: 0
-  sequentialDelay: 0.5
---- !u!114 &643666758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93b3ac2f1467c4d47a80fcfe75efcaa2, type: 3}
-  m_Name: InteractivePanAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-    (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  panSpeed: 0.26
-  gradientRepeats: 0.90000004
-  gradientOffset: 0
-  colorMode: 0
-  rainbowHueStart: 0.392
-  rainbowHueRange: 1
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  tertiaryColor: {r: 0, g: 1, b: 0, a: 1}
-  smoothGradient: 0
-  gradientCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  enablePulse: 0
-  pulseFrequency: 2
-  pulseMinBrightness: 0.3
-  directionSmoothSpeed: 4.24
-  defaultDirection: {x: 0, y: -0.65, z: 0}
-  showDirectionVector: 1
-  vectorDisplayLength: 50
-  vectorColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  highlightTouchedEndpoints: 1
-  endpointHighlightIntensity: 0.5
-  endpointHighlightRadius: 3
-  inputMode: 0
 --- !u!1 &646268706
 GameObject:
   m_ObjectHideFlags: 0
@@ -4053,647 +2606,647 @@ MonoBehaviour:
     suggestedLEDCount: 232
     totalLength: 231.93845
   currentNodeColors:
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 1.1039664, g: 0.82540536, b: 0, a: 1}
-  - {r: 1.1039664, g: 0.82540536, b: 0, a: 1}
-  - {r: 1.1039664, g: 0.82540536, b: 0, a: 1}
-  - {r: 1.1039664, g: 0.82540536, b: 0, a: 1}
-  - {r: 1.1039664, g: 0.82540536, b: 0, a: 1}
-  - {r: 1.1039664, g: 0.82540536, b: 0, a: 1}
-  - {r: 1.1039664, g: 0.82540536, b: 1.2535383, a: 1}
-  - {r: 0, g: 0.106730714, b: 1.2535383, a: 1}
-  - {r: 0, g: 0.106730714, b: 1.2535383, a: 1}
-  - {r: 0, g: 0.106730714, b: 1.2535383, a: 1}
-  - {r: 0, g: 0.106730714, b: 1.2535383, a: 1}
-  - {r: 0, g: 0.106730714, b: 1.2535383, a: 1}
-  - {r: 0, g: 0.106730714, b: 1.2535383, a: 1}
-  - {r: 1.2691672, g: 1.3825958, b: 0, a: 1}
-  - {r: 1.2691672, g: 1.3825958, b: 0, a: 1}
-  - {r: 1.2691672, g: 1.3825958, b: 0, a: 1}
-  - {r: 1.2691672, g: 1.3825958, b: 0, a: 1}
-  - {r: 1.2691672, g: 1.3825958, b: 0, a: 1}
-  - {r: 1.2691672, g: 1.3825958, b: 0, a: 1}
-  - {r: 1.2691672, g: 1.3825958, b: 1.4368707, a: 1}
-  - {r: 0.35810292, g: 0, b: 1.4368707, a: 1}
-  - {r: 0.35810292, g: 0, b: 1.4368707, a: 1}
-  - {r: 0.35810292, g: 0, b: 1.4368707, a: 1}
-  - {r: 0.35810292, g: 0, b: 1.4368707, a: 1}
-  - {r: 0.35810292, g: 0, b: 1.4368707, a: 1}
-  - {r: 0.8053788, g: 1.3800375, b: 1.4368707, a: 1}
-  - {r: 0.8053788, g: 1.3800375, b: 0, a: 1}
-  - {r: 0.8053788, g: 1.3800375, b: 0, a: 1}
-  - {r: 0.8053788, g: 1.3800375, b: 0, a: 1}
-  - {r: 0.8053788, g: 1.3800375, b: 0, a: 1}
-  - {r: 0.8053788, g: 1.3800375, b: 0, a: 1}
-  - {r: 0.8053788, g: 1.3800375, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0.40295506, g: 1.0690178, b: 0, a: 1}
-  - {r: 0.40295506, g: 1.0690178, b: 0, a: 1}
-  - {r: 0.40295506, g: 1.0690178, b: 0, a: 1}
-  - {r: 0.40295506, g: 1.0690178, b: 0, a: 1}
-  - {r: 0.40295506, g: 1.0690178, b: 0, a: 1}
-  - {r: 0.40295506, g: 1.0690178, b: 0, a: 1}
-  - {r: 0.40295506, g: 1.0690178, b: 0, a: 1}
-  - {r: 0.9615338, g: 0, b: 1.2167554, a: 1}
-  - {r: 0.9615338, g: 0, b: 1.2167554, a: 1}
-  - {r: 0.9615338, g: 0, b: 1.2167554, a: 1}
-  - {r: 0.9615338, g: 0, b: 1.2167554, a: 1}
-  - {r: 0.9615338, g: 0, b: 1.2167554, a: 1}
-  - {r: 0.9615338, g: 0, b: 1.2167554, a: 1}
-  - {r: 0.9615338, g: 1.3524423, b: 1.2167554, a: 1}
-  - {r: 0.057575878, g: 1.3524423, b: 0, a: 1}
-  - {r: 0.057575878, g: 1.3524423, b: 0, a: 1}
-  - {r: 0.057575878, g: 1.3524423, b: 0, a: 1}
-  - {r: 0.057575878, g: 1.3524423, b: 0, a: 1}
-  - {r: 0.057575878, g: 1.3524423, b: 0, a: 1}
-  - {r: 1.4349258, g: 1.3524423, b: 1.256117, a: 1}
-  - {r: 1.4349258, g: 0, b: 1.256117, a: 1}
-  - {r: 1.4349258, g: 0, b: 1.256117, a: 1}
-  - {r: 1.4349258, g: 0, b: 1.256117, a: 1}
-  - {r: 1.4349258, g: 0, b: 1.256117, a: 1}
-  - {r: 1.4349258, g: 0, b: 1.256117, a: 1}
-  - {r: 1.4349258, g: 0, b: 1.256117, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 1.4263694, g: 0, b: 0.95386386, a: 1}
-  - {r: 1.4263694, g: 0, b: 0.95386386, a: 1}
-  - {r: 1.4263694, g: 0, b: 0.95386386, a: 1}
-  - {r: 1.4263694, g: 0, b: 0.95386386, a: 1}
-  - {r: 1.4263694, g: 0, b: 0.95386386, a: 1}
-  - {r: 1.4263694, g: 0, b: 0.95386386, a: 1}
-  - {r: 1.4263694, g: 1.4220934, b: 0.95386386, a: 1}
-  - {r: 0, g: 1.4220934, b: 0.70884013, a: 1}
-  - {r: 0, g: 1.4220934, b: 0.70884013, a: 1}
-  - {r: 0, g: 1.4220934, b: 0.70884013, a: 1}
-  - {r: 0, g: 1.4220934, b: 0.70884013, a: 1}
-  - {r: 0, g: 1.4220934, b: 0.70884013, a: 1}
-  - {r: 0, g: 1.4220934, b: 0.70884013, a: 1}
-  - {r: 1.3268418, g: 0, b: 0.4436531, a: 1}
-  - {r: 1.3268418, g: 0, b: 0.4436531, a: 1}
-  - {r: 1.3268418, g: 0, b: 0.4436531, a: 1}
-  - {r: 1.3268418, g: 0, b: 0.4436531, a: 1}
-  - {r: 1.3268418, g: 0, b: 0.4436531, a: 1}
-  - {r: 1.3268418, g: 0, b: 0.4436531, a: 1}
-  - {r: 1.3268418, g: 1.1677077, b: 0.9724858, a: 1}
-  - {r: 0, g: 1.1677077, b: 0.9724858, a: 1}
-  - {r: 0, g: 1.1677077, b: 0.9724858, a: 1}
-  - {r: 0, g: 1.1677077, b: 0.9724858, a: 1}
-  - {r: 0, g: 1.1677077, b: 0.9724858, a: 1}
-  - {r: 0, g: 1.1677077, b: 0.9724858, a: 1}
-  - {r: 1.0062237, g: 1.1677077, b: 0.9724858, a: 1}
-  - {r: 1.0062237, g: 0, b: 0, a: 1}
-  - {r: 1.0062237, g: 0, b: 0, a: 1}
-  - {r: 1.0062237, g: 0, b: 0, a: 1}
-  - {r: 1.0062237, g: 0, b: 0, a: 1}
-  - {r: 1.0062237, g: 0, b: 0, a: 1}
-  - {r: 1.0062237, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 1.2454685, b: 1.2966452, a: 1}
-  - {r: 0, g: 1.2454685, b: 1.2966452, a: 1}
-  - {r: 0, g: 1.2454685, b: 1.2966452, a: 1}
-  - {r: 0, g: 1.2454685, b: 1.2966452, a: 1}
-  - {r: 0, g: 1.2454685, b: 1.2966452, a: 1}
-  - {r: 0, g: 1.2454685, b: 1.2966452, a: 1}
-  - {r: 1.4110384, g: 1.2454685, b: 1.2966452, a: 1}
-  - {r: 1.4110384, g: 0.29159448, b: 0, a: 1}
-  - {r: 1.4110384, g: 0.29159448, b: 0, a: 1}
-  - {r: 1.4110384, g: 0.29159448, b: 0, a: 1}
-  - {r: 1.4110384, g: 0.29159448, b: 0, a: 1}
-  - {r: 1.4110384, g: 0.29159448, b: 0, a: 1}
-  - {r: 1.4110384, g: 0.29159448, b: 0, a: 1}
-  - {r: 0, g: 0.8973482, b: 1.4330888, a: 1}
-  - {r: 0, g: 0.8973482, b: 1.4330888, a: 1}
-  - {r: 0, g: 0.8973482, b: 1.4330888, a: 1}
-  - {r: 0, g: 0.8973482, b: 1.4330888, a: 1}
-  - {r: 0, g: 0.8973482, b: 1.4330888, a: 1}
-  - {r: 0, g: 0.8973482, b: 1.4330888, a: 1}
-  - {r: 1.3537453, g: 0.8973482, b: 1.4330888, a: 1}
-  - {r: 1.3537453, g: 0.7324035, b: 0, a: 1}
-  - {r: 1.3537453, g: 0.7324035, b: 0, a: 1}
-  - {r: 1.3537453, g: 0.7324035, b: 0, a: 1}
-  - {r: 1.3537453, g: 0.7324035, b: 0, a: 1}
-  - {r: 1.3537453, g: 0.7324035, b: 0, a: 1}
-  - {r: 1.3537453, g: 0.7324035, b: 1.2166711, a: 1}
-  - {r: 0, g: 0.35501972, b: 1.2166711, a: 1}
-  - {r: 0, g: 0.35501972, b: 1.2166711, a: 1}
-  - {r: 0, g: 0.35501972, b: 1.2166711, a: 1}
-  - {r: 0, g: 0.35501972, b: 1.2166711, a: 1}
-  - {r: 0, g: 0.35501972, b: 1.2166711, a: 1}
-  - {r: 0, g: 0.35501972, b: 1.2166711, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.85162616, a: 1}
+  - {r: 0, g: 1, b: 0.8920696, a: 1}
+  - {r: 0, g: 1, b: 0.932513, a: 1}
+  - {r: 0, g: 1, b: 0.9729564, a: 1}
+  - {r: 0, g: 0.9866004, b: 1, a: 1}
+  - {r: 0, g: 0.946157, b: 1, a: 1}
+  - {r: 0, g: 0.90571356, b: 1, a: 1}
+  - {r: 0, g: 0.86527014, b: 1, a: 1}
+  - {r: 0, g: 0.8248267, b: 1, a: 1}
+  - {r: 0, g: 0.7843833, b: 1, a: 1}
+  - {r: 0, g: 0.7437682, b: 1, a: 1}
+  - {r: 0, g: 0.70297, b: 1, a: 1}
+  - {r: 0, g: 0.6621833, b: 1, a: 1}
+  - {r: 0, g: 0.6213851, b: 1, a: 1}
+  - {r: 0, g: 0.5805869, b: 1, a: 1}
+  - {r: 0, g: 0.53980017, b: 1, a: 1}
+  - {r: 0, g: 0.49900198, b: 1, a: 1}
+  - {r: 0, g: 0.4582038, b: 1, a: 1}
+  - {r: 0, g: 0.41741705, b: 1, a: 1}
+  - {r: 0, g: 0.37661886, b: 1, a: 1}
+  - {r: 0, g: 0.335752, b: 1, a: 1}
+  - {r: 0, g: 0.2946906, b: 1, a: 1}
+  - {r: 0, g: 0.2536292, b: 1, a: 1}
+  - {r: 0, g: 0.21255636, b: 1, a: 1}
+  - {r: 0, g: 0.17149496, b: 1, a: 1}
+  - {r: 0, g: 0.13043356, b: 1, a: 1}
+  - {r: 0, g: 0.08937216, b: 1, a: 1}
+  - {r: 0, g: 0.048299313, b: 1, a: 1}
+  - {r: 0, g: 0.007237911, b: 1, a: 1}
+  - {r: 0.03382349, g: 0, b: 1, a: 1}
+  - {r: 0.07488489, g: 0, b: 1, a: 1}
+  - {r: 0.11607218, g: 0, b: 1, a: 1}
+  - {r: 0.15735102, g: 0, b: 1, a: 1}
+  - {r: 0.19862986, g: 0, b: 1, a: 1}
+  - {r: 0.2399087, g: 0, b: 1, a: 1}
+  - {r: 0.28118753, g: 0, b: 1, a: 1}
+  - {r: 0.32246637, g: 0, b: 1, a: 1}
+  - {r: 0.3637452, g: 0, b: 1, a: 1}
+  - {r: 0.40502405, g: 0, b: 1, a: 1}
+  - {r: 0.4463029, g: 0, b: 1, a: 1}
+  - {r: 0.48758173, g: 0, b: 1, a: 1}
+  - {r: 0.52886057, g: 0, b: 1, a: 1}
+  - {r: 0.5702195, g: 0, b: 1, a: 1}
+  - {r: 0.61167, g: 0, b: 1, a: 1}
+  - {r: 0.6531205, g: 0, b: 1, a: 1}
+  - {r: 0.694571, g: 0, b: 1, a: 1}
+  - {r: 0.7360215, g: 0, b: 1, a: 1}
+  - {r: 0.777472, g: 0, b: 1, a: 1}
+  - {r: 0.8189225, g: 0, b: 1, a: 1}
+  - {r: 0.860373, g: 0, b: 1, a: 1}
+  - {r: 0.9018235, g: 0, b: 1, a: 1}
+  - {r: 0.943274, g: 0, b: 1, a: 1}
+  - {r: 0.9847245, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.973825, a: 1}
+  - {r: 1, g: 0, b: 0.9323058, a: 1}
+  - {r: 1, g: 0, b: 0.89078665, a: 1}
+  - {r: 1, g: 0, b: 0.84925604, a: 1}
+  - {r: 1, g: 0, b: 0.8077254, a: 1}
+  - {r: 1, g: 0, b: 0.7661948, a: 1}
+  - {r: 1, g: 0, b: 0.72467566, a: 1}
+  - {r: 1, g: 0, b: 0.68314505, a: 1}
+  - {r: 1, g: 0, b: 0.64161444, a: 1}
+  - {r: 1, g: 0, b: 0.6000953, a: 1}
+  - {r: 1, g: 0, b: 0.55856466, a: 1}
+  - {r: 1, g: 0, b: 0.51703405, a: 1}
+  - {r: 1, g: 0, b: 0.47550344, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.85162616, a: 1}
+  - {r: 0, g: 1, b: 0.8920696, a: 1}
+  - {r: 0, g: 1, b: 0.932513, a: 1}
+  - {r: 0, g: 1, b: 0.9729564, a: 1}
+  - {r: 0, g: 0.9866004, b: 1, a: 1}
+  - {r: 0, g: 0.946157, b: 1, a: 1}
+  - {r: 0, g: 0.90571356, b: 1, a: 1}
+  - {r: 0, g: 0.86527014, b: 1, a: 1}
+  - {r: 0, g: 0.8248267, b: 1, a: 1}
+  - {r: 0, g: 0.7843833, b: 1, a: 1}
+  - {r: 0, g: 0.7437682, b: 1, a: 1}
+  - {r: 0, g: 0.70297, b: 1, a: 1}
+  - {r: 0, g: 0.6621833, b: 1, a: 1}
+  - {r: 0, g: 0.6213851, b: 1, a: 1}
+  - {r: 0, g: 0.5805869, b: 1, a: 1}
+  - {r: 0, g: 0.53980017, b: 1, a: 1}
+  - {r: 0, g: 0.49900198, b: 1, a: 1}
+  - {r: 0, g: 0.4582038, b: 1, a: 1}
+  - {r: 0, g: 0.41741705, b: 1, a: 1}
+  - {r: 0, g: 0.37661886, b: 1, a: 1}
+  - {r: 0, g: 0.335752, b: 1, a: 1}
+  - {r: 0, g: 0.2946906, b: 1, a: 1}
+  - {r: 0, g: 0.2536292, b: 1, a: 1}
+  - {r: 0, g: 0.21255636, b: 1, a: 1}
+  - {r: 0, g: 0.17149496, b: 1, a: 1}
+  - {r: 0, g: 0.13043356, b: 1, a: 1}
+  - {r: 0, g: 0.08937216, b: 1, a: 1}
+  - {r: 0, g: 0.048299313, b: 1, a: 1}
+  - {r: 0, g: 0.007237911, b: 1, a: 1}
+  - {r: 0.03382349, g: 0, b: 1, a: 1}
+  - {r: 0.07488489, g: 0, b: 1, a: 1}
+  - {r: 0.11607218, g: 0, b: 1, a: 1}
+  - {r: 0.15735102, g: 0, b: 1, a: 1}
+  - {r: 0.19862986, g: 0, b: 1, a: 1}
+  - {r: 0.2399087, g: 0, b: 1, a: 1}
+  - {r: 0.28118753, g: 0, b: 1, a: 1}
+  - {r: 0.32246637, g: 0, b: 1, a: 1}
+  - {r: 0.3637452, g: 0, b: 1, a: 1}
+  - {r: 0.40502405, g: 0, b: 1, a: 1}
+  - {r: 0.4463029, g: 0, b: 1, a: 1}
+  - {r: 0.48758173, g: 0, b: 1, a: 1}
+  - {r: 0.52886057, g: 0, b: 1, a: 1}
+  - {r: 0.5702195, g: 0, b: 1, a: 1}
+  - {r: 0.61167, g: 0, b: 1, a: 1}
+  - {r: 0.6531205, g: 0, b: 1, a: 1}
+  - {r: 0.694571, g: 0, b: 1, a: 1}
+  - {r: 0.7360215, g: 0, b: 1, a: 1}
+  - {r: 0.777472, g: 0, b: 1, a: 1}
+  - {r: 0.8189225, g: 0, b: 1, a: 1}
+  - {r: 0.860373, g: 0, b: 1, a: 1}
+  - {r: 0.9018235, g: 0, b: 1, a: 1}
+  - {r: 0.943274, g: 0, b: 1, a: 1}
+  - {r: 0.9847245, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.973825, a: 1}
+  - {r: 1, g: 0, b: 0.9323058, a: 1}
+  - {r: 1, g: 0, b: 0.89078665, a: 1}
+  - {r: 1, g: 0, b: 0.84925604, a: 1}
+  - {r: 1, g: 0, b: 0.8077254, a: 1}
+  - {r: 1, g: 0, b: 0.7661948, a: 1}
+  - {r: 1, g: 0, b: 0.72467566, a: 1}
+  - {r: 1, g: 0, b: 0.68314505, a: 1}
+  - {r: 1, g: 0, b: 0.64161444, a: 1}
+  - {r: 1, g: 0, b: 0.6000953, a: 1}
+  - {r: 1, g: 0, b: 0.55856466, a: 1}
+  - {r: 1, g: 0, b: 0.51703405, a: 1}
+  - {r: 1, g: 0, b: 0.47550344, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.85162616, a: 1}
+  - {r: 0, g: 1, b: 0.8920696, a: 1}
+  - {r: 0, g: 1, b: 0.932513, a: 1}
+  - {r: 0, g: 1, b: 0.9729564, a: 1}
+  - {r: 0, g: 0.9866004, b: 1, a: 1}
+  - {r: 0, g: 0.946157, b: 1, a: 1}
+  - {r: 0, g: 0.90571356, b: 1, a: 1}
+  - {r: 0, g: 0.86527014, b: 1, a: 1}
+  - {r: 0, g: 0.8248267, b: 1, a: 1}
+  - {r: 0, g: 0.7843833, b: 1, a: 1}
+  - {r: 0, g: 0.7437682, b: 1, a: 1}
+  - {r: 0, g: 0.70297, b: 1, a: 1}
+  - {r: 0, g: 0.6621833, b: 1, a: 1}
+  - {r: 0, g: 0.6213851, b: 1, a: 1}
+  - {r: 0, g: 0.5805869, b: 1, a: 1}
+  - {r: 0, g: 0.53980017, b: 1, a: 1}
+  - {r: 0, g: 0.49900198, b: 1, a: 1}
+  - {r: 0, g: 0.4582038, b: 1, a: 1}
+  - {r: 0, g: 0.41741705, b: 1, a: 1}
+  - {r: 0, g: 0.37661886, b: 1, a: 1}
+  - {r: 0, g: 0.335752, b: 1, a: 1}
+  - {r: 0, g: 0.2946906, b: 1, a: 1}
+  - {r: 0, g: 0.2536292, b: 1, a: 1}
+  - {r: 0, g: 0.21255636, b: 1, a: 1}
+  - {r: 0, g: 0.17149496, b: 1, a: 1}
+  - {r: 0, g: 0.13043356, b: 1, a: 1}
+  - {r: 0, g: 0.08937216, b: 1, a: 1}
+  - {r: 0, g: 0.048299313, b: 1, a: 1}
+  - {r: 0, g: 0.007237911, b: 1, a: 1}
+  - {r: 0.03382349, g: 0, b: 1, a: 1}
+  - {r: 0.07488489, g: 0, b: 1, a: 1}
+  - {r: 0.11607218, g: 0, b: 1, a: 1}
+  - {r: 0.15735102, g: 0, b: 1, a: 1}
+  - {r: 0.19862986, g: 0, b: 1, a: 1}
+  - {r: 0.2399087, g: 0, b: 1, a: 1}
+  - {r: 0.28118753, g: 0, b: 1, a: 1}
+  - {r: 0.32246637, g: 0, b: 1, a: 1}
+  - {r: 0.3637452, g: 0, b: 1, a: 1}
+  - {r: 0.40502405, g: 0, b: 1, a: 1}
+  - {r: 0.4463029, g: 0, b: 1, a: 1}
+  - {r: 0.48758173, g: 0, b: 1, a: 1}
+  - {r: 0.52886057, g: 0, b: 1, a: 1}
+  - {r: 0.5702195, g: 0, b: 1, a: 1}
+  - {r: 0.61167, g: 0, b: 1, a: 1}
+  - {r: 0.6531205, g: 0, b: 1, a: 1}
+  - {r: 0.694571, g: 0, b: 1, a: 1}
+  - {r: 0.7360215, g: 0, b: 1, a: 1}
+  - {r: 0.777472, g: 0, b: 1, a: 1}
+  - {r: 0.8189225, g: 0, b: 1, a: 1}
+  - {r: 0.860373, g: 0, b: 1, a: 1}
+  - {r: 0.9018235, g: 0, b: 1, a: 1}
+  - {r: 0.943274, g: 0, b: 1, a: 1}
+  - {r: 0.9847245, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.973825, a: 1}
+  - {r: 1, g: 0, b: 0.9323058, a: 1}
+  - {r: 1, g: 0, b: 0.89078665, a: 1}
+  - {r: 1, g: 0, b: 0.84925604, a: 1}
+  - {r: 1, g: 0, b: 0.8077254, a: 1}
+  - {r: 1, g: 0, b: 0.7661948, a: 1}
+  - {r: 1, g: 0, b: 0.72467566, a: 1}
+  - {r: 1, g: 0, b: 0.68314505, a: 1}
+  - {r: 1, g: 0, b: 0.64161444, a: 1}
+  - {r: 1, g: 0, b: 0.6000953, a: 1}
+  - {r: 1, g: 0, b: 0.55856466, a: 1}
+  - {r: 1, g: 0, b: 0.51703405, a: 1}
+  - {r: 1, g: 0, b: 0.47550344, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.8244922, a: 1}
+  - {r: 0, g: 1, b: 0.85162616, a: 1}
+  - {r: 0, g: 1, b: 0.8920696, a: 1}
+  - {r: 0, g: 1, b: 0.932513, a: 1}
+  - {r: 0, g: 1, b: 0.9729564, a: 1}
+  - {r: 0, g: 0.9866004, b: 1, a: 1}
+  - {r: 0, g: 0.946157, b: 1, a: 1}
+  - {r: 0, g: 0.90571356, b: 1, a: 1}
+  - {r: 0, g: 0.86527014, b: 1, a: 1}
+  - {r: 0, g: 0.8248267, b: 1, a: 1}
+  - {r: 0, g: 0.7843833, b: 1, a: 1}
+  - {r: 0, g: 0.7437682, b: 1, a: 1}
+  - {r: 0, g: 0.70297, b: 1, a: 1}
+  - {r: 0, g: 0.6621833, b: 1, a: 1}
+  - {r: 0, g: 0.6213851, b: 1, a: 1}
+  - {r: 0, g: 0.5805869, b: 1, a: 1}
+  - {r: 0, g: 0.53980017, b: 1, a: 1}
+  - {r: 0, g: 0.49900198, b: 1, a: 1}
+  - {r: 0, g: 0.4582038, b: 1, a: 1}
+  - {r: 0, g: 0.41741705, b: 1, a: 1}
+  - {r: 0, g: 0.37661886, b: 1, a: 1}
+  - {r: 0, g: 0.335752, b: 1, a: 1}
+  - {r: 0, g: 0.2946906, b: 1, a: 1}
+  - {r: 0, g: 0.2536292, b: 1, a: 1}
+  - {r: 0, g: 0.21255636, b: 1, a: 1}
+  - {r: 0, g: 0.17149496, b: 1, a: 1}
+  - {r: 0, g: 0.13043356, b: 1, a: 1}
+  - {r: 0, g: 0.08937216, b: 1, a: 1}
+  - {r: 0, g: 0.048299313, b: 1, a: 1}
+  - {r: 0, g: 0.007237911, b: 1, a: 1}
+  - {r: 0.03382349, g: 0, b: 1, a: 1}
+  - {r: 0.07488489, g: 0, b: 1, a: 1}
+  - {r: 0.11607218, g: 0, b: 1, a: 1}
+  - {r: 0.15735102, g: 0, b: 1, a: 1}
+  - {r: 0.19862986, g: 0, b: 1, a: 1}
+  - {r: 0.2399087, g: 0, b: 1, a: 1}
+  - {r: 0.28118753, g: 0, b: 1, a: 1}
+  - {r: 0.32246637, g: 0, b: 1, a: 1}
+  - {r: 0.3637452, g: 0, b: 1, a: 1}
+  - {r: 0.40502405, g: 0, b: 1, a: 1}
+  - {r: 0.4463029, g: 0, b: 1, a: 1}
+  - {r: 0.48758173, g: 0, b: 1, a: 1}
+  - {r: 0.52886057, g: 0, b: 1, a: 1}
+  - {r: 0.5702195, g: 0, b: 1, a: 1}
+  - {r: 0.61167, g: 0, b: 1, a: 1}
+  - {r: 0.6531205, g: 0, b: 1, a: 1}
+  - {r: 0.694571, g: 0, b: 1, a: 1}
+  - {r: 0.7360215, g: 0, b: 1, a: 1}
+  - {r: 0.777472, g: 0, b: 1, a: 1}
+  - {r: 0.8189225, g: 0, b: 1, a: 1}
+  - {r: 0.860373, g: 0, b: 1, a: 1}
+  - {r: 0.9018235, g: 0, b: 1, a: 1}
+  - {r: 0.943274, g: 0, b: 1, a: 1}
+  - {r: 0.9847245, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.973825, a: 1}
+  - {r: 1, g: 0, b: 0.9323058, a: 1}
+  - {r: 1, g: 0, b: 0.89078665, a: 1}
+  - {r: 1, g: 0, b: 0.84925604, a: 1}
+  - {r: 1, g: 0, b: 0.8077254, a: 1}
+  - {r: 1, g: 0, b: 0.7661948, a: 1}
+  - {r: 1, g: 0, b: 0.72467566, a: 1}
+  - {r: 1, g: 0, b: 0.68314505, a: 1}
+  - {r: 1, g: 0, b: 0.64161444, a: 1}
+  - {r: 1, g: 0, b: 0.6000953, a: 1}
+  - {r: 1, g: 0, b: 0.55856466, a: 1}
+  - {r: 1, g: 0, b: 0.51703405, a: 1}
+  - {r: 1, g: 0, b: 0.47550344, a: 1}
   dataLoaded: 1
   showDebugInfo: 1
 --- !u!114 &646268710
@@ -4764,31 +3317,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BranchingLEDAnimator.Core.LEDAnimationSystem
   availableAnimations:
-  - {fileID: 1271082037}
-  - {fileID: 134816890}
-  - {fileID: 1780129284}
-  - {fileID: 1258001700}
-  - {fileID: 411791438}
-  - {fileID: 1384521467}
-  - {fileID: 1104946108}
-  - {fileID: 1271082031}
-  - {fileID: 643666758}
-  - {fileID: 2024631440}
-  - {fileID: 1477067752}
-  - {fileID: 1773181034}
-  - {fileID: 723428877}
-  - {fileID: 1335751514}
-  - {fileID: 287577577}
-  - {fileID: 1351765971}
-  - {fileID: 520045343}
-  - {fileID: 66823060}
-  - {fileID: 1058000671}
-  - {fileID: 1543652399}
-  - {fileID: 353435933}
-  - {fileID: 253131737}
-  - {fileID: 655924958}
-  - {fileID: 1525835037}
-  currentAnimationIndex: 1
+  - {fileID: 11400000, guid: 3bc7b572b1fd2cf4589c1e5b60ddf3fc, type: 2}
+  - {fileID: 11400000, guid: c3668959cbdf2a240af1a69f939093f9, type: 2}
+  - {fileID: 11400000, guid: 4e2bfc40cfbe76b42b65d9fd698592d0, type: 2}
+  currentAnimationIndex: 2
   isPlaying: 1
   autoPlayOnStart: 1
   globalSpeed: 1
@@ -4840,110 +3372,6 @@ AudioClip:
     m_Offset: 0
     m_Size: 0
   m_EditorCompressionFormat: 0
---- !u!114 &655924958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100165591cc76394182807fdd542af1a, type: 3}
-  m_Name: TopologySyncPulses (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Topology Sync Pulses
-  speed: 0.04
-  primaryColor: {r: 0, g: 1, b: 1, a: 1}
-  secondaryColor: {r: 1, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 3
-  loop: 0
-  highValenceThreshold: 2
-  lowValenceThreshold: 1
-  simultaneousPulses: 1
-  breathingMode: 1
-  breathingCycles: 2
-  pulseRadius: 32.7
-  pulseFalloff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.5933571
-      value: 1.0665588
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.9772949
-      value: 0.048706055
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  usePrimarySecondaryColors: 1
---- !u!114 &723428877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ed9f0937d6c6047a9e064fab80395e, type: 3}
-  m_Name: LEDWaveAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1.45
-  primaryColor: {r: 0.06772339, g: 1, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0.5552001, g: 0, b: 1, a: 1}
-  brightness: 2
-  saturation: 1.459
-  enhanceColors: 1
-  duration: 9.4
-  loop: 1
-  waveWidthLEDs: 4
-  waveSpeedLEDs: 7.3
-  fromEndpoints: 1
-  waveCount: 2
-  waveSpacing: 11
-  waveShape:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &789827288
 GameObject:
   m_ObjectHideFlags: 0
@@ -5021,59 +3449,6 @@ MonoBehaviour:
   touchHysteresis: 2
   graphManager: {fileID: 646268707}
   playerCamera: {fileID: 330585545}
---- !u!114 &813521602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100165591cc76394182807fdd542af1a, type: 3}
-  m_Name: TopologySyncPulses (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Topology Sync Pulses
-  speed: 0.04
-  primaryColor: {r: 0, g: 1, b: 1, a: 1}
-  secondaryColor: {r: 1, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 3
-  loop: 0
-  highValenceThreshold: 2
-  lowValenceThreshold: 1
-  simultaneousPulses: 1
-  breathingMode: 1
-  breathingCycles: 2
-  pulseRadius: 32.7
-  pulseFalloff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.5933571
-      value: 1.0665588
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.9772949
-      value: 0.048706055
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  usePrimarySecondaryColors: 1
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -5123,261 +3498,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &911469068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef6cae3e07280f4db5c7c37d5fdd791, type: 3}
-  m_Name: SpatialPanAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 0, g: 1, b: 0.16265583, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  positionMode: 0
-  spatialStripBlend: 1
-  panDirection: 0
-  customDirection: {x: 7.14, y: 2.38, z: 2.73}
-  reversePan: 0
-  panSpeed: 0.31
-  gradientRepeats: 0.98
-  gradientOffset: 0.383
-  colorMode: 0
-  tertiaryColor: {r: 0, g: 1, b: 1, a: 1}
-  rainbowHueStart: 0
-  rainbowHueRange: 1
-  enablePulse: 1
-  pulseFrequency: 1.86
-  pulseMinBrightness: 0.474
-  smoothGradient: 1
-  gradientCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  debugLogBounds: 1
---- !u!114 &954693624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: ShortestPathAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 3.34
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 43.78
-  loop: 0
-  pathMode: 2
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 3
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 0
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 0
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  pathFadeTime: 5
---- !u!114 &1058000671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae74d72d3187e24aa3d110766b9b3ff, type: 3}
-  m_Name: RandomNetworkWalk (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Random Network Walk
-  speed: 1.5
-  primaryColor: {r: 1, g: 0, b: 1, a: 1}
-  secondaryColor: {r: 1, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0.05, g: 0.02, b: 0.05, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  flowType: 0
-  particleLifetime: 4
-  maxParticles: 20
-  sourceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  sinkColor: {r: 1, g: 0, b: 1, a: 1}
-  flowTrail:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showNetworkRoles: 1
-  bidirectionalFlow: 0
---- !u!114 &1061960527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc22a9b6005fa974698d02a24e423614, type: 3}
-  m_Name: PulseAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Pulse
-  speed: 6.22
-  primaryColor: {r: 0, g: 0, b: 1, a: 1}
-  secondaryColor: {r: 0, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 0
-  pulseRadius: 163.4
-  pulseCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.03522873
-      value: 1.0032349
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  synchronizedPulse: 0
-  phaseOffset: 3.4
 --- !u!1 &1100864602
 GameObject:
   m_ObjectHideFlags: 0
@@ -5481,31 +3601,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BranchingLEDAnimator.Core.LEDAnimationSystem
   availableAnimations:
-  - {fileID: 28127876}
-  - {fileID: 1427793503}
-  - {fileID: 2074351730}
-  - {fileID: 1637967085}
-  - {fileID: 407471445}
-  - {fileID: 1662624056}
-  - {fileID: 274812868}
-  - {fileID: 579564370}
-  - {fileID: 1157098381}
-  - {fileID: 1777557271}
-  - {fileID: 1545455799}
-  - {fileID: 604525131}
-  - {fileID: 1286348964}
-  - {fileID: 308602852}
-  - {fileID: 1416991518}
-  - {fileID: 2058506205}
-  - {fileID: 1061960527}
-  - {fileID: 215564765}
-  - {fileID: 1828213311}
-  - {fileID: 331010099}
-  - {fileID: 1883798996}
-  - {fileID: 574115618}
-  - {fileID: 1666420166}
-  - {fileID: 1560793820}
-  currentAnimationIndex: 1
+  - {fileID: 11400000, guid: 18f30d92cbef4e14f8b150788ad9bc92, type: 2}
+  - {fileID: 11400000, guid: 3bc7b572b1fd2cf4589c1e5b60ddf3fc, type: 2}
+  - {fileID: 11400000, guid: b07d475d9b9053a4199a5b0641faeced, type: 2}
+  currentAnimationIndex: 0
   isPlaying: 1
   autoPlayOnStart: 1
   globalSpeed: 1
@@ -6038,97 +4137,6 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 1.3377143, g: 0, b: 0.8945771, a: 1}
-  - {r: 1.3377143, g: 0, b: 0.8945771, a: 1}
-  - {r: 1.3377143, g: 0, b: 0.8945771, a: 1}
-  - {r: 1.3377143, g: 0, b: 0.8945771, a: 1}
-  - {r: 1.3377143, g: 0, b: 0.8945771, a: 1}
-  - {r: 1.3377143, g: 0, b: 0.8945771, a: 1}
-  - {r: 1.3377143, g: 0, b: 0.8945771, a: 1}
-  - {r: 1.3641737, g: 0.28190976, b: 0, a: 1}
-  - {r: 1.3641737, g: 0.28190976, b: 0, a: 1}
-  - {r: 1.3641737, g: 0.28190976, b: 0, a: 1}
-  - {r: 1.3641737, g: 0.28190976, b: 0, a: 1}
-  - {r: 1.3641737, g: 0.28190976, b: 0, a: 1}
-  - {r: 1.3641737, g: 0.28190976, b: 0, a: 1}
-  - {r: 1.3641737, g: 1.3880795, b: 0, a: 1}
-  - {r: 1.274201, g: 1.3880795, b: 0, a: 1}
-  - {r: 1.274201, g: 1.3880795, b: 0, a: 1}
-  - {r: 1.274201, g: 1.3880795, b: 0, a: 1}
-  - {r: 1.274201, g: 1.3880795, b: 0, a: 1}
-  - {r: 1.274201, g: 1.3880795, b: 0, a: 1}
-  - {r: 1.274201, g: 1.3880795, b: 0, a: 1}
-  - {r: 0.06005174, g: 1.4105996, b: 0, a: 1}
-  - {r: 0.06005174, g: 1.4105996, b: 0, a: 1}
-  - {r: 0.06005174, g: 1.4105996, b: 0, a: 1}
-  - {r: 0.06005174, g: 1.4105996, b: 0, a: 1}
-  - {r: 0.06005174, g: 1.4105996, b: 0, a: 1}
-  - {r: 0.06005174, g: 1.4105996, b: 0, a: 1}
-  - {r: 0.06005174, g: 1.4267974, b: 1.1882598, a: 1}
-  - {r: 0, g: 1.4267974, b: 1.1882598, a: 1}
-  - {r: 0, g: 1.4267974, b: 1.1882598, a: 1}
-  - {r: 0, g: 1.4267974, b: 1.1882598, a: 1}
-  - {r: 0, g: 1.4267974, b: 1.1882598, a: 1}
-  - {r: 0, g: 1.4267974, b: 1.1882598, a: 1}
-  - {r: 0, g: 1.4267974, b: 1.4353312, a: 1}
-  - {r: 0, g: 0.41882387, b: 1.4353312, a: 1}
-  - {r: 0, g: 0.41882387, b: 1.4353312, a: 1}
-  - {r: 0, g: 0.41882387, b: 1.4353312, a: 1}
-  - {r: 0, g: 0.41882387, b: 1.4353312, a: 1}
-  - {r: 0, g: 0.41882387, b: 1.4353312, a: 1}
-  - {r: 0, g: 0.41882387, b: 1.4353312, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 1.1083897, g: 0.8287126, b: 0, a: 1}
-  - {r: 1.1083897, g: 0.8287126, b: 0, a: 1}
-  - {r: 1.1083897, g: 0.8287126, b: 0, a: 1}
-  - {r: 1.1083897, g: 0.8287126, b: 0, a: 1}
-  - {r: 1.1083897, g: 0.8287126, b: 0, a: 1}
-  - {r: 1.1083897, g: 0.8287126, b: 0, a: 1}
-  - {r: 1.1083897, g: 1.1421794, b: 0, a: 1}
-  - {r: 0.43053257, g: 1.1421794, b: 0, a: 1}
-  - {r: 0.43053257, g: 1.1421794, b: 0, a: 1}
-  - {r: 0.43053257, g: 1.1421794, b: 0, a: 1}
-  - {r: 0.43053257, g: 1.1421794, b: 0, a: 1}
-  - {r: 0.43053257, g: 1.1421794, b: 0, a: 1}
-  - {r: 0.43053257, g: 1.1421794, b: 0, a: 1}
-  - {r: 0, g: 1.1755449, b: 0.5859484, a: 1}
-  - {r: 0, g: 1.1755449, b: 0.5859484, a: 1}
-  - {r: 0, g: 1.1755449, b: 0.5859484, a: 1}
-  - {r: 0, g: 1.1755449, b: 0.5859484, a: 1}
-  - {r: 0, g: 1.1755449, b: 0.5859484, a: 1}
-  - {r: 0, g: 1.1755449, b: 0.5859484, a: 1}
-  - {r: 0, g: 1.1755449, b: 1.215791, a: 1}
-  - {r: 0, g: 0.76128423, b: 1.215791, a: 1}
-  - {r: 0, g: 0.76128423, b: 1.215791, a: 1}
-  - {r: 0, g: 0.76128423, b: 1.215791, a: 1}
-  - {r: 0, g: 0.76128423, b: 1.215791, a: 1}
-  - {r: 0, g: 0.76128423, b: 1.215791, a: 1}
-  - {r: 0, g: 0.76128423, b: 1.215791, a: 1}
-  - {r: 0.31389263, g: 0, b: 1.259479, a: 1}
-  - {r: 0.31389263, g: 0, b: 1.259479, a: 1}
-  - {r: 0.31389263, g: 0, b: 1.259479, a: 1}
-  - {r: 0.31389263, g: 0, b: 1.259479, a: 1}
-  - {r: 0.31389263, g: 0, b: 1.259479, a: 1}
-  - {r: 0.31389263, g: 0, b: 1.259479, a: 1}
-  - {r: 1.2849998, g: 0, b: 1.259479, a: 1}
-  - {r: 1.2849998, g: 0, b: 1.1248736, a: 1}
-  - {r: 1.2849998, g: 0, b: 1.1248736, a: 1}
-  - {r: 1.2849998, g: 0, b: 1.1248736, a: 1}
-  - {r: 1.2849998, g: 0, b: 1.1248736, a: 1}
-  - {r: 1.2849998, g: 0, b: 1.1248736, a: 1}
-  - {r: 1.2849998, g: 0, b: 1.1248736, a: 1}
-  - {r: 1.2127931, g: 0, b: 0, a: 1}
-  - {r: 1.2127931, g: 0, b: 0, a: 1}
-  - {r: 1.2127931, g: 0, b: 0, a: 1}
-  - {r: 1.2127931, g: 0, b: 0, a: 1}
-  - {r: 1.2127931, g: 0, b: 0, a: 1}
-  - {r: 1.2127931, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
@@ -6142,763 +4150,138 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 1.3782904, b: 1.4349247, a: 1}
-  - {r: 0, g: 1.3782904, b: 1.4349247, a: 1}
-  - {r: 0, g: 1.3782904, b: 1.4349247, a: 1}
-  - {r: 0, g: 1.3782904, b: 1.4349247, a: 1}
-  - {r: 0, g: 1.3782904, b: 1.4349247, a: 1}
-  - {r: 0, g: 1.3782904, b: 1.4349247, a: 1}
-  - {r: 0, g: 1.3782904, b: 1.4349247, a: 1}
-  - {r: 0, g: 0.12232579, b: 1.4367003, a: 1}
-  - {r: 0, g: 0.12232579, b: 1.4367003, a: 1}
-  - {r: 0, g: 0.12232579, b: 1.4367003, a: 1}
-  - {r: 0, g: 0.12232579, b: 1.4367003, a: 1}
-  - {r: 0, g: 0.12232579, b: 1.4367003, a: 1}
-  - {r: 0, g: 0.12232579, b: 1.4367003, a: 1}
-  - {r: 1.1318061, g: 0.12232579, b: 1.4367003, a: 1}
-  - {r: 1.1318061, g: 0, b: 1.4322234, a: 1}
-  - {r: 1.1318061, g: 0, b: 1.4322234, a: 1}
-  - {r: 1.1318061, g: 0, b: 1.4322234, a: 1}
-  - {r: 1.1318061, g: 0, b: 1.4322234, a: 1}
-  - {r: 1.1318061, g: 0, b: 1.4322234, a: 1}
-  - {r: 1.1318061, g: 0, b: 1.4322234, a: 1}
-  - {r: 1.4201112, g: 0, b: 0.4748394, a: 1}
-  - {r: 1.4201112, g: 0, b: 0.4748394, a: 1}
-  - {r: 1.4201112, g: 0, b: 0.4748394, a: 1}
-  - {r: 1.4201112, g: 0, b: 0.4748394, a: 1}
-  - {r: 1.4201112, g: 0, b: 0.4748394, a: 1}
-  - {r: 1.4201112, g: 0, b: 0.4748394, a: 1}
-  - {r: 1.4201112, g: 0.759079, b: 0.4748394, a: 1}
-  - {r: 1.4030513, g: 0.759079, b: 0, a: 1}
-  - {r: 1.4030513, g: 0.759079, b: 0, a: 1}
-  - {r: 1.4030513, g: 0.759079, b: 0, a: 1}
-  - {r: 1.4030513, g: 0.759079, b: 0, a: 1}
-  - {r: 1.4030513, g: 0.759079, b: 0, a: 1}
-  - {r: 1.4030513, g: 1.3774296, b: 0, a: 1}
-  - {r: 0.8038568, g: 1.3774296, b: 0, a: 1}
-  - {r: 0.8038568, g: 1.3774296, b: 0, a: 1}
-  - {r: 0.8038568, g: 1.3774296, b: 0, a: 1}
-  - {r: 0.8038568, g: 1.3774296, b: 0, a: 1}
-  - {r: 0.8038568, g: 1.3774296, b: 0, a: 1}
-  - {r: 0.8038568, g: 1.3774296, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.43461683, g: 0.08692336, b: 0.08692336, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.36507812, g: 0.43461683, b: 0.08692336, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.08692336, g: 0.43461683, b: 0.22600077, a: 1}
   dataLoaded: 1
   showDebugInfo: 1
---- !u!114 &1104946108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375ec206c8f6d944998226ef598f5800, type: 3}
-  m_Name: GraphJuggleAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 19.8
-  primaryColor: {r: 0, g: 1, b: 0.09368992, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  pulseSpeed: 18.76
-  catchWindowSeconds: 0.152
-  startingLives: 17
-  autoStartPulse: 1
-  maxSimultaneousBalls: 1
-  ballSpawnInterval: 2
-  enableMomentum: 1
-  momentumGainPerCatch: 1.08
-  maxMomentumMultiplier: 2
-  momentumDecayRate: 0.05
-  momentumLossOnMiss: 0.3
-  inputMode: 2
-  ambientVolume: 0.044
-  ambientPulseAmount: 0.042
-  ambientFrequency: 47.2
-  ambientFrequency2: 104.7
-  ambientNoiseAmount: 0.044
-  toneAttack: 0.0247
-  toneDecayTime: 0.386
-  toneSustain: 0.311
-  toneRelease: 1.11
-  baseFrequency: 82.1
-  toneVolume: 0.854
-  harmonic2: 0.357
-  harmonic3: 0.12
-  pulseAudioVolume: 109.4
-  groundColor: {r: 1, g: 0.4, b: 0.1, a: 1}
-  skyColor: {r: 0.3, g: 0.6, b: 1, a: 1}
-  catchReadyColor: {r: 0, g: 1, b: 0, a: 1}
-  pulseWidth: 7.47
-  pulseShape:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.009010315
-      value: 0.16060257
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.02540426
-      value: 0.4047165
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  useRainbowColors: 1
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  pulseStyle: 0
-  trailLength: 30
-  trailIntensity: 1
-  trailStretchWithMomentum: 1
-  successFlashDuration: 0
-  successBrightnessBoost: 0.98
-  catchBrightnessBoost: 1.5
-  playerGlowColor: {r: 0.3, g: 1, b: 0.5, a: 1}
-  playerGlowRadius: 27
-  playerGlowIntensity: 1
-  currentScore: 0
-  currentLives: 0
-  streak: 0
-  gameActive: 0
---- !u!114 &1157098381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93b3ac2f1467c4d47a80fcfe75efcaa2, type: 3}
-  m_Name: InteractivePanAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-    (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  panSpeed: 0.26
-  gradientRepeats: 0.90000004
-  gradientOffset: 0
-  colorMode: 0
-  rainbowHueStart: 0.392
-  rainbowHueRange: 1
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  tertiaryColor: {r: 0, g: 1, b: 0, a: 1}
-  smoothGradient: 0
-  gradientCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  enablePulse: 0
-  pulseFrequency: 2
-  pulseMinBrightness: 0.3
-  directionSmoothSpeed: 4.24
-  defaultDirection: {x: 0, y: -0.65, z: 0}
-  showDirectionVector: 1
-  vectorDisplayLength: 50
-  vectorColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  highlightTouchedEndpoints: 1
-  endpointHighlightIntensity: 0.5
-  endpointHighlightRadius: 3
-  inputMode: 0
---- !u!114 &1258001700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bb3dc0b1c1ccb42b6eedcd7ee6819f, type: 3}
-  m_Name: ChordTouchAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 21.3
-  loop: 1
-  audioMode: 1
-  customClips:
-  - {fileID: 8300000, guid: c1ecc08401ddc6a4faea98de28e92bbe, type: 3}
-  - {fileID: 8300000, guid: f465fda54c33cf84099723d85e337d32, type: 3}
-  - {fileID: 8300000, guid: 1439872e40ecd6a418ca36f6da676f82, type: 3}
-  - {fileID: 8300000, guid: 42f54d82faf512a45999e9519a7a0e0e, type: 3}
-  - {fileID: 8300000, guid: 076de3a30149085448a8732b282c3346, type: 3}
-  - {fileID: 8300000, guid: 2ab7bd7610f592240b171aba8d2deab3, type: 3}
-  loopCustomClips: 1
-  scale: 1
-  baseFrequency: 73.2
-  baseOctave: 69
-  toneVolume: 1
-  toneAttack: 4.74
-  toneRelease: 0.08
-  touchGlowColor: {r: 1, g: 0.9, b: 0.5, a: 1}
-  touchGlowRadius: 99
-  touchGlowIntensity: 2.946
-  touchGlowPulseSpeed: 4.11
-  touchGlowPulseAmount: 0.084
-  pulseColor: {r: 1, g: 0.8, b: 0.2, a: 1}
-  pulseSpeed: 21.31
-  pulseInterval: 0.4
-  pulseFadeTime: 17.36
-  pulseWidth: 2.9
-  pulseRange: 19
-  pulseFalloff: 0.412
-  pulseShape:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.03678131
-      value: 1.0782013
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.9581821
-      value: 0.2939701
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  distanceDecay:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.98413086
-      value: 0.9324829
-      inSlope: -0.8
-      outSlope: -0.8
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  endpointIdleColor: {r: 0.1, g: 0.2, b: 0.4, a: 1}
-  idlePulseSpeed: 1
-  idlePulseAmount: 0.3
-  showNoteAssignments: 1
-  verboseDebug: 1
---- !u!114 &1262224568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: RadialShortestPaths (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Radial Shortest Paths
-  speed: 1
-  primaryColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  secondaryColor: {r: 1, g: 0, b: 0, a: 1}
-  inactiveColor: {r: 0.05, g: 0.05, b: 0.02, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  pathMode: 0
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 3
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 1
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 0
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  pathFadeTime: 5
---- !u!114 &1271082031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae74d72d3187e24aa3d110766b9b3ff, type: 3}
-  m_Name: HubToEndpointsFlow (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Hub to Endpoints Flow
-  speed: 13.41
-  primaryColor: {r: 0, g: 0.8155856, b: 1, a: 1}
-  secondaryColor: {r: 0, g: 0.0564754, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1.072
-  saturation: 1.077
-  enhanceColors: 1
-  duration: 70
-  loop: 1
-  flowType: 2
-  particleLifetime: 23.6
-  maxParticles: 334
-  sourceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  sinkColor: {r: 1, g: 0, b: 1, a: 1}
-  flowTrail:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.013027191
-      value: 0.833271
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1.0355202
-      value: 0.7178451
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showNetworkRoles: 0
-  bidirectionalFlow: 1
---- !u!114 &1271082037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: AllPairsShortestPaths (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: All Pairs Shortest Paths
-  speed: 1.2
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 0, a: 1}
-  inactiveColor: {r: 0.02, g: 0.05, b: 0.02, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 12
-  loop: 0
-  pathMode: 1
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 3
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 0
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 0
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 0.078505754, g: 1, b: 0, a: 1}
-    key1: {r: 0, g: 0.30475473, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 1}
-    key3: {r: 0, g: 0, b: 0, a: 1}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 5975
-    atime2: 22552
-    atime3: 65535
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 2
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 4
-  pathFadeTime: 5
---- !u!114 &1286348964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ed9f0937d6c6047a9e064fab80395e, type: 3}
-  m_Name: LEDWaveAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1.45
-  primaryColor: {r: 0.06772339, g: 1, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0.5552001, g: 0, b: 1, a: 1}
-  brightness: 2
-  saturation: 1.459
-  enhanceColors: 1
-  duration: 9.4
-  loop: 1
-  waveWidthLEDs: 4
-  waveSpeedLEDs: 7.3
-  fromEndpoints: 1
-  waveCount: 2
-  waveSpacing: 11
-  waveShape:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &1290708625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ea601214fed3454c80158f91751a117, type: 3}
-  m_Name: BreadthFirstSearchAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-    (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 5
-  primaryColor: {r: 1, g: 0.7354885, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 1
-  duration: 164.8
-  loop: 0
-  searchSpeed: 74
-  pauseBetweenSearches: 1
-  stepInterval: 0.07
-  showProgressiveFill: 1
-  autoCalculateDuration: 1
-  durationBuffer: 148.8
-  _seedNodeCount: 10
-  _estimatedMaxDepth: 10
-  _estimatedRuntime: 164.8
-  _timingBreakdown: "10 seeds \xD7 (10 steps \xD7 0.07s + 1s pause) + 148.8s buffer"
-  useComplementaryColors: 1
-  colorProgression: 2.67
-  searchSaturation: 0.9
-  searchBrightness: 0.9
-  persistentBackground: 1
-  backgroundFadeRate: 0.3
-  highlightCurrentFrontier: 1
-  frontierIntensity: 1.2
---- !u!114 &1335751514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae74d72d3187e24aa3d110766b9b3ff, type: 3}
-  m_Name: NetworkCirculation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Network Circulation
-  speed: 9.15
-  primaryColor: {r: 0, g: 1, b: 0, a: 1}
-  secondaryColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  inactiveColor: {r: 0.02, g: 0.05, b: 0.02, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 86.2
-  loop: 1
-  flowType: 2
-  particleLifetime: 102.1
-  maxParticles: 85
-  sourceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  sinkColor: {r: 1, g: 0, b: 1, a: 1}
-  flowTrail:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showNetworkRoles: 0
-  bidirectionalFlow: 1
---- !u!114 &1351765971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b3a01bc5d7e1124abccf50dcd8ba532, type: 3}
-  m_Name: ProgressivePathAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-    (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 3.25
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 69.94
-  loop: 0
-  pathSpeed: 16.24
-  pathInterval: 0.24
-  maxConcurrentPaths: 1
-  useEndpointsOnly: 1
-  basePathColor: {r: 0, g: 1, b: 1, a: 1}
-  crossingColor: {r: 1, g: 1, b: 1, a: 1}
-  useColorProgression: 1
-  colorHueShift: 0.25
-  fadeTime: 3
-  showEndpoints: 1
-  endpointColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &1384521467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f19c5abad5156bf4986a5e193b6ce887, type: 3}
-  m_Name: FountainAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1.13
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 37.8
-  loop: 0
-  spawnRate: 4.8
-  maxParticles: 44
-  particleSpeed: 20
-  gravityBias: 0.005
-  continuousFlow: 1
-  useRainbowColors: 0
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  particleWidth: 1
-  trailLength: 10
-  trailIntensity: 1
-  enableInteraction: 1
-  blockGlowIntensity: 2
-  blockExpansion: 3
-  blockGlowColor: {r: 1, g: 0.8, b: 0.3, a: 1}
-  blockFadeTime: 0.5
-  enableAudio: 1
-  audioVolume: 0.3
 --- !u!1 &1398129903
 GameObject:
   m_ObjectHideFlags: 0
@@ -7028,60 +4411,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1416991518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1675220122ac8ef4995c8a2954b62730, type: 3}
-  m_Name: PathFinderAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  pathDuration: 5.12
-  recedeDuration: 1.267
-  fillStyle: 3
-  leadingEdgeWidth: 8
-  trailPersistence: 0.8
-  maxSimultaneousPaths: 2
-  avoidActiveEndpoints: 1
-  colorMode: 1
-  sourceColor: {r: 0.2, g: 0.8, b: 1, a: 1}
-  destinationColor: {r: 1, g: 0, b: 0.08282852, a: 1}
-  monochromeTrailColor: {r: 0, g: 0.8, b: 1, a: 1}
-  monochromeBackground: {r: 0.02, g: 0.02, b: 0.05, a: 1}
-  multiPathHueSpacing: 0.25
-  legColorSaturation: 0.8
-  legColorBrightness: 1
-  leadingEdgeColor: {r: 1, g: 1, b: 1, a: 1}
-  idleEndpointColor: {r: 0.1, g: 0.2, b: 0.3, a: 1}
-  idlePulseSpeed: 1.07
-  idlePulseAmount: 0.105
-  chaseParticleCount: 7
-  chaseSpeed: 1.5
-  chaseSpacing: 0.2
-  enableAudio: 1
-  baseFrequency: 220
-  audioVolume: 0.415
-  audioAttack: 0.3
-  audioRelease: 1
-  destinationWindow: 4.81
-  anyEndpointCanStart: 1
-  highlightDestination: 1
-  destinationPulseSpeed: 7.35
-  showPathDebug: 1
 --- !u!1 &1419625858
 GameObject:
   m_ObjectHideFlags: 0
@@ -7115,123 +4444,6 @@ Transform:
   - {fileID: 1453703469}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1427793503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60242fa35a9bd04478f994bb3b7f9604, type: 3}
-  m_Name: BallSettleAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 49.9
-  primaryColor: {r: 1, g: 0.037245974, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 1, b: 0.2011559, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 0
-  duration: 13.95
-  loop: 1
-  ballSpeed: 7.2000003
-  totalBalls: 19
-  autoSpawnAtStart: 1
-  useRainbowColors: 1
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  pulseStyle: 1
-  pulseWidth: 6.49
-  trailLength: 30
-  trailIntensity: 1
-  pulseShape:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  settledIntensity: 1.437
-  settledPulse: 1
-  settledPulseSpeed: 0.955
-  dispatchStagger: 0.065
-  enableAudio: 1
-  toneVolume: 0.3
-  inputMode: 0
---- !u!114 &1448898929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1675220122ac8ef4995c8a2954b62730, type: 3}
-  m_Name: PathFinderAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  pathDuration: 5.12
-  recedeDuration: 1.267
-  fillStyle: 3
-  leadingEdgeWidth: 8
-  trailPersistence: 0.8
-  maxSimultaneousPaths: 2
-  avoidActiveEndpoints: 1
-  colorMode: 1
-  sourceColor: {r: 0.2, g: 0.8, b: 1, a: 1}
-  destinationColor: {r: 1, g: 0, b: 0.08282852, a: 1}
-  monochromeTrailColor: {r: 0, g: 0.8, b: 1, a: 1}
-  monochromeBackground: {r: 0.02, g: 0.02, b: 0.05, a: 1}
-  multiPathHueSpacing: 0.25
-  legColorSaturation: 0.8
-  legColorBrightness: 1
-  leadingEdgeColor: {r: 1, g: 1, b: 1, a: 1}
-  idleEndpointColor: {r: 0.1, g: 0.2, b: 0.3, a: 1}
-  idlePulseSpeed: 1.07
-  idlePulseAmount: 0.105
-  chaseParticleCount: 7
-  chaseSpeed: 1.5
-  chaseSpacing: 0.2
-  enableAudio: 1
-  baseFrequency: 220
-  audioVolume: 0.415
-  audioAttack: 0.3
-  audioRelease: 1
-  destinationWindow: 4.81
-  anyEndpointCanStart: 1
-  highlightDestination: 1
-  destinationPulseSpeed: 7.35
-  showPathDebug: 1
 --- !u!1 &1453703468
 GameObject:
   m_ObjectHideFlags: 0
@@ -7361,1037 +4573,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1477067752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100165591cc76394182807fdd542af1a, type: 3}
-  m_Name: JunctionPulses (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Junction Pulses
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 1, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 4
-  loop: 1
-  highValenceThreshold: 2
-  lowValenceThreshold: 1
-  simultaneousPulses: 0
-  breathingMode: 1
-  breathingCycles: 2
-  pulseRadius: 5
-  pulseFalloff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  usePrimarySecondaryColors: 1
---- !u!114 &1507266356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: AllPairsShortestPaths (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: All Pairs Shortest Paths
-  speed: 1.2
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 0, a: 1}
-  inactiveColor: {r: 0.02, g: 0.05, b: 0.02, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 12
-  loop: 0
-  pathMode: 1
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 3
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 0
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 0
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 0.078505754, g: 1, b: 0, a: 1}
-    key1: {r: 0, g: 0.30475473, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 1}
-    key3: {r: 0, g: 0, b: 0, a: 1}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 5975
-    atime2: 22552
-    atime3: 65535
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 2
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 4
-  pathFadeTime: 5
---- !u!114 &1525835037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eddce8aa148af645baaa6a7d64d0827, type: 3}
-  m_Name: WaveAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Wave
-  speed: 1.8
-  primaryColor: {r: 0.84059954, g: 1, b: 0, a: 1}
-  secondaryColor: {r: 1, g: 0.50585276, b: 0, a: 1}
-  inactiveColor: {r: 0, g: 0.12919855, b: 1, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 1
-  duration: 15
-  loop: 1
-  waveSpeed: 12.4
-  waveWidth: 11.4
-  multipleWaves: 1
-  waveSeparation: 34.5
---- !u!114 &1543652399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2029c0746dbdd04a996129d96f61f2d, type: 3}
-  m_Name: ShortestPathAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 3.34
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 43.78
-  loop: 0
-  pathMode: 2
-  startNodeColor: {r: 1, g: 0, b: 0, a: 1}
-  endNodeColor: {r: 0, g: 0, b: 1, a: 1}
-  exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathIntensity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showExploration: 0
-  maxConcurrentPaths: 3
-  pathInterval: 3
-  networkPaintingMode: 1
-  useColorWheel: 1
-  fillSpeed: 2
-  clearNetworkOnLoop: 0
-  legacyTravelingWave: 0
-  legacyPersistentPaths: 0
-  pathColorGradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  pathFadeTime: 5
---- !u!114 &1545455799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100165591cc76394182807fdd542af1a, type: 3}
-  m_Name: JunctionPulses (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Junction Pulses
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 1, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 4
-  loop: 1
-  highValenceThreshold: 2
-  lowValenceThreshold: 1
-  simultaneousPulses: 0
-  breathingMode: 1
-  breathingCycles: 2
-  pulseRadius: 5
-  pulseFalloff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  usePrimarySecondaryColors: 1
---- !u!114 &1560793820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eddce8aa148af645baaa6a7d64d0827, type: 3}
-  m_Name: WaveAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Wave
-  speed: 1.8
-  primaryColor: {r: 0.84059954, g: 1, b: 0, a: 1}
-  secondaryColor: {r: 1, g: 0.50585276, b: 0, a: 1}
-  inactiveColor: {r: 0, g: 0.12919855, b: 1, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 1
-  duration: 15
-  loop: 1
-  waveSpeed: 12.4
-  waveWidth: 11.4
-  multipleWaves: 1
-  waveSeparation: 34.5
---- !u!114 &1577240400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ced867edbd921654dbbd7f61f6e7f519, type: 3}
-  m_Name: SparkleAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Sparkle
-  speed: 1
-  primaryColor: {r: 1, g: 1, b: 1, a: 1}
-  secondaryColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  maxActiveSparkles: 190
-  sparkleLifetime: 0.29
-  sparkleIntensity: 1
-  colorVariation: 0
-  randomSeed: 73
---- !u!114 &1586622969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60242fa35a9bd04478f994bb3b7f9604, type: 3}
-  m_Name: BallSettleAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 49.9
-  primaryColor: {r: 1, g: 0.037245974, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 1, b: 0.2011559, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 0
-  duration: 13.95
-  loop: 1
-  ballSpeed: 7.2000003
-  totalBalls: 19
-  autoSpawnAtStart: 1
-  useRainbowColors: 1
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  pulseStyle: 1
-  pulseWidth: 6.49
-  trailLength: 30
-  trailIntensity: 1
-  pulseShape:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  settledIntensity: 1.437
-  settledPulse: 1
-  settledPulseSpeed: 0.955
-  dispatchStagger: 0.065
-  enableAudio: 1
-  toneVolume: 0.3
-  inputMode: 0
---- !u!114 &1637967085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bb3dc0b1c1ccb42b6eedcd7ee6819f, type: 3}
-  m_Name: ChordTouchAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 21.3
-  loop: 1
-  audioMode: 1
-  customClips:
-  - {fileID: 8300000, guid: c1ecc08401ddc6a4faea98de28e92bbe, type: 3}
-  - {fileID: 8300000, guid: f465fda54c33cf84099723d85e337d32, type: 3}
-  - {fileID: 8300000, guid: 1439872e40ecd6a418ca36f6da676f82, type: 3}
-  - {fileID: 8300000, guid: 42f54d82faf512a45999e9519a7a0e0e, type: 3}
-  - {fileID: 8300000, guid: 076de3a30149085448a8732b282c3346, type: 3}
-  - {fileID: 8300000, guid: 2ab7bd7610f592240b171aba8d2deab3, type: 3}
-  loopCustomClips: 1
-  scale: 1
-  baseFrequency: 73.2
-  baseOctave: 69
-  toneVolume: 1
-  toneAttack: 4.74
-  toneRelease: 0.08
-  touchGlowColor: {r: 1, g: 0.9, b: 0.5, a: 1}
-  touchGlowRadius: 99
-  touchGlowIntensity: 2.946
-  touchGlowPulseSpeed: 4.11
-  touchGlowPulseAmount: 0.084
-  pulseColor: {r: 1, g: 0.8, b: 0.2, a: 1}
-  pulseSpeed: 21.31
-  pulseInterval: 0.4
-  pulseFadeTime: 17.36
-  pulseWidth: 2.9
-  pulseRange: 19
-  pulseFalloff: 0.412
-  pulseShape:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.03678131
-      value: 1.0782013
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.9581821
-      value: 0.2939701
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  distanceDecay:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.98413086
-      value: 0.9324829
-      inSlope: -0.8
-      outSlope: -0.8
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  endpointIdleColor: {r: 0.1, g: 0.2, b: 0.4, a: 1}
-  idlePulseSpeed: 1
-  idlePulseAmount: 0.3
-  showNoteAssignments: 1
-  verboseDebug: 1
---- !u!114 &1654034796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae74d72d3187e24aa3d110766b9b3ff, type: 3}
-  m_Name: RandomNetworkWalk (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Random Network Walk
-  speed: 1.5
-  primaryColor: {r: 1, g: 0, b: 1, a: 1}
-  secondaryColor: {r: 1, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0.05, g: 0.02, b: 0.05, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  flowType: 0
-  particleLifetime: 4
-  maxParticles: 20
-  sourceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  sinkColor: {r: 1, g: 0, b: 1, a: 1}
-  flowTrail:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showNetworkRoles: 1
-  bidirectionalFlow: 0
---- !u!114 &1662624056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f19c5abad5156bf4986a5e193b6ce887, type: 3}
-  m_Name: FountainAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1.13
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 37.8
-  loop: 0
-  spawnRate: 4.8
-  maxParticles: 44
-  particleSpeed: 20
-  gravityBias: 0.005
-  continuousFlow: 1
-  useRainbowColors: 0
-  rainbowSaturation: 1
-  rainbowBrightness: 1
-  particleWidth: 1
-  trailLength: 10
-  trailIntensity: 1
-  enableInteraction: 1
-  blockGlowIntensity: 2
-  blockExpansion: 3
-  blockGlowColor: {r: 1, g: 0.8, b: 0.3, a: 1}
-  blockFadeTime: 0.5
-  enableAudio: 1
-  audioVolume: 0.3
---- !u!114 &1666420166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100165591cc76394182807fdd542af1a, type: 3}
-  m_Name: TopologySyncPulses (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Topology Sync Pulses
-  speed: 0.04
-  primaryColor: {r: 0, g: 1, b: 1, a: 1}
-  secondaryColor: {r: 1, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 3
-  loop: 0
-  highValenceThreshold: 2
-  lowValenceThreshold: 1
-  simultaneousPulses: 1
-  breathingMode: 1
-  breathingCycles: 2
-  pulseRadius: 32.7
-  pulseFalloff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.5933571
-      value: 1.0665588
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.9772949
-      value: 0.048706055
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  usePrimarySecondaryColors: 1
---- !u!114 &1773181034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce8e8d6aa4869a46b6cf2eba0b5a1d8, type: 3}
-  m_Name: LEDMappingTest (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  testPattern: 0
-  testColor: {r: 1, g: 0, b: 0, a: 1}
-  pulseSpeed: 2
-  enableSequentialTest: 0
-  sequentialDelay: 0.5
---- !u!114 &1777557271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100165591cc76394182807fdd542af1a, type: 3}
-  m_Name: JunctionBreathing (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Junction Breathing
-  speed: 0.57
-  primaryColor: {r: 1, g: 0.3, b: 0.1, a: 1}
-  secondaryColor: {r: 0.1, g: 0.5, b: 1, a: 1}
-  inactiveColor: {r: 0.05, g: 0.05, b: 0.1, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 16.97
-  loop: 1
-  highValenceThreshold: 2
-  lowValenceThreshold: 1
-  simultaneousPulses: 0
-  breathingMode: 1
-  breathingCycles: 1
-  pulseRadius: 35.4
-  pulseFalloff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1.0106201
-      value: 0.25811768
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  usePrimarySecondaryColors: 1
---- !u!114 &1780129284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ea601214fed3454c80158f91751a117, type: 3}
-  m_Name: BreadthFirstSearchAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-    (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 5
-  primaryColor: {r: 1, g: 0.7354885, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 1
-  duration: 164.8
-  loop: 0
-  searchSpeed: 74
-  pauseBetweenSearches: 1
-  stepInterval: 0.07
-  showProgressiveFill: 1
-  autoCalculateDuration: 1
-  durationBuffer: 148.8
-  _seedNodeCount: 10
-  _estimatedMaxDepth: 10
-  _estimatedRuntime: 164.8
-  _timingBreakdown: "10 seeds \xD7 (10 steps \xD7 0.07s + 1s pause) + 148.8s buffer"
-  useComplementaryColors: 1
-  colorProgression: 2.67
-  searchSaturation: 0.9
-  searchBrightness: 0.9
-  persistentBackground: 1
-  backgroundFadeRate: 0.3
-  highlightCurrentFrontier: 1
-  frontierIntensity: 1.2
---- !u!114 &1799469136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eddce8aa148af645baaa6a7d64d0827, type: 3}
-  m_Name: WaveAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Wave
-  speed: 1.8
-  primaryColor: {r: 0.84059954, g: 1, b: 0, a: 1}
-  secondaryColor: {r: 1, g: 0.50585276, b: 0, a: 1}
-  inactiveColor: {r: 0, g: 0.12919855, b: 1, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 1
-  duration: 15
-  loop: 1
-  waveSpeed: 12.4
-  waveWidth: 11.4
-  multipleWaves: 1
-  waveSeparation: 34.5
---- !u!114 &1828213311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae74d72d3187e24aa3d110766b9b3ff, type: 3}
-  m_Name: RandomNetworkWalk (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Random Network Walk
-  speed: 1.5
-  primaryColor: {r: 1, g: 0, b: 1, a: 1}
-  secondaryColor: {r: 1, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0.05, g: 0.02, b: 0.05, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  flowType: 0
-  particleLifetime: 4
-  maxParticles: 20
-  sourceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  sinkColor: {r: 1, g: 0, b: 1, a: 1}
-  flowTrail:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showNetworkRoles: 1
-  bidirectionalFlow: 0
---- !u!114 &1883798996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ced867edbd921654dbbd7f61f6e7f519, type: 3}
-  m_Name: SparkleAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Sparkle
-  speed: 1
-  primaryColor: {r: 1, g: 1, b: 1, a: 1}
-  secondaryColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 10
-  loop: 1
-  maxActiveSparkles: 190
-  sparkleLifetime: 0.29
-  sparkleIntensity: 1
-  colorVariation: 0
-  randomSeed: 73
---- !u!114 &2024631440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100165591cc76394182807fdd542af1a, type: 3}
-  m_Name: JunctionBreathing (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Junction Breathing
-  speed: 0.57
-  primaryColor: {r: 1, g: 0.3, b: 0.1, a: 1}
-  secondaryColor: {r: 0.1, g: 0.5, b: 1, a: 1}
-  inactiveColor: {r: 0.05, g: 0.05, b: 0.1, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 16.97
-  loop: 1
-  highValenceThreshold: 2
-  lowValenceThreshold: 1
-  simultaneousPulses: 0
-  breathingMode: 1
-  breathingCycles: 1
-  pulseRadius: 35.4
-  pulseFalloff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1.0106201
-      value: 0.25811768
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  usePrimarySecondaryColors: 1
---- !u!114 &2058506205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b3a01bc5d7e1124abccf50dcd8ba532, type: 3}
-  m_Name: ProgressivePathAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-    (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 3.25
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 69.94
-  loop: 0
-  pathSpeed: 16.24
-  pathInterval: 0.24
-  maxConcurrentPaths: 1
-  useEndpointsOnly: 1
-  basePathColor: {r: 0, g: 1, b: 1, a: 1}
-  crossingColor: {r: 1, g: 1, b: 1, a: 1}
-  useColorProgression: 1
-  colorHueShift: 0.25
-  fadeTime: 3
-  showEndpoints: 1
-  endpointColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &2074351730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ea601214fed3454c80158f91751a117, type: 3}
-  m_Name: BreadthFirstSearchAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-    (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 5
-  primaryColor: {r: 1, g: 0.7354885, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 2
-  saturation: 2
-  enhanceColors: 1
-  duration: 164.8
-  loop: 0
-  searchSpeed: 74
-  pauseBetweenSearches: 1
-  stepInterval: 0.07
-  showProgressiveFill: 1
-  autoCalculateDuration: 1
-  durationBuffer: 148.8
-  _seedNodeCount: 10
-  _estimatedMaxDepth: 10
-  _estimatedRuntime: 164.8
-  _timingBreakdown: "10 seeds \xD7 (10 steps \xD7 0.07s + 1s pause) + 148.8s buffer"
-  useComplementaryColors: 1
-  colorProgression: 2.67
-  searchSaturation: 0.9
-  searchBrightness: 0.9
-  persistentBackground: 1
-  backgroundFadeRate: 0.3
-  highlightCurrentFrontier: 1
-  frontierIntensity: 1.2
 --- !u!1 &2077911101
 GameObject:
   m_ObjectHideFlags: 0
@@ -8495,30 +4676,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BranchingLEDAnimator.Core.LEDAnimationSystem
   availableAnimations:
-  - {fileID: 1507266356}
-  - {fileID: 1586622969}
-  - {fileID: 1290708625}
-  - {fileID: 2086492377}
-  - {fileID: 77622315}
-  - {fileID: 175309766}
-  - {fileID: 123140785}
-  - {fileID: 13572423}
-  - {fileID: 600154880}
-  - {fileID: 471998812}
-  - {fileID: 343047554}
-  - {fileID: 554719016}
-  - {fileID: 492065153}
-  - {fileID: 2112792262}
-  - {fileID: 1448898929}
-  - {fileID: 1547758}
-  - {fileID: 55341768}
-  - {fileID: 1262224568}
-  - {fileID: 1654034796}
-  - {fileID: 954693624}
-  - {fileID: 1577240400}
-  - {fileID: 911469068}
-  - {fileID: 813521602}
-  - {fileID: 1799469136}
+  - {fileID: 11400000, guid: 23e08999ec86c7a4ab0b971e2d6bc8b3, type: 2}
+  - {fileID: 11400000, guid: 2c50311e8e00b53408c16e5b28e165f5, type: 2}
+  - {fileID: 11400000, guid: 8931772f516a83a44bd33440cda3bc5f, type: 2}
   currentAnimationIndex: 1
   isPlaying: 1
   autoPlayOnStart: 1
@@ -9942,6 +6102,71 @@ MonoBehaviour:
     totalLength: 169.4461
   currentNodeColors:
   - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 1.2785065, g: 0.26420644, b: 0, a: 1}
+  - {r: 1.2785065, g: 0.26420644, b: 0, a: 1}
+  - {r: 1.2785065, g: 0.26420644, b: 0, a: 1}
+  - {r: 1.2785065, g: 0.26420644, b: 0, a: 1}
+  - {r: 1.2785065, g: 0.26420644, b: 0, a: 1}
+  - {r: 1.2785065, g: 0.26420644, b: 0, a: 1}
+  - {r: 1.2785065, g: 0.26420644, b: 0, a: 1}
+  - {r: 1.4089718, g: 0, b: 0.47111472, a: 1}
+  - {r: 1.4089718, g: 0, b: 0.47111472, a: 1}
+  - {r: 1.4089718, g: 0, b: 0.47111472, a: 1}
+  - {r: 1.4089718, g: 0, b: 0.47111472, a: 1}
+  - {r: 1.4089718, g: 0, b: 0.47111472, a: 1}
+  - {r: 1.4089718, g: 0, b: 0.47111472, a: 1}
+  - {r: 1.4089718, g: 1.2695662, b: 0.47111472, a: 1}
+  - {r: 0.4785497, g: 1.2695662, b: 0, a: 1}
+  - {r: 0.4785497, g: 1.2695662, b: 0, a: 1}
+  - {r: 0.4785497, g: 1.2695662, b: 0, a: 1}
+  - {r: 0.4785497, g: 1.2695662, b: 0, a: 1}
+  - {r: 0.4785497, g: 1.2695662, b: 0, a: 1}
+  - {r: 0.4785497, g: 1.2695662, b: 0, a: 1}
+  - {r: 1.4341205, g: 0, b: 1.2554121, a: 1}
+  - {r: 1.4341205, g: 0, b: 1.2554121, a: 1}
+  - {r: 1.4341205, g: 0, b: 1.2554121, a: 1}
+  - {r: 1.4341205, g: 0, b: 1.2554121, a: 1}
+  - {r: 1.4341205, g: 0, b: 1.2554121, a: 1}
+  - {r: 1.4341205, g: 0, b: 1.2554121, a: 1}
+  - {r: 1.4341205, g: 0, b: 1.2554121, a: 1}
+  - {r: 1.4062668, g: 0, b: 0, a: 1}
+  - {r: 1.4062668, g: 0, b: 0, a: 1}
+  - {r: 1.4062668, g: 0, b: 0, a: 1}
+  - {r: 1.4062668, g: 0, b: 0, a: 1}
+  - {r: 1.4062668, g: 0, b: 0, a: 1}
+  - {r: 1.4062668, g: 0, b: 0, a: 1}
+  - {r: 1.1516013, g: 0.8610207, b: 0, a: 1}
+  - {r: 1.1516013, g: 0.8610207, b: 0, a: 1}
+  - {r: 1.1516013, g: 0.8610207, b: 0, a: 1}
+  - {r: 1.1516013, g: 0.8610207, b: 0, a: 1}
+  - {r: 1.1516013, g: 0.8610207, b: 0, a: 1}
+  - {r: 1.1516013, g: 0.8610207, b: 0, a: 1}
+  - {r: 1.1516013, g: 1.0981866, b: 0.5473893, a: 1}
+  - {r: 0, g: 1.0981866, b: 0.5473893, a: 1}
+  - {r: 0, g: 1.0981866, b: 0.5473893, a: 1}
+  - {r: 0, g: 1.0981866, b: 0.5473893, a: 1}
+  - {r: 0, g: 1.0981866, b: 0.5473893, a: 1}
+  - {r: 0, g: 1.0981866, b: 0.5473893, a: 1}
+  - {r: 0, g: 1.0981866, b: 0.5473893, a: 1}
+  - {r: 1.0449467, g: 0, b: 0.69879293, a: 1}
+  - {r: 1.0449467, g: 0, b: 0.69879293, a: 1}
+  - {r: 1.0449467, g: 0, b: 0.69879293, a: 1}
+  - {r: 1.0449467, g: 0, b: 0.69879293, a: 1}
+  - {r: 1.0449467, g: 0, b: 0.69879293, a: 1}
+  - {r: 1.0449467, g: 0, b: 0.69879293, a: 1}
+  - {r: 1.0449467, g: 1.2661574, b: 1.0544763, a: 1}
+  - {r: 0, g: 1.2661574, b: 1.0544763, a: 1}
+  - {r: 0, g: 1.2661574, b: 1.0544763, a: 1}
+  - {r: 0, g: 1.2661574, b: 1.0544763, a: 1}
+  - {r: 0, g: 1.2661574, b: 1.0544763, a: 1}
+  - {r: 0, g: 1.2661574, b: 1.0544763, a: 1}
+  - {r: 0.9234168, g: 1.2661574, b: 1.0544763, a: 1}
+  - {r: 0.9234168, g: 1.0059448, b: 0, a: 1}
+  - {r: 0.9234168, g: 1.0059448, b: 0, a: 1}
+  - {r: 0.9234168, g: 1.0059448, b: 0, a: 1}
+  - {r: 0.9234168, g: 1.0059448, b: 0, a: 1}
+  - {r: 0.9234168, g: 1.0059448, b: 0, a: 1}
+  - {r: 0.9234168, g: 1.0059448, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
@@ -9988,25 +6213,6 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 1.3293587, b: 1.3839824, a: 1}
-  - {r: 0, g: 1.3293587, b: 1.3839824, a: 1}
-  - {r: 0, g: 1.3293587, b: 1.3839824, a: 1}
-  - {r: 0, g: 1.3293587, b: 1.3839824, a: 1}
-  - {r: 0, g: 1.3293587, b: 1.3839824, a: 1}
-  - {r: 0, g: 1.3293587, b: 1.3839824, a: 1}
-  - {r: 0.91727316, g: 1.3293587, b: 1.3839824, a: 1}
-  - {r: 0.91727316, g: 0, b: 1.1607466, a: 1}
-  - {r: 0.91727316, g: 0, b: 1.1607466, a: 1}
-  - {r: 0.91727316, g: 0, b: 1.1607466, a: 1}
-  - {r: 0.91727316, g: 0, b: 1.1607466, a: 1}
-  - {r: 0.91727316, g: 0, b: 1.1607466, a: 1}
-  - {r: 1.1406794, g: 0.6171305, b: 1.1607466, a: 1}
-  - {r: 1.1406794, g: 0.6171305, b: 0, a: 1}
-  - {r: 1.1406794, g: 0.6171305, b: 0, a: 1}
-  - {r: 1.1406794, g: 0.6171305, b: 0, a: 1}
-  - {r: 1.1406794, g: 0.6171305, b: 0, a: 1}
-  - {r: 1.1406794, g: 0.6171305, b: 0, a: 1}
-  - {r: 1.1406794, g: 0.6171305, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
@@ -10063,6 +6269,19 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.80241156, g: 0, b: 1.0153971, a: 1}
+  - {r: 0.80241156, g: 0, b: 1.0153971, a: 1}
+  - {r: 0.80241156, g: 0, b: 1.0153971, a: 1}
+  - {r: 0.80241156, g: 0, b: 1.0153971, a: 1}
+  - {r: 0.80241156, g: 0, b: 1.0153971, a: 1}
+  - {r: 0.80241156, g: 0, b: 1.0153971, a: 1}
+  - {r: 0.80241156, g: 1.3802047, b: 1.4369177, a: 1}
+  - {r: 0, g: 1.3802047, b: 1.4369177, a: 1}
+  - {r: 0, g: 1.3802047, b: 1.4369177, a: 1}
+  - {r: 0, g: 1.3802047, b: 1.4369177, a: 1}
+  - {r: 0, g: 1.3802047, b: 1.4369177, a: 1}
+  - {r: 0, g: 1.3802047, b: 1.4369177, a: 1}
+  - {r: 0, g: 1.3802047, b: 1.4369177, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
@@ -10093,6 +6312,32 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.47322991, g: 0, b: 1.0380664, a: 1}
+  - {r: 0.47322991, g: 0, b: 1.0380664, a: 1}
+  - {r: 0.47322991, g: 0, b: 1.0380664, a: 1}
+  - {r: 0.47322991, g: 0, b: 1.0380664, a: 1}
+  - {r: 0.47322991, g: 0, b: 1.0380664, a: 1}
+  - {r: 0.47322991, g: 0, b: 1.0380664, a: 1}
+  - {r: 0.47322991, g: 0, b: 1.0380664, a: 1}
+  - {r: 0.6042038, g: 1.035319, b: 0, a: 1}
+  - {r: 0.6042038, g: 1.035319, b: 0, a: 1}
+  - {r: 0.6042038, g: 1.035319, b: 0, a: 1}
+  - {r: 0.6042038, g: 1.035319, b: 0, a: 1}
+  - {r: 0.6042038, g: 1.035319, b: 0, a: 1}
+  - {r: 0.6042038, g: 1.035319, b: 0, a: 1}
+  - {r: 1.051138, g: 1.035319, b: 0, a: 1}
+  - {r: 1.051138, g: 0.56868684, b: 0, a: 1}
+  - {r: 1.051138, g: 0.56868684, b: 0, a: 1}
+  - {r: 1.051138, g: 0.56868684, b: 0, a: 1}
+  - {r: 1.051138, g: 0.56868684, b: 0, a: 1}
+  - {r: 1.051138, g: 0.56868684, b: 0, a: 1}
+  - {r: 1.051138, g: 0.6400953, b: 1.0222491, a: 1}
+  - {r: 0, g: 0.6400953, b: 1.0222491, a: 1}
+  - {r: 0, g: 0.6400953, b: 1.0222491, a: 1}
+  - {r: 0, g: 0.6400953, b: 1.0222491, a: 1}
+  - {r: 0, g: 0.6400953, b: 1.0222491, a: 1}
+  - {r: 0, g: 0.6400953, b: 1.0222491, a: 1}
+  - {r: 0, g: 0.6400953, b: 1.0222491, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
@@ -10103,25 +6348,6 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0.4000628, g: 1.0613447, b: 0, a: 1}
-  - {r: 0.4000628, g: 1.0613447, b: 0, a: 1}
-  - {r: 0.4000628, g: 1.0613447, b: 0, a: 1}
-  - {r: 0.4000628, g: 1.0613447, b: 0, a: 1}
-  - {r: 0.4000628, g: 1.0613447, b: 0, a: 1}
-  - {r: 0.4000628, g: 1.0613447, b: 0, a: 1}
-  - {r: 0.4000628, g: 1.0613447, b: 1.4344835, a: 1}
-  - {r: 0, g: 0.89822155, b: 1.4344835, a: 1}
-  - {r: 0, g: 0.89822155, b: 1.4344835, a: 1}
-  - {r: 0, g: 0.89822155, b: 1.4344835, a: 1}
-  - {r: 0, g: 0.89822155, b: 1.4344835, a: 1}
-  - {r: 0, g: 0.89822155, b: 1.4344835, a: 1}
-  - {r: 1.0336099, g: 0.89822155, b: 1.4344835, a: 1}
-  - {r: 1.0336099, g: 0, b: 0.90480983, a: 1}
-  - {r: 1.0336099, g: 0, b: 0.90480983, a: 1}
-  - {r: 1.0336099, g: 0, b: 0.90480983, a: 1}
-  - {r: 1.0336099, g: 0, b: 0.90480983, a: 1}
-  - {r: 1.0336099, g: 0, b: 0.90480983, a: 1}
-  - {r: 1.0336099, g: 0, b: 0.90480983, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
@@ -10159,25 +6385,6 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 1.0059491, g: 0, b: 0.6727139, a: 1}
-  - {r: 1.0059491, g: 0, b: 0.6727139, a: 1}
-  - {r: 1.0059491, g: 0, b: 0.6727139, a: 1}
-  - {r: 1.0059491, g: 0, b: 0.6727139, a: 1}
-  - {r: 1.0059491, g: 0, b: 0.6727139, a: 1}
-  - {r: 1.0059491, g: 0, b: 0.6727139, a: 1}
-  - {r: 1.2799716, g: 1.3943658, b: 0.6727139, a: 1}
-  - {r: 1.2799716, g: 1.3943658, b: 0, a: 1}
-  - {r: 1.2799716, g: 1.3943658, b: 0, a: 1}
-  - {r: 1.2799716, g: 1.3943658, b: 0, a: 1}
-  - {r: 1.2799716, g: 1.3943658, b: 0, a: 1}
-  - {r: 1.2799716, g: 1.3943658, b: 0, a: 1}
-  - {r: 1.2799716, g: 1.3943658, b: 0.9508266, a: 1}
-  - {r: 0, g: 1.1417005, b: 0.9508266, a: 1}
-  - {r: 0, g: 1.1417005, b: 0.9508266, a: 1}
-  - {r: 0, g: 1.1417005, b: 0.9508266, a: 1}
-  - {r: 0, g: 1.1417005, b: 0.9508266, a: 1}
-  - {r: 0, g: 1.1417005, b: 0.9508266, a: 1}
-  - {r: 0, g: 1.1417005, b: 0.9508266, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
@@ -10253,25 +6460,6 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 1.0065464, g: 0.20800523, b: 0, a: 1}
-  - {r: 1.0065464, g: 0.20800523, b: 0, a: 1}
-  - {r: 1.0065464, g: 0.20800523, b: 0, a: 1}
-  - {r: 1.0065464, g: 0.20800523, b: 0, a: 1}
-  - {r: 1.0065464, g: 0.20800523, b: 0, a: 1}
-  - {r: 1.0065464, g: 0.20800523, b: 0, a: 1}
-  - {r: 1.0065464, g: 1.3888422, b: 0, a: 1}
-  - {r: 0.05912549, g: 1.3888422, b: 0, a: 1}
-  - {r: 0.05912549, g: 1.3888422, b: 0, a: 1}
-  - {r: 0.05912549, g: 1.3888422, b: 0, a: 1}
-  - {r: 0.05912549, g: 1.3888422, b: 0, a: 1}
-  - {r: 0.05912549, g: 1.3888422, b: 0, a: 1}
-  - {r: 0.05912549, g: 1.3888422, b: 1.1684707, a: 1}
-  - {r: 0, g: 0.34095505, b: 1.1684707, a: 1}
-  - {r: 0, g: 0.34095505, b: 1.1684707, a: 1}
-  - {r: 0, g: 0.34095505, b: 1.1684707, a: 1}
-  - {r: 0, g: 0.34095505, b: 1.1684707, a: 1}
-  - {r: 0, g: 0.34095505, b: 1.1684707, a: 1}
-  - {r: 0, g: 0.34095505, b: 1.1684707, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
@@ -10288,6 +6476,19 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.3578701, g: 0, b: 1.4359365, a: 1}
+  - {r: 0.3578701, g: 0, b: 1.4359365, a: 1}
+  - {r: 0.3578701, g: 0, b: 1.4359365, a: 1}
+  - {r: 0.3578701, g: 0, b: 1.4359365, a: 1}
+  - {r: 0.3578701, g: 0, b: 1.4359365, a: 1}
+  - {r: 0.3578701, g: 0, b: 1.4359365, a: 1}
+  - {r: 0.3578701, g: 0.1110258, b: 1.4359365, a: 1}
+  - {r: 0, g: 0.1110258, b: 1.3039834, a: 1}
+  - {r: 0, g: 0.1110258, b: 1.3039834, a: 1}
+  - {r: 0, g: 0.1110258, b: 1.3039834, a: 1}
+  - {r: 0, g: 0.1110258, b: 1.3039834, a: 1}
+  - {r: 0, g: 0.1110258, b: 1.3039834, a: 1}
+  - {r: 0, g: 0.1110258, b: 1.3039834, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
@@ -10303,32 +6504,6 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 1.1243844, g: 0.84067136, b: 0, a: 1}
-  - {r: 1.1243844, g: 0.84067136, b: 0, a: 1}
-  - {r: 1.1243844, g: 0.84067136, b: 0, a: 1}
-  - {r: 1.1243844, g: 0.84067136, b: 0, a: 1}
-  - {r: 1.1243844, g: 0.84067136, b: 0, a: 1}
-  - {r: 1.1243844, g: 0.84067136, b: 0, a: 1}
-  - {r: 1.1243844, g: 0.84067136, b: 0, a: 1}
-  - {r: 0, g: 1.4133284, b: 0.70447123, a: 1}
-  - {r: 0, g: 1.4133284, b: 0.70447123, a: 1}
-  - {r: 0, g: 1.4133284, b: 0.70447123, a: 1}
-  - {r: 0, g: 1.4133284, b: 0.70447123, a: 1}
-  - {r: 0, g: 1.4133284, b: 0.70447123, a: 1}
-  - {r: 0, g: 1.4133284, b: 0.70447123, a: 1}
-  - {r: 0.25123373, g: 1.4133284, b: 1.0080632, a: 1}
-  - {r: 0.25123373, g: 0, b: 1.0080632, a: 1}
-  - {r: 0.25123373, g: 0, b: 1.0080632, a: 1}
-  - {r: 0.25123373, g: 0, b: 1.0080632, a: 1}
-  - {r: 0.25123373, g: 0, b: 1.0080632, a: 1}
-  - {r: 0.25123373, g: 0, b: 1.0080632, a: 1}
-  - {r: 1.4331305, g: 0, b: 1.0080632, a: 1}
-  - {r: 1.4331305, g: 0, b: 0, a: 1}
-  - {r: 1.4331305, g: 0, b: 0, a: 1}
-  - {r: 1.4331305, g: 0, b: 0, a: 1}
-  - {r: 1.4331305, g: 0, b: 0, a: 1}
-  - {r: 1.4331305, g: 0, b: 0, a: 1}
-  - {r: 1.4331305, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
@@ -10357,191 +6532,21 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0.11123707, b: 1.3064648, a: 1}
-  - {r: 0, g: 0.11123707, b: 1.3064648, a: 1}
-  - {r: 0, g: 0.11123707, b: 1.3064648, a: 1}
-  - {r: 0, g: 0.11123707, b: 1.3064648, a: 1}
-  - {r: 0, g: 0.11123707, b: 1.3064648, a: 1}
-  - {r: 0, g: 0.11123707, b: 1.3064648, a: 1}
-  - {r: 1.2685139, g: 0.11123707, b: 1.3064648, a: 1}
-  - {r: 1.2685139, g: 0, b: 0.42415014, a: 1}
-  - {r: 1.2685139, g: 0, b: 0.42415014, a: 1}
-  - {r: 1.2685139, g: 0, b: 0.42415014, a: 1}
-  - {r: 1.2685139, g: 0, b: 0.42415014, a: 1}
-  - {r: 1.2685139, g: 0, b: 0.42415014, a: 1}
-  - {r: 1.2685139, g: 1.0632886, b: 0.42415014, a: 1}
-  - {r: 0.6205266, g: 1.0632886, b: 0, a: 1}
-  - {r: 0.6205266, g: 1.0632886, b: 0, a: 1}
-  - {r: 0.6205266, g: 1.0632886, b: 0, a: 1}
-  - {r: 0.6205266, g: 1.0632886, b: 0, a: 1}
-  - {r: 0.6205266, g: 1.0632886, b: 0, a: 1}
-  - {r: 0.6205266, g: 1.0632886, b: 0, a: 1}
+  - {r: 0.048396304, g: 1.1368165, b: 0, a: 1}
+  - {r: 0.048396304, g: 1.1368165, b: 0, a: 1}
+  - {r: 0.048396304, g: 1.1368165, b: 0, a: 1}
+  - {r: 0.048396304, g: 1.1368165, b: 0, a: 1}
+  - {r: 0.048396304, g: 1.1368165, b: 0, a: 1}
+  - {r: 0.048396304, g: 1.1368165, b: 0, a: 1}
+  - {r: 0.048396304, g: 1.1368165, b: 1.0082389, a: 1}
+  - {r: 0, g: 0.29420006, b: 1.0082389, a: 1}
+  - {r: 0, g: 0.29420006, b: 1.0082389, a: 1}
+  - {r: 0, g: 0.29420006, b: 1.0082389, a: 1}
+  - {r: 0, g: 0.29420006, b: 1.0082389, a: 1}
+  - {r: 0, g: 0.29420006, b: 1.0082389, a: 1}
+  - {r: 0, g: 0.29420006, b: 1.0082389, a: 1}
   dataLoaded: 1
   showDebugInfo: 1
---- !u!114 &2086492377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bb3dc0b1c1ccb42b6eedcd7ee6819f, type: 3}
-  m_Name: ChordTouchAnimation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Base Animation
-  speed: 1
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
-  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 21.3
-  loop: 1
-  audioMode: 1
-  customClips:
-  - {fileID: 8300000, guid: c1ecc08401ddc6a4faea98de28e92bbe, type: 3}
-  - {fileID: 8300000, guid: f465fda54c33cf84099723d85e337d32, type: 3}
-  - {fileID: 8300000, guid: 1439872e40ecd6a418ca36f6da676f82, type: 3}
-  - {fileID: 8300000, guid: 42f54d82faf512a45999e9519a7a0e0e, type: 3}
-  - {fileID: 8300000, guid: 076de3a30149085448a8732b282c3346, type: 3}
-  - {fileID: 8300000, guid: 2ab7bd7610f592240b171aba8d2deab3, type: 3}
-  loopCustomClips: 1
-  scale: 1
-  baseFrequency: 73.2
-  baseOctave: 69
-  toneVolume: 1
-  toneAttack: 4.74
-  toneRelease: 0.08
-  touchGlowColor: {r: 1, g: 0.9, b: 0.5, a: 1}
-  touchGlowRadius: 99
-  touchGlowIntensity: 2.946
-  touchGlowPulseSpeed: 4.11
-  touchGlowPulseAmount: 0.084
-  pulseColor: {r: 1, g: 0.8, b: 0.2, a: 1}
-  pulseSpeed: 21.31
-  pulseInterval: 0.4
-  pulseFadeTime: 17.36
-  pulseWidth: 2.9
-  pulseRange: 19
-  pulseFalloff: 0.412
-  pulseShape:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.03678131
-      value: 1.0782013
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.9581821
-      value: 0.2939701
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  distanceDecay:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.98413086
-      value: 0.9324829
-      inSlope: -0.8
-      outSlope: -0.8
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  endpointIdleColor: {r: 0.1, g: 0.2, b: 0.4, a: 1}
-  idlePulseSpeed: 1
-  idlePulseAmount: 0.3
-  showNoteAssignments: 1
-  verboseDebug: 1
---- !u!114 &2112792262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae74d72d3187e24aa3d110766b9b3ff, type: 3}
-  m_Name: NetworkCirculation (Clone) (Clone) (Clone) (Clone) (Clone) (Clone) (Clone)
-  m_EditorClassIdentifier: 
-  animationName: Network Circulation
-  speed: 9.15
-  primaryColor: {r: 0, g: 1, b: 0, a: 1}
-  secondaryColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  inactiveColor: {r: 0.02, g: 0.05, b: 0.02, a: 1}
-  brightness: 1
-  saturation: 1
-  enhanceColors: 1
-  duration: 86.2
-  loop: 1
-  flowType: 2
-  particleLifetime: 102.1
-  maxParticles: 85
-  sourceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  sinkColor: {r: 1, g: 0, b: 1, a: 1}
-  flowTrail:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  showNetworkRoles: 0
-  bidirectionalFlow: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -10550,3 +6555,4 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 364243222}
   - {fileID: 1419625859}
+  - {fileID: 444699820}

@@ -20,13 +20,13 @@ MonoBehaviour:
   brightness: 2
   saturation: 1.459
   enhanceColors: 1
-  duration: 9.4
+  duration: 15.96
   loop: 1
-  waveWidthLEDs: 4
-  waveSpeedLEDs: 7.3
+  waveWidthLEDs: 3
+  waveSpeedLEDs: 4.6
   fromEndpoints: 1
-  waveCount: 2
-  waveSpacing: 11
+  waveCount: 5
+  waveSpacing: 58
   waveShape:
     serializedVersion: 2
     m_Curve:
@@ -40,8 +40,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1
+      time: 0.9992676
+      value: 0.37701797
       inSlope: 0
       outSlope: 0
       tangentMode: 0

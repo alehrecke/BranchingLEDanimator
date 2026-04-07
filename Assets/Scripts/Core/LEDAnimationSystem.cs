@@ -79,7 +79,6 @@ namespace BranchingLEDAnimator.Core
         private int currentFrame = 0;
         private float lastUpdateTime;
         private int lastAnimationIndex = -1;
-        private List<LEDAnimationType> runtimeAnimationClones = new List<LEDAnimationType>();
         
         // Properties
         public LEDAnimationType CurrentAnimation => 
@@ -99,10 +98,13 @@ namespace BranchingLEDAnimator.Core
         #if UNITY_EDITOR
         void OnEnable()
         {
-            // Initialize in Edit mode too
+            if (!Application.isPlaying)
+            {
+                SanitizeAnimationList();
+            }
+            
             InitializeSystem();
             
-            // Register for Editor updates (works in Edit mode)
             UnityEditor.EditorApplication.update += EditorUpdate;
         }
         
@@ -114,7 +116,6 @@ namespace BranchingLEDAnimator.Core
         
         void OnValidate()
         {
-            // Reinitialize when Inspector changes
             InitializeSystem();
             
             // Validate when Inspector changes
@@ -446,10 +447,20 @@ namespace BranchingLEDAnimator.Core
                 return;
             }
             
-            // Load default animations if none assigned
+            // Load default animations if none assigned (single-graph only)
             if (availableAnimations.Count == 0)
             {
-                LoadDefaultAnimations();
+                var allGraphs = FindObjectsByType<LEDGraphManager>(FindObjectsSortMode.None);
+                if (allGraphs.Length <= 1)
+                {
+                    LoadDefaultAnimations();
+                }
+                else
+                {
+                    Debug.LogWarning($"[{gameObject.name}] No animations assigned. " +
+                        "In the gallery scene, assign animations manually via the Inspector's " +
+                        "'Available Animations' list on each sculpture's LEDAnimationSystem.");
+                }
             }
             
             // Validate animation index
@@ -463,13 +474,14 @@ namespace BranchingLEDAnimator.Core
             LEDVisualizationEvents.OnGeometryUpdated -= OnGeometryLoaded; // Prevent double subscription
             LEDVisualizationEvents.OnGeometryUpdated += OnGeometryLoaded;
             
-            // Clone animation SOs so each LEDAnimationSystem instance has independent runtime state
-            CloneAnimationAssets();
+            // Assign OwnerGraphManager so each animation filters events to its own graph
+            AssignOwnerToAnimations();
             
             if (showDebugInfo)
             {
-                Debug.Log($"✓ LEDAnimationSystem initialized with {availableAnimations.Count} animations");
-                Debug.Log($"✓ Graph Manager found: {(graphManager != null ? "✅" : "❌")}");
+                string activeName = CurrentAnimation != null ? CurrentAnimation.name : "None";
+                Debug.Log($"✓ [{gameObject.name}] LEDAnimationSystem initialized — " +
+                          $"playing '{activeName}' (index {currentAnimationIndex} of {availableAnimations.Count})");
             }
             
             // If geometry is already loaded (event fired before we subscribed), auto-start now
@@ -487,45 +499,49 @@ namespace BranchingLEDAnimator.Core
         void OnDestroy()
         {
             LEDVisualizationEvents.OnGeometryUpdated -= OnGeometryLoaded;
-            DestroyAnimationClones();
         }
         
-        private List<LEDAnimationType> originalAnimationAssets = new List<LEDAnimationType>();
-        
-        private void CloneAnimationAssets()
+        /// <summary>
+        /// Remove stale runtime clone references from the serialized animation list.
+        /// Called in Edit mode to fix corrupted scene data from previous cloning.
+        /// </summary>
+        private void SanitizeAnimationList()
         {
-            DestroyAnimationClones();
-
-            // Save the original (uncloned) asset references on the first call
-            if (originalAnimationAssets.Count == 0)
+            #if UNITY_EDITOR
+            int removed = 0;
+            for (int i = availableAnimations.Count - 1; i >= 0; i--)
             {
-                for (int i = 0; i < availableAnimations.Count; i++)
+                if (availableAnimations[i] == null || !UnityEditor.AssetDatabase.Contains(availableAnimations[i]))
                 {
-                    if (availableAnimations[i] != null)
-                        originalAnimationAssets.Add(availableAnimations[i]);
+                    availableAnimations.RemoveAt(i);
+                    removed++;
                 }
             }
-
-            availableAnimations.Clear();
-            for (int i = 0; i < originalAnimationAssets.Count; i++)
+            if (removed > 0)
             {
-                if (originalAnimationAssets[i] == null) continue;
-                var clone = Instantiate(originalAnimationAssets[i]);
-                clone.name = originalAnimationAssets[i].name + " (Clone)";
-                clone.OwnerGraphManager = graphManager;
-                runtimeAnimationClones.Add(clone);
-                availableAnimations.Add(clone);
+                Debug.LogWarning($"[{gameObject.name}] Removed {removed} stale animation reference(s). " +
+                    $"{availableAnimations.Count} valid animation(s) remain. " +
+                    (availableAnimations.Count == 0
+                        ? "Please reassign animations in the Inspector."
+                        : ""));
             }
+            #endif
         }
         
-        private void DestroyAnimationClones()
+        private void AssignOwnerToAnimations()
         {
-            foreach (var clone in runtimeAnimationClones)
+            foreach (var anim in availableAnimations)
             {
-                if (clone != null)
-                    DestroyImmediate(clone);
+                if (anim == null) continue;
+                
+                if (anim.OwnerGraphManager != null && anim.OwnerGraphManager != graphManager)
+                {
+                    if (showDebugInfo)
+                        Debug.LogWarning($"Animation '{anim.name}' is shared by multiple graphs. " +
+                                         "Duplicate the asset (Ctrl+D) for independent multi-graph control.");
+                }
+                anim.OwnerGraphManager = graphManager;
             }
-            runtimeAnimationClones.Clear();
         }
         
         /// <summary>

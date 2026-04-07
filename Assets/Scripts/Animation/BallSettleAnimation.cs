@@ -172,6 +172,7 @@ namespace BranchingLEDAnimator.Animation
             ledMappingInitialized = false;
             initialized = false;
             analysisComplete = false;
+            audioInitialized = false;
             settledBalls.Clear();
             travelingBalls.Clear();
             nextBallIndex = 0;
@@ -300,8 +301,11 @@ namespace BranchingLEDAnimator.Animation
             float deltaTime = Mathf.Clamp(currentTime - lastRealTime, 0.001f, 0.1f);
             lastRealTime = currentTime;
             
-            if (!initialized)
+            if (!initialized || (enableAudio && audioInitialized && toneSource == null))
             {
+                initialized = false;
+                analysisComplete = false;
+                audioInitialized = false;
                 Initialize(currentTime, nodePositions, edgeConnections);
             }
             
@@ -1085,27 +1089,21 @@ namespace BranchingLEDAnimator.Animation
         
         private void SetupAudio()
         {
-            if (audioContainer == null)
+            if (audioContainer != null)
             {
-                audioContainer = new GameObject("BallSettleAudio");
-                audioContainer.hideFlags = HideFlags.HideAndDontSave;
-                if (Application.isPlaying)
-                    Object.DontDestroyOnLoad(audioContainer);
+                Object.DestroyImmediate(audioContainer);
+                audioContainer = null;
             }
             
-            if (toneSource == null)
-            {
-                toneSource = audioContainer.AddComponent<AudioSource>();
-                toneSource.playOnAwake = false;
-            }
+            audioContainer = new GameObject("BallSettleAudio");
+            toneSource = audioContainer.AddComponent<AudioSource>();
+            toneSource.playOnAwake = false;
             
             // Pre-generate tone clips
+            toneClips.Clear();
             foreach (var kvp in endpointFrequencies)
             {
-                if (!toneClips.ContainsKey(kvp.Key))
-                {
-                    toneClips[kvp.Key] = GenerateToneClip(kvp.Value, 0.4f);
-                }
+                toneClips[kvp.Key] = GenerateToneClip(kvp.Value, 0.4f);
             }
             
             audioInitialized = true;

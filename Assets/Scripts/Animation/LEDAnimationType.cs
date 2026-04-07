@@ -29,7 +29,7 @@ namespace BranchingLEDAnimator.Animation
         public bool loop = true;
         
         /// <summary>
-        /// Set by LEDAnimationSystem after cloning. Used by interactive animations
+        /// Set by LEDAnimationSystem during initialization. Used by interactive animations
         /// to filter player events so they only react to their own graph.
         /// </summary>
         [System.NonSerialized]

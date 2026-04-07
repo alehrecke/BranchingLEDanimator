@@ -15,20 +15,20 @@ MonoBehaviour:
   animationName: Base Animation
   speed: 49.9
   primaryColor: {r: 1, g: 0.037245974, b: 0, a: 1}
-  secondaryColor: {r: 0, g: 1, b: 0.2011559, a: 1}
+  secondaryColor: {r: 0.8835497, g: 1, b: 0, a: 1}
   inactiveColor: {r: 0, g: 0, b: 0, a: 1}
   brightness: 2
   saturation: 2
   enhanceColors: 0
   duration: 13.95
   loop: 1
-  ballSpeed: 7.2000003
-  totalBalls: 19
+  ballSpeed: 16.33
+  totalBalls: 16
   autoSpawnAtStart: 1
   useRainbowColors: 1
   rainbowSaturation: 1
   rainbowBrightness: 1
-  pulseStyle: 1
+  pulseStyle: 0
   pulseWidth: 6.49
   trailLength: 30
   trailIntensity: 1
@@ -56,10 +56,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  settledIntensity: 1.437
+  settledIntensity: 1.396
   settledPulse: 1
   settledPulseSpeed: 0.955
-  dispatchStagger: 0.065
+  dispatchStagger: 0.084
   enableAudio: 1
   toneVolume: 0.3
   inputMode: 0
