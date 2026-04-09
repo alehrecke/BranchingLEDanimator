@@ -4764,31 +4764,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BranchingLEDAnimator.Core.LEDAnimationSystem
   availableAnimations:
-  - {fileID: 1271082037}
-  - {fileID: 134816890}
-  - {fileID: 1780129284}
-  - {fileID: 1258001700}
-  - {fileID: 411791438}
-  - {fileID: 1384521467}
-  - {fileID: 1104946108}
-  - {fileID: 1271082031}
-  - {fileID: 643666758}
-  - {fileID: 2024631440}
-  - {fileID: 1477067752}
-  - {fileID: 1773181034}
-  - {fileID: 723428877}
-  - {fileID: 1335751514}
-  - {fileID: 287577577}
-  - {fileID: 1351765971}
-  - {fileID: 520045343}
-  - {fileID: 66823060}
-  - {fileID: 1058000671}
-  - {fileID: 1543652399}
-  - {fileID: 353435933}
-  - {fileID: 253131737}
-  - {fileID: 655924958}
-  - {fileID: 1525835037}
-  currentAnimationIndex: 1
+  - {fileID: 11400000, guid: c4f8a91e2d6b4038a7e5c1d9b2a3f701, type: 2}
+  currentAnimationIndex: 0
   isPlaying: 1
   autoPlayOnStart: 1
   globalSpeed: 1
@@ -8495,31 +8472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BranchingLEDAnimator.Core.LEDAnimationSystem
   availableAnimations:
-  - {fileID: 1507266356}
-  - {fileID: 1586622969}
-  - {fileID: 1290708625}
-  - {fileID: 2086492377}
-  - {fileID: 77622315}
-  - {fileID: 175309766}
-  - {fileID: 123140785}
-  - {fileID: 13572423}
-  - {fileID: 600154880}
-  - {fileID: 471998812}
-  - {fileID: 343047554}
-  - {fileID: 554719016}
-  - {fileID: 492065153}
-  - {fileID: 2112792262}
-  - {fileID: 1448898929}
-  - {fileID: 1547758}
-  - {fileID: 55341768}
-  - {fileID: 1262224568}
-  - {fileID: 1654034796}
-  - {fileID: 954693624}
-  - {fileID: 1577240400}
-  - {fileID: 911469068}
-  - {fileID: 813521602}
-  - {fileID: 1799469136}
-  currentAnimationIndex: 1
+  - {fileID: 11400000, guid: d5e9b02f3c7d5149b8f6d2e0c3b4a812, type: 2}
+  currentAnimationIndex: 0
   isPlaying: 1
   autoPlayOnStart: 1
   globalSpeed: 1
