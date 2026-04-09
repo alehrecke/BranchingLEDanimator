@@ -1089,8 +1089,8 @@ namespace BranchingLEDAnimator.Animation
             {
                 audioContainer = new GameObject("BallSettleAudio");
                 audioContainer.hideFlags = HideFlags.HideAndDontSave;
-                if (Application.isPlaying)
-                    Object.DontDestroyOnLoad(audioContainer);
+                // Never call DontDestroyOnLoad here: Initialize/SetupAudio runs from
+                // LEDAnimationSystem.EditorUpdate in edit-mode scene preview, which throws.
             }
             
             if (toneSource == null)

@@ -403,7 +403,7 @@ namespace BranchingLEDAnimator.Hardware
                 Debug.Log($"🎬 Playing: {item.GetDisplayName()} ({item.GetDuration()}s)");
                 
                 // Set animation in animation system
-                int animationIndex = animationSystem.availableAnimations.IndexOf(item.animation);
+                int animationIndex = animationSystem.IndexOfAnimation(item.animation);
                 if (animationIndex >= 0)
                 {
                     animationSystem.currentAnimationIndex = animationIndex;
