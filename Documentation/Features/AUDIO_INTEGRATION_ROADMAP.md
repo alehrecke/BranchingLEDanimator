@@ -227,6 +227,17 @@ Assets/Scripts/
 4. **Troubleshooting Guide**: Audio-specific issues and solutions
 5. **API Reference**: New audio-related classes and methods
 
+## Gallery Assembly: G4 / G6 stems (Unity preview)
+
+The **GalleryAssembly** scene wires **Sculpture A** to `ChordTouch_G4_Gallery` and **Sculpture B** to `ChordTouch_G6_Gallery` ([`ChordTouch_G4_Gallery.asset`](../../Assets/Scripts/Animation/ChordTouch_G4_Gallery.asset), [`ChordTouch_G6_Gallery.asset`](../../Assets/Scripts/Animation/ChordTouch_G6_Gallery.asset)). Both use **ChordTouchAnimation** with **AudioMode = CustomClips**:
+
+- **G4 clips** (in order): `Assets/Audio/G4/` — stem 1.1, stem1.2, stem1.3, stem1.4 (WAV).
+- **G6 clips** (in order): `Assets/Audio/G6/` — stem G6.1 … G6.6 (WAV).
+
+**Endpoint-to-clip mapping:** `ChordTouchAnimation` assigns `customClips[i]` to graph endpoints sorted by **world-space Y (lowest first)**. If the stem you hear on a physical leg is wrong, **reorder the `customClips` array** on the asset (or adjust Grasshopper geometry) rather than expecting node index order. Fewer clips than endpoints **cycles** the array.
+
+**GalleryAudienceSimulator** uses `GraphPlayerController` press/hold/release; Chord Touch subscribes to the same events and filters by `OwnerGraphManager`, so each sculpture only plays its own stems.
+
 ---
 
 ## 🚀 Getting Started

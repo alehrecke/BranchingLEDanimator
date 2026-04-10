@@ -77,8 +77,8 @@ namespace BranchingLEDAnimator.Hardware
             if (animationSystem.CurrentAnimation == null)
             {
                 Debug.LogError("ESP32AnimationExporter: No animation currently selected for export. Current animation index: " + animationSystem.currentAnimationIndex + 
-                             ", Available animations: " + animationSystem.availableAnimations.Count + 
-                             ". Please set a valid currentAnimationIndex in LEDAnimationSystem (0-" + (animationSystem.availableAnimations.Count - 1) + ").");
+                             ", Playback count: " + animationSystem.AnimationCount + 
+                             ". Please set a valid currentAnimationIndex in LEDAnimationSystem (0-" + (animationSystem.AnimationCount - 1) + ").");
                 return;
             }
             
@@ -103,9 +103,12 @@ namespace BranchingLEDAnimator.Hardware
         {
             if (exportCurrentPlaylist && animationSystem != null)
             {
-                // Export all animations in the animation system
                 animationsToExport.Clear();
-                animationsToExport.AddRange(animationSystem.availableAnimations);
+                foreach (var a in animationSystem.GetPlaybackAnimations())
+                {
+                    if (a != null)
+                        animationsToExport.Add(a);
+                }
             }
             
             if (animationsToExport.Count == 0)
@@ -474,7 +477,7 @@ namespace BranchingLEDAnimator.Hardware
             float totalStorage = 0f;
             int totalAnimations = exportCurrentPlaylist ? animationSystem.AnimationCount : animationsToExport.Count;
             
-            var animations = exportCurrentPlaylist ? animationSystem.availableAnimations : animationsToExport;
+            var animations = exportCurrentPlaylist ? animationSystem.GetPlaybackAnimations() : animationsToExport;
             
             Debug.Log("📊 ANIMATION STORAGE REQUIREMENTS:");
             Debug.Log("=================================");

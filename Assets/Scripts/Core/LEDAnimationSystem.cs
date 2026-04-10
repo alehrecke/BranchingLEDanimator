@@ -12,6 +12,7 @@ namespace BranchingLEDAnimator.Core
     public class LEDAnimationSystem : MonoBehaviour
     {
         [Header("Animation")]
+        [Tooltip("Project animation assets only. Runtime copies are kept separately so this list is not overwritten by clones.")]
         public List<LEDAnimationType> availableAnimations = new List<LEDAnimationType>();
         public int currentAnimationIndex = 0;
         public bool isPlaying = false;
@@ -79,16 +80,45 @@ namespace BranchingLEDAnimator.Core
         private int currentFrame = 0;
         private float lastUpdateTime;
         private int lastAnimationIndex = -1;
+        private List<LEDAnimationType> runtimeAnimationClones = new List<LEDAnimationType>();
+        
+#if UNITY_EDITOR
+        [System.NonSerialized] private int[] playlistIdentity;
+#endif
+        
+        private IReadOnlyList<LEDAnimationType> PlaybackList =>
+            runtimeAnimationClones.Count > 0 ? runtimeAnimationClones : availableAnimations;
         
         // Properties
-        public LEDAnimationType CurrentAnimation => 
-            availableAnimations.Count > 0 && currentAnimationIndex >= 0 && currentAnimationIndex < availableAnimations.Count 
-                ? availableAnimations[currentAnimationIndex] 
-                : null;
+        public LEDAnimationType CurrentAnimation
+        {
+            get
+            {
+                var list = PlaybackList;
+                if (list.Count == 0 || currentAnimationIndex < 0 || currentAnimationIndex >= list.Count)
+                    return null;
+                return list[currentAnimationIndex];
+            }
+        }
         
         // Use asset name (what shows in Inspector) rather than animationName field        
         public string CurrentAnimationName => CurrentAnimation?.name ?? "None";
-        public int AnimationCount => availableAnimations.Count;
+        public int AnimationCount => PlaybackList.Count;
+        
+        /// <summary>Runtime clones used for playback (edit preview + play mode). Matches order of Available Animations; null slots preserved.</summary>
+        public IReadOnlyList<LEDAnimationType> GetPlaybackAnimations() =>
+            runtimeAnimationClones.Count > 0 ? runtimeAnimationClones : availableAnimations;
+        
+        public int IndexOfAnimation(LEDAnimationType anim)
+        {
+            if (anim == null) return -1;
+            for (int i = 0; i < runtimeAnimationClones.Count; i++)
+            {
+                if (runtimeAnimationClones[i] == anim)
+                    return i;
+            }
+            return availableAnimations.IndexOf(anim);
+        }
         
         void Start()
         {
@@ -98,13 +128,10 @@ namespace BranchingLEDAnimator.Core
         #if UNITY_EDITOR
         void OnEnable()
         {
-            if (!Application.isPlaying)
-            {
-                SanitizeAnimationList();
-            }
-            
+            // Initialize in Edit mode too
             InitializeSystem();
             
+            // Register for Editor updates (works in Edit mode)
             UnityEditor.EditorApplication.update += EditorUpdate;
         }
         
@@ -116,16 +143,30 @@ namespace BranchingLEDAnimator.Core
         
         void OnValidate()
         {
-            InitializeSystem();
+            if (graphManager == null)
+                graphManager = GetComponent<LEDGraphManager>();
             
-            // Validate when Inspector changes
             ValidateAnimationIndex();
+            
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                EnsureGeometrySubscription();
+                if (PlaylistIdentityChanged())
+                    TryRebuildRuntimeClonesForEditor();
+            }
+            else if (Application.isPlaying && graphManager != null && PlaylistIdentityChanged())
+            {
+                EnsureGeometrySubscription();
+                CloneAnimationAssets();
+            }
+#endif
             
             // Auto-start/restart continuous animation if everything is ready
             bool shouldAutoStart = (autoPlayOnStart || alwaysPlayInSceneView) && 
                                    graphManager != null && 
                                    graphManager.DataLoaded && 
-                                   availableAnimations.Count > 0;
+                                   PlaybackList.Count > 0;
             
             if (shouldAutoStart)
             {
@@ -138,7 +179,7 @@ namespace BranchingLEDAnimator.Core
                     bool stillShouldStart = (autoPlayOnStart || alwaysPlayInSceneView) && 
                                            graphManager != null && 
                                            graphManager.DataLoaded && 
-                                           availableAnimations.Count > 0;
+                                           PlaybackList.Count > 0;
                     
                     if (stillShouldStart)
                     {
@@ -165,7 +206,7 @@ namespace BranchingLEDAnimator.Core
             if (!Application.isPlaying)
             {
                 // Auto-restart if alwaysPlayInSceneView is enabled but animation stopped
-                if (alwaysPlayInSceneView && !isPlaying && graphManager != null && graphManager.DataLoaded && availableAnimations.Count > 0)
+                if (alwaysPlayInSceneView && !isPlaying && graphManager != null && graphManager.DataLoaded && PlaybackList.Count > 0)
                 {
                     isPlaying = true;
                     continuousAnimationRunning = true;
@@ -360,7 +401,7 @@ namespace BranchingLEDAnimator.Core
         {
             Debug.Log($"🔍 Animation System Debug:");
             Debug.Log($"  - Is Playing: {isPlaying}");
-            Debug.Log($"  - Animation Count: {availableAnimations.Count}");
+            Debug.Log($"  - Animation Count: {AnimationCount} (sources: {availableAnimations.Count})");
             Debug.Log($"  - Current Index: {currentAnimationIndex}");
             Debug.Log($"  - Current Animation: {CurrentAnimationName}");
             Debug.Log($"  - Graph Manager: {(graphManager != null ? "✅" : "❌")}");
@@ -447,20 +488,10 @@ namespace BranchingLEDAnimator.Core
                 return;
             }
             
-            // Load default animations if none assigned (single-graph only)
+            // Load default animations if none assigned
             if (availableAnimations.Count == 0)
             {
-                var allGraphs = FindObjectsByType<LEDGraphManager>(FindObjectsSortMode.None);
-                if (allGraphs.Length <= 1)
-                {
-                    LoadDefaultAnimations();
-                }
-                else
-                {
-                    Debug.LogWarning($"[{gameObject.name}] No animations assigned. " +
-                        "In the gallery scene, assign animations manually via the Inspector's " +
-                        "'Available Animations' list on each sculpture's LEDAnimationSystem.");
-                }
+                LoadDefaultAnimations();
             }
             
             // Validate animation index
@@ -470,22 +501,19 @@ namespace BranchingLEDAnimator.Core
             ResetAnimation();
             lastAnimationIndex = currentAnimationIndex;
             
-            // Subscribe to geometry updates to auto-start animation
-            LEDVisualizationEvents.OnGeometryUpdated -= OnGeometryLoaded; // Prevent double subscription
-            LEDVisualizationEvents.OnGeometryUpdated += OnGeometryLoaded;
+            EnsureGeometrySubscription();
             
-            // Assign OwnerGraphManager so each animation filters events to its own graph
-            AssignOwnerToAnimations();
+            // Clone animation SOs so each LEDAnimationSystem instance has independent runtime state
+            CloneAnimationAssets();
             
             if (showDebugInfo)
             {
-                string activeName = CurrentAnimation != null ? CurrentAnimation.name : "None";
-                Debug.Log($"✓ [{gameObject.name}] LEDAnimationSystem initialized — " +
-                          $"playing '{activeName}' (index {currentAnimationIndex} of {availableAnimations.Count})");
+                Debug.Log($"✓ LEDAnimationSystem initialized with {PlaybackList.Count} animations");
+                Debug.Log($"✓ Graph Manager found: {(graphManager != null ? "✅" : "❌")}");
             }
             
             // If geometry is already loaded (event fired before we subscribed), auto-start now
-            if (autoPlayOnStart && !isPlaying && graphManager.DataLoaded && availableAnimations.Count > 0)
+            if (autoPlayOnStart && !isPlaying && graphManager.DataLoaded && PlaybackList.Count > 0)
             {
                 StartContinuousAnimationInternal();
                 
@@ -496,52 +524,79 @@ namespace BranchingLEDAnimator.Core
             }
         }
         
+        void EnsureGeometrySubscription()
+        {
+            LEDVisualizationEvents.OnGeometryUpdated -= OnGeometryLoaded;
+            LEDVisualizationEvents.OnGeometryUpdated += OnGeometryLoaded;
+        }
+        
         void OnDestroy()
         {
             LEDVisualizationEvents.OnGeometryUpdated -= OnGeometryLoaded;
+            DestroyAnimationClones();
         }
         
-        /// <summary>
-        /// Remove stale runtime clone references from the serialized animation list.
-        /// Called in Edit mode to fix corrupted scene data from previous cloning.
-        /// </summary>
-        private void SanitizeAnimationList()
+#if UNITY_EDITOR
+        bool PlaylistIdentityChanged()
         {
-            #if UNITY_EDITOR
-            int removed = 0;
-            for (int i = availableAnimations.Count - 1; i >= 0; i--)
+            if (playlistIdentity == null || playlistIdentity.Length != availableAnimations.Count)
+                return true;
+            for (int i = 0; i < availableAnimations.Count; i++)
             {
-                if (availableAnimations[i] == null || !UnityEditor.AssetDatabase.Contains(availableAnimations[i]))
-                {
-                    availableAnimations.RemoveAt(i);
-                    removed++;
-                }
+                int id = availableAnimations[i] != null ? availableAnimations[i].GetInstanceID() : 0;
+                if (id != playlistIdentity[i])
+                    return true;
             }
-            if (removed > 0)
-            {
-                Debug.LogWarning($"[{gameObject.name}] Removed {removed} stale animation reference(s). " +
-                    $"{availableAnimations.Count} valid animation(s) remain. " +
-                    (availableAnimations.Count == 0
-                        ? "Please reassign animations in the Inspector."
-                        : ""));
-            }
-            #endif
+            return false;
         }
         
-        private void AssignOwnerToAnimations()
+        void SnapshotPlaylistIdentity()
         {
-            foreach (var anim in availableAnimations)
+            playlistIdentity = new int[availableAnimations.Count];
+            for (int i = 0; i < availableAnimations.Count; i++)
+                playlistIdentity[i] = availableAnimations[i] != null ? availableAnimations[i].GetInstanceID() : 0;
+        }
+        
+        void TryRebuildRuntimeClonesForEditor()
+        {
+            if (graphManager == null)
+                graphManager = GetComponent<LEDGraphManager>();
+            if (graphManager == null)
+                return;
+            CloneAnimationAssets();
+        }
+#endif
+        
+        private void CloneAnimationAssets()
+        {
+            DestroyAnimationClones();
+
+            for (int i = 0; i < availableAnimations.Count; i++)
             {
-                if (anim == null) continue;
-                
-                if (anim.OwnerGraphManager != null && anim.OwnerGraphManager != graphManager)
+                var src = availableAnimations[i];
+                if (src == null)
                 {
-                    if (showDebugInfo)
-                        Debug.LogWarning($"Animation '{anim.name}' is shared by multiple graphs. " +
-                                         "Duplicate the asset (Ctrl+D) for independent multi-graph control.");
+                    runtimeAnimationClones.Add(null);
+                    continue;
                 }
-                anim.OwnerGraphManager = graphManager;
+                var clone = Instantiate(src);
+                clone.name = src.name + " (Clone)";
+                clone.OwnerGraphManager = graphManager;
+                runtimeAnimationClones.Add(clone);
             }
+#if UNITY_EDITOR
+            SnapshotPlaylistIdentity();
+#endif
+        }
+        
+        private void DestroyAnimationClones()
+        {
+            foreach (var clone in runtimeAnimationClones)
+            {
+                if (clone != null)
+                    DestroyImmediate(clone);
+            }
+            runtimeAnimationClones.Clear();
         }
         
         /// <summary>
@@ -554,7 +609,7 @@ namespace BranchingLEDAnimator.Core
         {
             if (source != graphManager) return;
 
-            if (autoPlayOnStart && !isPlaying && availableAnimations.Count > 0)
+            if (autoPlayOnStart && !isPlaying && PlaybackList.Count > 0)
             {
                 // Start continuous animation automatically
                 StartContinuousAnimationInternal();
@@ -575,11 +630,36 @@ namespace BranchingLEDAnimator.Core
             }
         }
         
+#if UNITY_EDITOR
+        /// <summary>
+        /// Copies serialized fields from playlist assets into runtime clones. Inspector edits target the
+        /// assets in <see cref="availableAnimations"/>; playback runs on <see cref="runtimeAnimationClones"/>.
+        /// Non-serialized runtime state on the clone (e.g. BallSettle ball lists) is preserved.
+        /// </summary>
+        private void SyncPlaybackSerializedStateFromSources()
+        {
+            if (runtimeAnimationClones.Count == 0) return;
+            int n = Mathf.Min(availableAnimations.Count, runtimeAnimationClones.Count);
+            for (int i = 0; i < n; i++)
+            {
+                var src = availableAnimations[i];
+                var rt = runtimeAnimationClones[i];
+                if (src == null || rt == null) continue;
+                if (ReferenceEquals(src, rt)) continue;
+                UnityEditor.EditorUtility.CopySerialized(src, rt);
+                rt.OwnerGraphManager = graphManager;
+            }
+        }
+#endif
+        
         /// <summary>
         /// Unified animation update method (works in both Edit and Play mode)
         /// </summary>
         void AnimationUpdate()
         {
+#if UNITY_EDITOR
+            SyncPlaybackSerializedStateFromSources();
+#endif
             // Check for animation change
             if (lastAnimationIndex != currentAnimationIndex)
             {
@@ -844,7 +924,7 @@ namespace BranchingLEDAnimator.Core
         /// </summary>
         public void SetAnimation(int index)
         {
-            if (index >= 0 && index < availableAnimations.Count && index != currentAnimationIndex)
+            if (index >= 0 && index < PlaybackList.Count && index != currentAnimationIndex)
             {
                 currentAnimationIndex = index;
                 // Change will be handled in Update()
@@ -856,9 +936,9 @@ namespace BranchingLEDAnimator.Core
         /// </summary>
         public void SetAnimation(string animationName)
         {
-            for (int i = 0; i < availableAnimations.Count; i++)
+            for (int i = 0; i < PlaybackList.Count; i++)
             {
-                if (availableAnimations[i].animationName == animationName)
+                if (PlaybackList[i] != null && PlaybackList[i].animationName == animationName)
                 {
                     SetAnimation(i);
                     return;
@@ -876,13 +956,13 @@ namespace BranchingLEDAnimator.Core
         /// </summary>
         public string[] GetAnimationNames()
         {
-            string[] names = new string[availableAnimations.Count];
-            for (int i = 0; i < availableAnimations.Count; i++)
+            string[] names = new string[PlaybackList.Count];
+            for (int i = 0; i < PlaybackList.Count; i++)
             {
-                if (availableAnimations[i] != null)
+                if (PlaybackList[i] != null)
                 {
                     // Use the asset name (what shows in Inspector) rather than the animationName field
-                    names[i] = availableAnimations[i].name;
+                    names[i] = PlaybackList[i].name;
                 }
                 else
                 {
@@ -915,6 +995,11 @@ namespace BranchingLEDAnimator.Core
             }
             
             ValidateAnimationIndex();
+            
+            if (graphManager == null)
+                graphManager = GetComponent<LEDGraphManager>();
+            if (graphManager != null)
+                CloneAnimationAssets();
             
             if (showDebugInfo)
             {
@@ -975,8 +1060,8 @@ namespace BranchingLEDAnimator.Core
         private void OnAnimationChanged()
         {
             // Get the previous animation before changing
-            LEDAnimationType previousAnimation = lastAnimationIndex >= 0 && lastAnimationIndex < availableAnimations.Count 
-                ? availableAnimations[lastAnimationIndex] 
+            LEDAnimationType previousAnimation = lastAnimationIndex >= 0 && lastAnimationIndex < PlaybackList.Count 
+                ? PlaybackList[lastAnimationIndex] 
                 : null;
             
             // Clean up audio from previous animation if it has a CleanupAudio method

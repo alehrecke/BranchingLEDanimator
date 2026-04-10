@@ -116,7 +116,7 @@ namespace BranchingLEDAnimator.Audio
             if (animationSystem != null)
             {
                 // Find the animation in the available animations list
-                int animationIndex = animationSystem.availableAnimations.IndexOf(animation);
+                int animationIndex = animationSystem.IndexOfAnimation(animation);
                 if (animationIndex >= 0)
                 {
                     animationSystem.currentAnimationIndex = animationIndex;
