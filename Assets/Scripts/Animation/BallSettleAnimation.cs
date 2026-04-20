@@ -77,8 +77,84 @@ namespace BranchingLEDAnimator.Animation
         
         [Header("Audio")]
         [SerializeField] private bool enableAudio = true;
+        public enum AudioMode { ProceduralTones, CustomClips }
+        [Tooltip("ProceduralTones generates chord tones assigned per ball. CustomClips cycles through the list below.")]
+        [SerializeField] private AudioMode audioMode = AudioMode.ProceduralTones;
+        [Tooltip("Audio clips cycled round-robin when AudioMode is CustomClips.")]
+        [SerializeField] private List<AudioClip> customClips = new List<AudioClip>();
         [Range(0f, 1f)]
         [SerializeField] private float toneVolume = 0.3f;
+        
+        public enum NoteName { C, CSharp, D, DSharp, E, F, FSharp, G, GSharp, A, ASharp, B }
+        public enum ChordType { Major, Minor, Major7, Minor7, Dom7, Dim7, Aug, Sus4 }
+        
+        [Header("Chord Settings (Procedural Mode)")]
+        [Tooltip("Root note of the chord")]
+        [SerializeField] private NoteName rootNote = NoteName.C;
+        [Tooltip("Octave of the root note")]
+        [Range(2, 6)]
+        [SerializeField] private int rootOctave = 4;
+        [Tooltip("Chord quality")]
+        [SerializeField] private ChordType chordType = ChordType.Major7;
+        [Tooltip("Randomly shift each ball's note up or down by octaves")]
+        [SerializeField] private bool enableOctaveSpread = true;
+        [Tooltip("How many octaves above/below the base octave a ball's note can be shifted")]
+        [Range(1, 3)]
+        [SerializeField] private int octaveRange = 1;
+        
+        [Header("Tone Envelope (Procedural Mode)")]
+        [Tooltip("Duration of the generated tone clip in seconds")]
+        [Range(0.1f, 2f)]
+        [SerializeField] private float toneDuration = 0.4f;
+        [Tooltip("Time in seconds for the tone to reach peak amplitude")]
+        [Range(0f, 0.2f)]
+        [SerializeField] private float toneAttack = 0.005f;
+        [Tooltip("Time in seconds for the tone to fall from peak to sustain level")]
+        [Range(0.01f, 1f)]
+        [SerializeField] private float toneDecay = 0.25f;
+        [Tooltip("Amplitude level held after decay (0 = pure bell, 1 = organ-like)")]
+        [Range(0f, 1f)]
+        [SerializeField] private float toneSustain = 0f;
+        
+        [Header("Tone Harmonics (Procedural Mode)")]
+        [Tooltip("Amplitude of the fundamental frequency")]
+        [Range(0f, 1f)]
+        [SerializeField] private float harmonic1 = 0.5f;
+        [Tooltip("Amplitude of the 2nd harmonic (octave above)")]
+        [Range(0f, 1f)]
+        [SerializeField] private float harmonic2 = 0.25f;
+        [Tooltip("Amplitude of the 3rd harmonic")]
+        [Range(0f, 1f)]
+        [SerializeField] private float harmonic3 = 0.1f;
+        
+        [Header("Junction Tone")]
+        [Tooltip("Play a softer tone when a ball passes through a junction node")]
+        [SerializeField] private bool enableJunctionTones = true;
+        [Tooltip("Volume multiplier for junction pass-through tones")]
+        [Range(0f, 1f)]
+        [SerializeField] private float junctionToneVolume = 0.3f;
+        
+        [Header("Touch Feedback")]
+        [Tooltip("Flash a color at the touched endpoint for visual feedback")]
+        [SerializeField] private bool enableTouchFeedback = true;
+        [Tooltip("Color shown when touching an endpoint with no balls (miss)")]
+        [SerializeField] private Color missFlashColor = new Color(1f, 0.15f, 0.1f, 1f);
+        [Tooltip("Color shown when touching an endpoint with balls (hit)")]
+        [SerializeField] private Color hitFlashColor = new Color(1f, 0.9f, 0.6f, 1f);
+        [Tooltip("How many nodes the flash glow extends from the endpoint")]
+        [Range(1f, 50f)]
+        [SerializeField] private float flashRadius = 6f;
+        [Tooltip("How quickly the flash fades out in seconds")]
+        [Range(0.1f, 2f)]
+        [SerializeField] private float flashDuration = 0.4f;
+        [Tooltip("Peak brightness of the flash")]
+        [Range(0.5f, 3f)]
+        [SerializeField] private float flashIntensity = 1.5f;
+        [Tooltip("Custom audio clip to play when an empty endpoint is touched (optional)")]
+        [SerializeField] private AudioClip missAudioClip;
+        [Tooltip("Volume of the miss audio clip")]
+        [Range(0f, 1f)]
+        [SerializeField] private float missAudioVolume = 0.3f;
         
         public enum InputMode { PlayerController, MouseClick, None }
         
@@ -93,12 +169,14 @@ namespace BranchingLEDAnimator.Animation
             public float lastProgress;
             public int targetEndpoint;
             public float spawnTime;
-            public float startDelay; // Delay before ball starts moving
+            public float startDelay;
             public float hue;
             public int ballIndex;
-            public int targetStackPosition; // Where this ball will land in the stack
+            public int targetStackPosition;
+            public float frequency;
+            public int lastPathNodeIndex;
             
-            public TravelingBall(List<int> nodePath, float time, float assignedHue, int index, float delay = 0f)
+            public TravelingBall(List<int> nodePath, float time, float assignedHue, int index, float freq, float delay = 0f)
             {
                 path = nodePath;
                 progress = 0f;
@@ -109,6 +187,8 @@ namespace BranchingLEDAnimator.Animation
                 hue = assignedHue;
                 ballIndex = index;
                 targetStackPosition = 0;
+                frequency = freq;
+                lastPathNodeIndex = 0;
             }
         }
         
@@ -118,40 +198,60 @@ namespace BranchingLEDAnimator.Animation
             public float hue;
             public int ballIndex;
             public float settleTime;
-            public int stackPosition; // 0 = bottom, 1, 2... = stacked on top
+            public int stackPosition;
+            public float frequency;
             
-            public SettledBall(int endpoint, float assignedHue, int index, float time)
+            public SettledBall(int endpoint, float assignedHue, int index, float time, float freq)
             {
                 endpointIndex = endpoint;
                 hue = assignedHue;
                 ballIndex = index;
                 settleTime = time;
                 stackPosition = 0;
+                frequency = freq;
             }
+        }
+        
+        private class TouchFlash
+        {
+            public int endpointIndex;
+            public float startTime;
+            public Color color;
         }
         
         // State
         private List<int> endpointNodes = new List<int>();
+        private HashSet<int> junctionNodes = new HashSet<int>();
         private Dictionary<int, List<int>> adjacency = new Dictionary<int, List<int>>();
-        private Dictionary<int, float> endpointFrequencies = new Dictionary<int, float>();
         private List<Vector3> cachedPositions;
         private float minHeight, maxHeight;
-        private int topNode = -1; // Highest point in the graph (spawn point)
+        private int topNode = -1;
         private bool analysisComplete = false;
         
         private List<TravelingBall> travelingBalls = new List<TravelingBall>();
         private List<SettledBall> settledBalls = new List<SettledBall>();
+        private List<TouchFlash> activeFlashes = new List<TouchFlash>();
         private float lastRealTime = 0f;
         private int nextBallIndex = 0;
-        private int lastTotalBalls = 0; // Track changes to totalBalls
+        private int lastTotalBalls = 0;
         private bool initialized = false;
         
         // Audio
         private GameObject audioContainer;
         private AudioSource toneSource;
-        private Dictionary<int, AudioClip> toneClips = new Dictionary<int, AudioClip>();
+        private Dictionary<float, AudioClip> toneClips = new Dictionary<float, AudioClip>();
+        private float[] chordFrequencies;
         private int sampleRate = 44100;
         private bool audioInitialized = false;
+        private int customClipIndex = 0;
+        
+        private struct ScheduledTone
+        {
+            public float frequency;
+            public float playTime;
+            public float volume;
+        }
+        private List<ScheduledTone> scheduledTones = new List<ScheduledTone>();
         
         // Input
         private Queue<int> pendingTouches = new Queue<int>();
@@ -172,8 +272,11 @@ namespace BranchingLEDAnimator.Animation
             ledMappingInitialized = false;
             initialized = false;
             analysisComplete = false;
+            audioInitialized = false;
             settledBalls.Clear();
             travelingBalls.Clear();
+            activeFlashes.Clear();
+            scheduledTones.Clear();
             nextBallIndex = 0;
             lastTotalBalls = 0;
             topNode = -1;
@@ -213,20 +316,14 @@ namespace BranchingLEDAnimator.Animation
             float deltaTime = Mathf.Clamp(currentTime - lastRealTime, 0.001f, 0.1f);
             lastRealTime = currentTime;
             
-            // Check for ball count changes
             CheckBallCountChange(currentTime);
-            
-            // Update traveling balls
             UpdateTravelingBalls(deltaTime, currentTime);
-            
-            // Process any pending input
             ProcessInput();
+            DrainScheduledTones(currentTime);
             
-            // Render settled balls
             RenderSettledBallsLED(colors, mappedGraph, currentTime);
-            
-            // Render traveling balls
             RenderTravelingBallsLED(colors, mappedGraph);
+            RenderTouchFlashes(colors, currentTime);
             
             return colors;
         }
@@ -305,16 +402,15 @@ namespace BranchingLEDAnimator.Animation
                 Initialize(currentTime, nodePositions, edgeConnections);
             }
             
-            // Check for ball count changes
             CheckBallCountChange(currentTime);
             
             UpdateTravelingBalls(deltaTime, currentTime);
             ProcessInput();
+            DrainScheduledTones(currentTime);
             
-            // Render
             RenderSettledBalls(colors, nodePositions, currentTime);
             RenderTravelingBalls(colors, nodePositions);
-            
+            RenderTouchFlashes(colors, currentTime);
             
             return colors;
         }
@@ -363,27 +459,22 @@ namespace BranchingLEDAnimator.Animation
             
             for (int i = 0; i < count; i++)
             {
-                // Pick a random endpoint target
                 int targetEndpoint = shuffledEndpoints[i % shuffledEndpoints.Count];
                 
-                // Use golden ratio for even hue distribution regardless of spawn order
-                // This ensures colors are spread across the spectrum even when adding balls incrementally
                 float hue = ((existingBallCount + i) * 0.618033988749895f) % 1f;
+                float freq = PickRandomChordFrequency();
                 
-                // Find path from top node to target endpoint
                 var path = FindPath(topNode, targetEndpoint);
                 if (path == null || path.Count < 2)
                 {
-                    // Fallback: just settle at the endpoint
-                    var ball = new SettledBall(targetEndpoint, hue, nextBallIndex, time);
+                    var ball = new SettledBall(targetEndpoint, hue, nextBallIndex, time, freq);
                     settledBalls.Add(ball);
                     nextBallIndex++;
                     continue;
                 }
                 
-                // Create traveling ball with staggered start delay
-                float delay = i * 0.15f; // Stagger spawns
-                var traveling = new TravelingBall(path, time, hue, nextBallIndex, delay);
+                float delay = i * 0.15f;
+                var traveling = new TravelingBall(path, time, hue, nextBallIndex, freq, delay);
                 
                 // Calculate target stack position
                 int existingAtTarget = settledBalls.Count(b => b.endpointIndex == targetEndpoint);
@@ -476,32 +567,98 @@ namespace BranchingLEDAnimator.Animation
                 }
             }
             
-            // Find endpoints (nodes with only one connection)
             endpointNodes.Clear();
+            junctionNodes.Clear();
             foreach (var kvp in adjacency)
             {
                 if (kvp.Value.Count == 1)
-                {
                     endpointNodes.Add(kvp.Key);
-                }
+                else if (kvp.Value.Count > 2)
+                    junctionNodes.Add(kvp.Key);
             }
             
-            // Assign frequencies to endpoints
-            AssignEndpointFrequencies();
+            BuildChordFrequencies();
             
             analysisComplete = true;
         }
         
-        private void AssignEndpointFrequencies()
+        private static int[] GetChordIntervals(ChordType type)
         {
-            endpointFrequencies.Clear();
-            float[] pentatonic = { 261.63f, 293.66f, 329.63f, 392.00f, 440.00f, 523.25f, 587.33f, 659.25f };
-            
-            var sortedEndpoints = endpointNodes.OrderBy(e => cachedPositions[e].y).ToList();
-            for (int i = 0; i < sortedEndpoints.Count; i++)
+            switch (type)
             {
-                endpointFrequencies[sortedEndpoints[i]] = pentatonic[i % pentatonic.Length];
+                case ChordType.Major:  return new[] { 0, 4, 7, 12 };
+                case ChordType.Minor:  return new[] { 0, 3, 7, 12 };
+                case ChordType.Major7: return new[] { 0, 4, 7, 11 };
+                case ChordType.Minor7: return new[] { 0, 3, 7, 10 };
+                case ChordType.Dom7:   return new[] { 0, 4, 7, 10 };
+                case ChordType.Dim7:   return new[] { 0, 3, 6, 9 };
+                case ChordType.Aug:    return new[] { 0, 4, 8, 12 };
+                case ChordType.Sus4:   return new[] { 0, 5, 7, 12 };
+                default:               return new[] { 0, 4, 7, 11 };
             }
+        }
+        
+        private static float NoteToFrequency(int noteIndex, int octave)
+        {
+            int midiNote = (octave + 1) * 12 + noteIndex;
+            return 440f * Mathf.Pow(2f, (midiNote - 69) / 12f);
+        }
+        
+        private void BuildChordFrequencies()
+        {
+            int[] intervals = GetChordIntervals(chordType);
+            int rootNoteIndex = (int)rootNote;
+            
+            var freqSet = new HashSet<float>();
+            var baseFreqs = new float[4];
+            
+            for (int i = 0; i < 4; i++)
+            {
+                int semitone = rootNoteIndex + intervals[i];
+                int octave = rootOctave + semitone / 12;
+                int note = semitone % 12;
+                baseFreqs[i] = NoteToFrequency(note, octave);
+                freqSet.Add(baseFreqs[i]);
+            }
+            
+            chordFrequencies = baseFreqs;
+            
+            if (enableOctaveSpread)
+            {
+                foreach (float f in baseFreqs)
+                {
+                    for (int oct = -octaveRange; oct <= octaveRange; oct++)
+                    {
+                        if (oct == 0) continue;
+                        freqSet.Add(f * Mathf.Pow(2f, oct));
+                    }
+                }
+            }
+            
+            toneClips.Clear();
+            foreach (float freq in freqSet)
+            {
+                if (!toneClips.ContainsKey(freq))
+                {
+                    toneClips[freq] = GenerateToneClip(freq, toneDuration);
+                }
+            }
+        }
+        
+        private float PickRandomChordFrequency()
+        {
+            if (chordFrequencies == null || chordFrequencies.Length == 0)
+                return 261.63f;
+            
+            float baseFreq = chordFrequencies[Random.Range(0, chordFrequencies.Length)];
+            
+            if (enableOctaveSpread)
+            {
+                int octShift = Random.Range(-octaveRange, octaveRange + 1);
+                baseFreq *= Mathf.Pow(2f, octShift);
+            }
+            
+            return baseFreq;
         }
         
         private void SubscribeToInput()
@@ -573,13 +730,21 @@ namespace BranchingLEDAnimator.Animation
             
             if (ballsHere.Count > 0)
             {
-                // Disperse all balls at this endpoint with stagger delay
+                if (enableTouchFeedback)
+                {
+                    activeFlashes.Add(new TouchFlash
+                    {
+                        endpointIndex = endpointIndex,
+                        startTime = currentTime,
+                        color = hitFlashColor
+                    });
+                }
+                
                 int dispatchIndex = 0;
                 foreach (var ball in ballsHere)
                 {
                     settledBalls.Remove(ball);
                     
-                    // Pick a random OTHER endpoint
                     var otherEndpoints = endpointNodes.Where(e => e != endpointIndex).ToList();
                     if (otherEndpoints.Count > 0)
                     {
@@ -588,19 +753,15 @@ namespace BranchingLEDAnimator.Animation
                         
                         if (path.Count >= 2)
                         {
-                            // Add stagger delay based on dispatch order
                             float delay = dispatchIndex * dispatchStagger;
-                            var traveling = new TravelingBall(path, currentTime, ball.hue, ball.ballIndex, delay);
+                            var traveling = new TravelingBall(path, currentTime, ball.hue, ball.ballIndex, ball.frequency, delay);
                             
-                            // Start the ball from where it was sitting in the stack
-                            // Stack position 0 = at endpoint (progress 0)
-                            // Higher stack positions = further along the path
                             float pathLength = path.Count - 1;
                             float startOffset = ball.stackPosition * pulseWidth / pathLength;
                             traveling.progress = Mathf.Clamp01(startOffset);
                             traveling.lastProgress = traveling.progress;
+                            traveling.lastPathNodeIndex = Mathf.FloorToInt(traveling.progress * pathLength);
                             
-                            // Calculate where this ball will land in the target's stack
                             int existingAtTarget = settledBalls.Count(b => b.endpointIndex == target);
                             int incomingToTarget = travelingBalls.Count(b => b.targetEndpoint == target);
                             traveling.targetStackPosition = existingAtTarget + incomingToTarget;
@@ -608,16 +769,31 @@ namespace BranchingLEDAnimator.Animation
                             travelingBalls.Add(traveling);
                         }
                     }
+                    
+                    if (enableAudio)
+                    {
+                        ScheduleTone(ball.frequency, currentTime + dispatchIndex * dispatchStagger, 1f);
+                    }
                     dispatchIndex++;
                 }
                 
-                // Play dispersal sound
-                if (enableAudio)
-                {
-                    PlayTone(endpointIndex, ballsHere.Count);
-                }
-                
                 UpdateStackPositions();
+            }
+            else
+            {
+                if (enableTouchFeedback)
+                {
+                    activeFlashes.Add(new TouchFlash
+                    {
+                        endpointIndex = endpointIndex,
+                        startTime = currentTime,
+                        color = missFlashColor
+                    });
+                }
+                if (enableAudio && missAudioClip != null && toneSource != null)
+                {
+                    toneSource.PlayOneShot(missAudioClip, missAudioVolume);
+                }
             }
         }
         
@@ -638,7 +814,21 @@ namespace BranchingLEDAnimator.Animation
                 float progressSpeed = ballSpeed / (pathLength * 10f);
                 ball.progress += progressSpeed * deltaTime * speed;
                 
-                // Recalculate target stack position (other balls may have arrived)
+                if (enableAudio && enableJunctionTones)
+                {
+                    int currentNodeIdx = Mathf.FloorToInt(ball.progress * pathLength);
+                    currentNodeIdx = Mathf.Clamp(currentNodeIdx, 0, ball.path.Count - 1);
+                    
+                    for (int ni = ball.lastPathNodeIndex + 1; ni <= currentNodeIdx; ni++)
+                    {
+                        if (ni >= 0 && ni < ball.path.Count && junctionNodes.Contains(ball.path[ni]))
+                        {
+                            PlayBallTone(ball.frequency, junctionToneVolume);
+                        }
+                    }
+                    ball.lastPathNodeIndex = currentNodeIdx;
+                }
+                
                 int currentStackAtTarget = settledBalls.Count(b => b.endpointIndex == ball.targetEndpoint);
                 int incomingBeforeMe = travelingBalls.Count(b => 
                     b.targetEndpoint == ball.targetEndpoint && 
@@ -646,28 +836,22 @@ namespace BranchingLEDAnimator.Animation
                     b.progress > ball.progress);
                 ball.targetStackPosition = currentStackAtTarget + incomingBeforeMe;
                 
-                // Calculate arrival threshold - ball stops at its stack position, not at endpoint
-                // Stack position 0 = at endpoint (progress 1.0)
-                // Stack position 1 = one pulseWidth back, etc.
                 float stackOffset = ball.targetStackPosition * pulseWidth / pathLength;
                 float arrivalThreshold = 1f - stackOffset;
                 
-                // Ball has arrived at its stack position
                 if (ball.progress >= arrivalThreshold)
                 {
-                    ball.progress = arrivalThreshold; // Clamp to exact position
+                    ball.progress = arrivalThreshold;
                     
-                    // Settle at destination
-                    var settled = new SettledBall(ball.targetEndpoint, ball.hue, ball.ballIndex, currentTime);
+                    var settled = new SettledBall(ball.targetEndpoint, ball.hue, ball.ballIndex, currentTime, ball.frequency);
                     settledBalls.Add(settled);
                     travelingBalls.RemoveAt(i);
                     
                     UpdateStackPositions();
                     
-                    // Soft arrival tone
                     if (enableAudio)
                     {
-                        PlayTone(ball.targetEndpoint, 1, 0.5f);
+                        PlayBallTone(ball.frequency, 0.5f);
                     }
                 }
                 else
@@ -870,6 +1054,54 @@ namespace BranchingLEDAnimator.Animation
                             colors[nodeIndex] = BlendMax(colors[nodeIndex], ballColor, intensity);
                         }
                     }
+                }
+            }
+        }
+        
+        private void RenderTouchFlashes(Color[] colors, float currentTime)
+        {
+            for (int f = activeFlashes.Count - 1; f >= 0; f--)
+            {
+                var flash = activeFlashes[f];
+                float elapsed = currentTime - flash.startTime;
+                
+                if (elapsed >= flashDuration)
+                {
+                    activeFlashes.RemoveAt(f);
+                    continue;
+                }
+                
+                float fadeT = elapsed / flashDuration;
+                float intensity = flashIntensity * (1f - fadeT * fadeT);
+                
+                int endpoint = flash.endpointIndex;
+                if (endpoint >= colors.Length || !adjacency.ContainsKey(endpoint)) continue;
+                
+                var pathFromEndpoint = new List<int> { endpoint };
+                int current = endpoint;
+                int prev = -1;
+                int maxDepth = (int)flashRadius + 1;
+                
+                for (int step = 0; step < maxDepth && adjacency.ContainsKey(current); step++)
+                {
+                    var neighbors = adjacency[current].Where(n => n != prev).ToList();
+                    if (neighbors.Count == 0) break;
+                    prev = current;
+                    current = neighbors[0];
+                    pathFromEndpoint.Add(current);
+                    if (adjacency.ContainsKey(current) && adjacency[current].Count > 2) break;
+                }
+                
+                for (int i = 0; i < pathFromEndpoint.Count; i++)
+                {
+                    int nodeIndex = pathFromEndpoint[i];
+                    if (nodeIndex >= colors.Length) continue;
+                    
+                    float distFalloff = 1f - (float)i / flashRadius;
+                    if (distFalloff <= 0f) continue;
+                    
+                    float nodeIntensity = intensity * distFalloff * distFalloff;
+                    colors[nodeIndex] = BlendMax(colors[nodeIndex], flash.color, nodeIntensity);
                 }
             }
         }
@@ -1088,9 +1320,7 @@ namespace BranchingLEDAnimator.Animation
             if (audioContainer == null)
             {
                 audioContainer = new GameObject("BallSettleAudio");
-                audioContainer.hideFlags = HideFlags.HideAndDontSave;
-                // Never call DontDestroyOnLoad here: Initialize/SetupAudio runs from
-                // LEDAnimationSystem.EditorUpdate in edit-mode scene preview, which throws.
+                audioContainer.hideFlags = HideFlags.DontSave;
             }
             
             if (toneSource == null)
@@ -1099,15 +1329,12 @@ namespace BranchingLEDAnimator.Animation
                 toneSource.playOnAwake = false;
             }
             
-            // Pre-generate tone clips
-            foreach (var kvp in endpointFrequencies)
+            if (audioMode == AudioMode.ProceduralTones)
             {
-                if (!toneClips.ContainsKey(kvp.Key))
-                {
-                    toneClips[kvp.Key] = GenerateToneClip(kvp.Value, 0.4f);
-                }
+                BuildChordFrequencies();
             }
-            
+
+            customClipIndex = 0;
             audioInitialized = true;
         }
         
@@ -1116,15 +1343,32 @@ namespace BranchingLEDAnimator.Animation
             int samples = (int)(sampleRate * duration);
             float[] data = new float[samples];
             
+            float attackSamples = toneAttack * sampleRate;
+            float decaySamples = toneDecay * sampleRate;
+            
             for (int i = 0; i < samples; i++)
             {
                 float t = (float)i / sampleRate;
-                float envelope = Mathf.Exp(-t * 4f); // Quick decay
                 
-                // Soft bell-like tone
-                float sample = Mathf.Sin(2f * Mathf.PI * frequency * t) * 0.5f;
-                sample += Mathf.Sin(4f * Mathf.PI * frequency * t) * 0.25f;
-                sample += Mathf.Sin(6f * Mathf.PI * frequency * t) * 0.1f;
+                float envelope;
+                if (i < attackSamples)
+                {
+                    envelope = (attackSamples > 0) ? (float)i / attackSamples : 1f;
+                }
+                else if (i < attackSamples + decaySamples)
+                {
+                    float decayProgress = (i - attackSamples) / Mathf.Max(1f, decaySamples);
+                    envelope = Mathf.Lerp(1f, toneSustain, decayProgress);
+                }
+                else
+                {
+                    float releaseT = t - (toneAttack + toneDecay);
+                    envelope = toneSustain * Mathf.Exp(-releaseT * 3f);
+                }
+                
+                float sample = Mathf.Sin(2f * Mathf.PI * frequency * t) * harmonic1;
+                sample += Mathf.Sin(4f * Mathf.PI * frequency * t) * harmonic2;
+                sample += Mathf.Sin(6f * Mathf.PI * frequency * t) * harmonic3;
                 
                 data[i] = sample * envelope;
             }
@@ -1134,19 +1378,48 @@ namespace BranchingLEDAnimator.Animation
             return clip;
         }
         
-        private void PlayTone(int endpointIndex, int ballCount, float volumeMultiplier = 1f)
+        private void PlayBallTone(float frequency, float volumeMultiplier = 1f)
         {
             if (!audioInitialized || toneSource == null) return;
-            
-            if (toneClips.TryGetValue(endpointIndex, out AudioClip clip))
+
+            if (audioMode == AudioMode.CustomClips)
             {
-                // Play multiple times for stacked balls (with slight pitch variation)
-                for (int i = 0; i < Mathf.Min(ballCount, 3); i++)
+                if (customClips == null || customClips.Count == 0) return;
+                AudioClip clip = customClips[customClipIndex % customClips.Count];
+                customClipIndex++;
+                if (clip == null) return;
+                toneSource.pitch = 1f;
+                toneSource.PlayOneShot(clip, toneVolume * volumeMultiplier);
+            }
+            else
+            {
+                if (toneClips.TryGetValue(frequency, out AudioClip clip))
                 {
-                    toneSource.pitch = 1f + i * 0.1f;
+                    toneSource.pitch = 1f;
                     toneSource.PlayOneShot(clip, toneVolume * volumeMultiplier);
                 }
-                toneSource.pitch = 1f;
+            }
+        }
+        
+        private void ScheduleTone(float frequency, float playTime, float volume)
+        {
+            scheduledTones.Add(new ScheduledTone
+            {
+                frequency = frequency,
+                playTime = playTime,
+                volume = volume
+            });
+        }
+        
+        private void DrainScheduledTones(float currentTime)
+        {
+            for (int i = scheduledTones.Count - 1; i >= 0; i--)
+            {
+                if (currentTime >= scheduledTones[i].playTime)
+                {
+                    PlayBallTone(scheduledTones[i].frequency, scheduledTones[i].volume);
+                    scheduledTones.RemoveAt(i);
+                }
             }
         }
         
@@ -1202,7 +1475,8 @@ namespace BranchingLEDAnimator.Animation
             if (atEndpoint >= 0)
             {
                 float hue = (float)nextBallIndex / Mathf.Max(1, totalBalls);
-                var ball = new SettledBall(atEndpoint, hue, nextBallIndex, Time.realtimeSinceStartup);
+                float freq = PickRandomChordFrequency();
+                var ball = new SettledBall(atEndpoint, hue, nextBallIndex, Time.realtimeSinceStartup, freq);
                 settledBalls.Add(ball);
                 nextBallIndex++;
                 UpdateStackPositions();
@@ -1237,6 +1511,8 @@ namespace BranchingLEDAnimator.Animation
                 audioContainer = null;
             }
             
+            toneClips.Clear();
+            scheduledTones.Clear();
             audioInitialized = false;
         }
         

@@ -23,13 +23,13 @@ MonoBehaviour:
   duration: 13.95
   loop: 1
   ballSpeed: 16.33
-  totalBalls: 16
+  totalBalls: 12
   autoSpawnAtStart: 1
   useRainbowColors: 1
   rainbowSaturation: 1
   rainbowBrightness: 1
   pulseStyle: 0
-  pulseWidth: 6.49
+  pulseWidth: 13.48
   trailLength: 30
   trailIntensity: 1
   pulseShape:
@@ -59,7 +59,39 @@ MonoBehaviour:
   settledIntensity: 1.396
   settledPulse: 1
   settledPulseSpeed: 0.955
-  dispatchStagger: 0.084
+  dispatchStagger: 0.16
   enableAudio: 1
-  toneVolume: 0.3
+  audioMode: 1
+  customClips:
+  - {fileID: 8300000, guid: bf6c74378f4f3c34598571c276625652, type: 3}
+  - {fileID: 8300000, guid: b657bf87172724f489857cd667914bf9, type: 3}
+  - {fileID: 8300000, guid: c70945dbdc3fd404482e949f2fd7af9d, type: 3}
+  - {fileID: 8300000, guid: e326461ae45aa864ea0e0202fa5becfc, type: 3}
+  - {fileID: 8300000, guid: 870d8f05b7829e5419971d9f2cc89840, type: 3}
+  - {fileID: 8300000, guid: 1aad66c939e946b4c9a6bd89b87d3b2c, type: 3}
+  - {fileID: 8300000, guid: e3869f3ec59b7ed4f891d782dd3fd90d, type: 3}
+  - {fileID: 8300000, guid: f4f9121cd092ec2488dce15ee0673cc0, type: 3}
+  toneVolume: 0.176
+  rootNote: 2
+  rootOctave: 4
+  chordType: 3
+  enableOctaveSpread: 1
+  octaveRange: 1
+  toneDuration: 0.85
+  toneAttack: 0.003
+  toneDecay: 0.5
+  toneSustain: 0.05
+  harmonic1: 0.5
+  harmonic2: 0.1
+  harmonic3: 0.08
+  enableJunctionTones: 1
+  junctionToneVolume: 0.3
+  enableTouchFeedback: 1
+  missFlashColor: {r: 1, g: 0.15, b: 0.1, a: 1}
+  hitFlashColor: {r: 1, g: 0.9, b: 0.6, a: 1}
+  flashRadius: 35
+  flashDuration: 1.25
+  flashIntensity: 1.71
+  missAudioClip: {fileID: 8300000, guid: d9f028497b13d394a9c79a0651531050, type: 3}
+  missAudioVolume: 0.51
   inputMode: 0

@@ -19,7 +19,7 @@ namespace BranchingLEDAnimator.Simulation
 
         [Header("Movement")]
         [Tooltip("How fast visitors walk (units/sec)")]
-        [Range(0.5f, 5f)]
+        [Range(0.5f, 50f)]
         [SerializeField] private float walkSpeed = 1.5f;
 
         [Tooltip("Distance at which a visitor can interact with an endpoint")]
@@ -51,6 +51,12 @@ namespace BranchingLEDAnimator.Simulation
         [Range(0f, 1f)]
         [SerializeField] private float lingerRatio = 0.4f;
 
+        [Header("Ground Plane")]
+        [Tooltip("Fraction of sculpture height from the bottom to count an endpoint as ground-touching. " +
+                 "Increase if sculptures have feet that sit above absolute world Y=0.")]
+        [Range(0.01f, 0.4f)]
+        [SerializeField] private float groundSnapThreshold = 0.12f;
+
         [Header("Visualization")]
         [SerializeField] private bool showVisitorGizmos = true;
         [SerializeField] private bool showDebugLog = false;
@@ -66,6 +72,9 @@ namespace BranchingLEDAnimator.Simulation
             public List<int> endpointIndices;
             public List<Vector3> endpointWorldPositions;
             public Vector3 worldCenter;
+            /// <summary>Subset of endpoints whose world Y is within groundSnapThreshold of the scene floor.</summary>
+            public List<int> groundEndpointIndices;
+            public List<Vector3> groundEndpointPositions;
         }
 
         private enum VisitorState { Walking, Lingering, Idle }
@@ -94,6 +103,7 @@ namespace BranchingLEDAnimator.Simulation
         private List<SculptureInfo> sculptures = new List<SculptureInfo>();
         private List<Visitor> visitors = new List<Visitor>();
         private Bounds galleryBounds;
+        private float groundY = 0f;
         private bool initialized = false;
 
         void Start()
@@ -144,7 +154,9 @@ namespace BranchingLEDAnimator.Simulation
                 {
                     graph = gm,
                     endpointIndices = new List<int>(),
-                    endpointWorldPositions = new List<Vector3>()
+                    endpointWorldPositions = new List<Vector3>(),
+                    groundEndpointIndices = new List<int>(),
+                    groundEndpointPositions = new List<Vector3>()
                 };
 
                 var nodes = gm.NodePositions;
@@ -175,6 +187,29 @@ namespace BranchingLEDAnimator.Simulation
                 sculptures.Add(info);
             }
 
+            // Determine the ground Y from the lowest node across all sculptures
+            groundY = overallMin.y;
+            float sculHeight = overallMax.y - overallMin.y;
+            float groundBand = sculHeight * groundSnapThreshold;
+
+            // Second pass: classify ground-touching endpoints for each sculpture
+            for (int si = 0; si < sculptures.Count; si++)
+            {
+                var info = sculptures[si];
+                for (int i = 0; i < info.endpointIndices.Count; i++)
+                {
+                    if (info.endpointWorldPositions[i].y <= groundY + groundBand)
+                    {
+                        info.groundEndpointIndices.Add(info.endpointIndices[i]);
+                        // Snap the navigation point to the ground plane
+                        Vector3 gp = info.endpointWorldPositions[i];
+                        gp.y = groundY;
+                        info.groundEndpointPositions.Add(gp);
+                    }
+                }
+                sculptures[si] = info;
+            }
+
             galleryBounds = new Bounds((overallMin + overallMax) / 2f, overallMax - overallMin);
             float pad = Mathf.Max(galleryBounds.size.x, galleryBounds.size.z) * 0.3f;
             galleryBounds.Expand(new Vector3(pad, 0, pad));
@@ -197,9 +232,11 @@ namespace BranchingLEDAnimator.Simulation
             SpawnVisitors();
             initialized = true;
 
+            int totalGround = sculptures.Sum(s => s.groundEndpointPositions.Count);
             Debug.Log($"🎭 Gallery Audience Simulator: {visitors.Count} visitors, " +
-                      $"{sculptures.Count} sculptures, {sculptures.Sum(s => s.endpointIndices.Count)} total endpoints\n" +
-                      $"   Gallery span: {gallerySpan:F0}, Reach: {reachDistance:F1}, Walk speed: {walkSpeed:F1}");
+                      $"{sculptures.Count} sculptures, {sculptures.Sum(s => s.endpointIndices.Count)} total endpoints " +
+                      $"({totalGround} ground-level)\n" +
+                      $"   Ground Y: {groundY:F2}, Gallery span: {gallerySpan:F0}, Reach: {reachDistance:F1}, Walk speed: {walkSpeed:F1}");
         }
 
         void SpawnVisitors()
@@ -254,17 +291,19 @@ namespace BranchingLEDAnimator.Simulation
                     {
                         float speed = walkSpeed * (visitor.type == VisitorType.Hyperactive ? 1.4f : 1f);
                         visitor.position += dir.normalized * speed * dt;
+                        visitor.position.y = groundY;
                     }
                     break;
 
                 case VisitorState.Lingering:
                     visitor.stateTimer -= dt;
-                    // Slight drift while lingering
+                    // Slight drift while lingering (ground plane only)
                     visitor.position += new Vector3(
                         Mathf.Sin(Time.time * 0.5f + visitor.GetHashCode()) * 0.2f * dt,
                         0,
                         Mathf.Cos(Time.time * 0.7f + visitor.GetHashCode()) * 0.2f * dt
                     );
+                    visitor.position.y = groundY;
 
                     if (visitor.stateTimer <= 0f)
                     {
@@ -396,12 +435,25 @@ namespace BranchingLEDAnimator.Simulation
                 return RandomGalleryPosition();
 
             var sculpture = sculptures[sculptureIndex];
-            Vector3 center = sculpture.worldCenter;
-            float spread = reachDistance * 0.8f;
-            return center + new Vector3(
-                Random.Range(-spread, spread),
-                0,
-                Random.Range(-spread, spread)
+
+            // Navigate to a ground-touching endpoint; fall back to ground-projected center
+            if (sculpture.groundEndpointPositions.Count > 0)
+            {
+                Vector3 ep = sculpture.groundEndpointPositions[Random.Range(0, sculpture.groundEndpointPositions.Count)];
+                float spread = reachDistance * 0.4f;
+                return new Vector3(
+                    ep.x + Random.Range(-spread, spread),
+                    groundY,
+                    ep.z + Random.Range(-spread, spread)
+                );
+            }
+
+            // Fallback: near the sculpture center projected onto the ground plane
+            float fallbackSpread = reachDistance * 0.8f;
+            return new Vector3(
+                sculpture.worldCenter.x + Random.Range(-fallbackSpread, fallbackSpread),
+                groundY,
+                sculpture.worldCenter.z + Random.Range(-fallbackSpread, fallbackSpread)
             );
         }
 
@@ -409,7 +461,7 @@ namespace BranchingLEDAnimator.Simulation
         {
             return new Vector3(
                 Random.Range(galleryBounds.min.x, galleryBounds.max.x),
-                galleryBounds.center.y,
+                groundY,
                 Random.Range(galleryBounds.min.z, galleryBounds.max.z)
             );
         }
@@ -477,9 +529,17 @@ namespace BranchingLEDAnimator.Simulation
                 }
             }
 
-            // Gallery bounds
+            // Gallery bounds (ground footprint)
             Gizmos.color = new Color(1f, 1f, 1f, 0.1f);
             Gizmos.DrawWireCube(galleryBounds.center, galleryBounds.size);
+
+            // Ground-touching endpoints (navigation targets)
+            Gizmos.color = new Color(0f, 1f, 1f, 0.5f);
+            foreach (var s in sculptures)
+            {
+                foreach (var gp in s.groundEndpointPositions)
+                    Gizmos.DrawWireSphere(gp, 2f);
+            }
         }
     }
 }

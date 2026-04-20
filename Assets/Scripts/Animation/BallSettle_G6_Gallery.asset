@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60242fa35a9bd04478f994bb3b7f9604, type: 3}
+  m_Name: BallSettle_G6_Gallery
+  m_EditorClassIdentifier: 
+  animationName: Gallery G6 Settle
+  speed: 49.9
+  primaryColor: {r: 0.4, g: 0.95, b: 0.85, a: 1}
+  secondaryColor: {r: 0.6, g: 0.3, b: 1, a: 1}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
+  brightness: 2
+  saturation: 2
+  enhanceColors: 0
+  duration: 13.95
+  loop: 1
+  ballSpeed: 16.33
+  totalBalls: 16
+  autoSpawnAtStart: 1
+  useRainbowColors: 1
+  rainbowSaturation: 1
+  rainbowBrightness: 1
+  pulseStyle: 0
+  pulseWidth: 6.49
+  trailLength: 30
+  trailIntensity: 1
+  pulseShape:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  settledIntensity: 1.396
+  settledPulse: 1
+  settledPulseSpeed: 0.955
+  dispatchStagger: 0.084
+  enableAudio: 1
+  audioMode: 1
+  customClips:
+  - {fileID: 8300000, guid: 77aaf51877f0d73488a8db4ee844c2b8, type: 3}
+  - {fileID: 8300000, guid: 10bd2a37380a5ec40b81a58f7be5ac2a, type: 3}
+  - {fileID: 8300000, guid: 06fc44f51f4d4a442b1302bb30b3f263, type: 3}
+  - {fileID: 8300000, guid: de1f7f2be2dd547439e0cbbb46c3457d, type: 3}
+  - {fileID: 8300000, guid: 50112ad24e1a61a4caa0013b07aa1ce5, type: 3}
+  - {fileID: 8300000, guid: bb3f52db238ad094798a03a4ce481bbc, type: 3}
+  toneVolume: 0.3
+  inputMode: 0

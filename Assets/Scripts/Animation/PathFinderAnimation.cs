@@ -8,8 +8,9 @@ namespace BranchingLEDAnimator.Animation
 {
     /// <summary>
     /// Interactive pathfinding animation where touching an endpoint starts a fill
-    /// that animates along a path to another random endpoint. Touching the destination
-    /// redirects the fill to a new target. Supports multiple simultaneous paths.
+    /// that animates along a path to another random endpoint, then automatically
+    /// recedes. New triggers always start a fresh path, overwriting older visuals.
+    /// Supports multiple simultaneous paths.
     /// </summary>
     [CreateAssetMenu(fileName = "PathFinderAnimation", menuName = "LED Animations/Interactive/Path Finder")]
     public class PathFinderAnimation : LEDAnimationType
@@ -32,9 +33,14 @@ namespace BranchingLEDAnimator.Animation
         public enum PathState
         {
             Expanding,          // Fill traveling from source to destination
-            Waiting,            // Fill arrived, waiting for player
-            Receding,           // Fill receding back into the triggered endpoint
+            Receding,           // Fill receding back after expansion completes
             Complete            // Path finished, ready for removal
+        }
+        
+        public enum AudioMode
+        {
+            ProceduralTones,
+            CustomClips
         }
         
         [Header("Path Settings")]
@@ -42,7 +48,7 @@ namespace BranchingLEDAnimator.Animation
         [Range(0.5f, 10f)]
         public float pathDuration = 3f;
         
-        [Tooltip("Time for the path to recede after destination is touched")]
+        [Tooltip("Time for the path to recede after reaching the destination")]
         [Range(0.1f, 3f)]
         public float recedeDuration = 0.8f;
         
@@ -61,9 +67,6 @@ namespace BranchingLEDAnimator.Animation
         [Tooltip("Maximum number of simultaneous paths")]
         [Range(1, 10)]
         public int maxSimultaneousPaths = 4;
-        
-        [Tooltip("If true, new paths avoid endpoints already in use")]
-        public bool avoidActiveEndpoints = true;
         
         [Header("Color Mode")]
         public ColorMode colorMode = ColorMode.GlobalGradient;
@@ -97,6 +100,18 @@ namespace BranchingLEDAnimator.Animation
         [Range(0f, 0.5f)]
         public float idlePulseAmount = 0.2f;
         
+        [Header("Endpoint Glow")]
+        [Tooltip("Enable a colored glow around each idle endpoint using its per-leg color")]
+        public bool enableEndpointGlow = false;
+        
+        [Tooltip("Glow radius in graph hops from the endpoint")]
+        [Range(0, 50)]
+        public int endpointGlowRadius = 8;
+        
+        [Tooltip("Falloff curve: 1 = linear, <1 = sharper falloff, >1 = softer falloff")]
+        [Range(0.2f, 3f)]
+        public float endpointGlowFalloff = 1f;
+        
         [Header("Chasing Effect (when FillStyle = ChasingFill)")]
         [Range(0, 10)]
         public int chaseParticleCount = 3;
@@ -108,21 +123,37 @@ namespace BranchingLEDAnimator.Animation
         [Header("Audio")]
         [Tooltip("Enable audio blending between source and destination")]
         public bool enableAudio = true;
+        
+        [Tooltip("Choose between procedural tones or custom audio clips")]
+        public AudioMode audioMode = AudioMode.ProceduralTones;
+        
+        public enum AudioBlendMode
+        {
+            Crossfade,      // Source fades out as destination fades in
+            HoldBoth,       // Both source and destination play at full volume through the path
+            SourceOnly      // Only the triggered leg's clip plays, destination is silent
+        }
+        [Tooltip("Crossfade blends source to destination. HoldBoth plays both. SourceOnly plays only the triggered leg.")]
+        public AudioBlendMode audioBlendMode = AudioBlendMode.Crossfade;
+        
+        [Header("Custom Audio Clips (when AudioMode = CustomClips)")]
+        [Tooltip("Audio clips assigned to endpoints by height (lowest to highest). Cycles if fewer clips than endpoints.")]
+        public AudioClip[] customClips;
+        
+        [Tooltip("Should custom clips loop while playing?")]
+        public bool loopCustomClips = true;
+        
+        [Header("Procedural Tone Settings (when AudioMode = ProceduralTones)")]
         public float baseFrequency = 220f;
+        
+        [Header("Audio Volume & Envelope")]
         [Range(0f, 1f)]
         public float audioVolume = 0.4f;
         public float audioAttack = 0.3f;
         public float audioRelease = 1f;
         
-        [Header("Gameplay")]
-        [Tooltip("Time window to touch destination after fill arrives (0 = unlimited)")]
-        [Range(0f, 10f)]
-        public float destinationWindow = 5f;
-        
-        [Tooltip("If true, any endpoint can start a new path")]
-        public bool anyEndpointCanStart = true;
-        
-        [Tooltip("Visual indication of the target endpoint")]
+        [Header("Destination")]
+        [Tooltip("Visual indication of the target endpoint while path is expanding")]
         public bool highlightDestination = true;
         public float destinationPulseSpeed = 3f;
         
@@ -142,7 +173,6 @@ namespace BranchingLEDAnimator.Animation
             public PathState state = PathState.Expanding;
             public Color pathColor;
             public float hueOffset;  // For monochrome mode
-            public bool wasDestinationTriggered;  // True if player touched destination, false if timeout
             
             // Audio
             public AudioSource sourceAudio;
@@ -157,6 +187,7 @@ namespace BranchingLEDAnimator.Animation
         private List<int> endpointNodes = new List<int>();
         private Dictionary<int, List<int>> adjacency = new Dictionary<int, List<int>>();
         private Dictionary<int, float> endpointFrequencies = new Dictionary<int, float>();
+        private Dictionary<int, AudioClip> endpointClips = new Dictionary<int, AudioClip>();
         private Dictionary<int, Color> endpointColors = new Dictionary<int, Color>();
         private bool analysisComplete = false;
         private bool subscribedToEvents = false;
@@ -185,6 +216,12 @@ namespace BranchingLEDAnimator.Animation
                 colors[i] = bgColor;
             }
             
+            // Re-init if audio container was destroyed between sessions
+            if (analysisComplete && enableAudio && audioContainer == null)
+            {
+                analysisComplete = false;
+            }
+            
             // First-time analysis
             if (!analysisComplete)
             {
@@ -207,15 +244,18 @@ namespace BranchingLEDAnimator.Animation
                 RenderPath(path, time, colors);
             }
             
-            // Highlight destinations
-            foreach (var path in activePaths.Where(p => p.state == PathState.Expanding || p.state == PathState.Waiting))
+            // Highlight destinations during expansion
+            if (highlightDestination)
             {
-                if (highlightDestination && path.destinationEndpoint >= 0)
+                foreach (var path in activePaths.Where(p => p.state == PathState.Expanding))
                 {
-                    float pulse = 0.5f + 0.5f * Mathf.Sin(time * destinationPulseSpeed * Mathf.PI * 2f);
-                    float intensity = path.state == PathState.Waiting ? 1f : 0.5f + 0.5f * pulse;
-                    Color destColor = GetDestinationColor(path);
-                    colors[path.destinationEndpoint] = Color.Lerp(colors[path.destinationEndpoint], destColor, intensity);
+                    if (path.destinationEndpoint >= 0)
+                    {
+                        float pulse = 0.5f + 0.5f * Mathf.Sin(time * destinationPulseSpeed * Mathf.PI * 2f);
+                        float intensity = 0.5f + 0.5f * pulse;
+                        Color destColor = GetDestinationColor(path);
+                        colors[path.destinationEndpoint] = Color.Lerp(colors[path.destinationEndpoint], destColor, intensity);
+                    }
                 }
             }
             
@@ -231,6 +271,7 @@ namespace BranchingLEDAnimator.Animation
             endpointNodes.Clear();
             adjacency.Clear();
             endpointFrequencies.Clear();
+            endpointClips.Clear();
             endpointColors.Clear();
             
             // Build adjacency
@@ -278,9 +319,20 @@ namespace BranchingLEDAnimator.Animation
                 // Color (for per-leg mode)
                 float hue = (float)i / endpointNodes.Count;
                 endpointColors[endpoint] = Color.HSVToRGB(hue, legColorSaturation, legColorBrightness);
+                
+                // Custom clip (assigned by height order, cycling if fewer clips than endpoints)
+                if (audioMode == AudioMode.CustomClips && customClips != null && customClips.Length > 0)
+                {
+                    int clipIndex = i % customClips.Length;
+                    if (customClips[clipIndex] != null)
+                        endpointClips[endpoint] = customClips[clipIndex];
+                }
             }
             
-            Debug.Log($"🔍 PathFinder: Found {endpointNodes.Count} endpoints");
+            string audioModeStr = audioMode == AudioMode.CustomClips
+                ? $"custom clips ({endpointClips.Count} assigned)"
+                : "procedural tones";
+            Debug.Log($"🔍 PathFinder: Found {endpointNodes.Count} endpoints, audio: {audioModeStr}");
             analysisComplete = true;
         }
         
@@ -288,31 +340,42 @@ namespace BranchingLEDAnimator.Animation
         {
             if (!enableAudio) return;
             
-            if (audioContainer == null)
+            if (audioContainer != null)
             {
-                audioContainer = new GameObject("PathFinderAudio");
-                audioContainer.hideFlags = HideFlags.HideAndDontSave;
+                Object.DestroyImmediate(audioContainer);
+                audioContainer = null;
             }
+            
+            audioContainer = new GameObject("PathFinderAudio");
+            audioContainer.hideFlags = HideFlags.DontSave;
         }
         
         AudioSource CreateAudioSource(string name, float frequency)
         {
-            // Ensure audio container exists
+            return CreateAudioSourceInternal(name, GenerateToneClip(frequency), true);
+        }
+        
+        AudioSource CreateAudioSource(string name, AudioClip clip, bool loop)
+        {
+            return CreateAudioSourceInternal(name, clip, loop);
+        }
+        
+        AudioSource CreateAudioSourceInternal(string name, AudioClip clip, bool loop)
+        {
             if (audioContainer == null)
             {
                 audioContainer = new GameObject("PathFinderAudio");
-                audioContainer.hideFlags = HideFlags.HideAndDontSave;
+                audioContainer.hideFlags = HideFlags.DontSave;
             }
             
             var go = new GameObject(name);
             go.transform.SetParent(audioContainer.transform);
-            go.hideFlags = HideFlags.HideAndDontSave;
             
             var source = go.AddComponent<AudioSource>();
             source.playOnAwake = false;
-            source.loop = true;
+            source.loop = loop;
             source.volume = 0f;
-            source.clip = GenerateToneClip(frequency);
+            source.clip = clip;
             
             return source;
         }
@@ -363,36 +426,10 @@ namespace BranchingLEDAnimator.Animation
                 Debug.Log($"🎯 Endpoint {endpointIndex} pressed. Active paths: {activePaths.Count}, Max: {maxSimultaneousPaths}");
             }
             
-            // Check if this endpoint is a destination of any waiting path
-            var waitingPath = activePaths.FirstOrDefault(p => 
-                p.state == PathState.Waiting && p.destinationEndpoint == endpointIndex);
-            
-            if (waitingPath != null)
-            {
-                // Trigger recede and then start new path from this endpoint
-                if (showPathDebug) Debug.Log($"✅ Endpoint {endpointIndex} is waiting destination - starting recede");
-                StartRecede(waitingPath, endpointIndex);
-                return;
-            }
-            
-            // Check if this endpoint is already in use
-            if (avoidActiveEndpoints && IsEndpointInUse(endpointIndex))
-            {
-                if (showPathDebug) Debug.Log($"⚠️ Endpoint {endpointIndex} already in use by another path");
-                return;
-            }
-            
             // Check max paths
             if (activePaths.Count >= maxSimultaneousPaths)
             {
                 if (showPathDebug) Debug.Log($"⚠️ Max paths ({maxSimultaneousPaths}) reached, current: {activePaths.Count}");
-                return;
-            }
-            
-            // Check if we can start from any endpoint, or only when no paths active
-            if (!anyEndpointCanStart && activePaths.Count > 0)
-            {
-                if (showPathDebug) Debug.Log($"⚠️ anyEndpointCanStart is false and {activePaths.Count} paths already active");
                 return;
             }
             
@@ -420,18 +457,7 @@ namespace BranchingLEDAnimator.Animation
         
         void StartNewPath(int fromEndpoint)
         {
-            // Pick a random destination, avoiding active endpoints
-            var activeEndpoints = GetActiveEndpoints();
-            var availableDestinations = endpointNodes
-                .Where(e => e != fromEndpoint && (!avoidActiveEndpoints || !activeEndpoints.Contains(e)))
-                .ToList();
-            
-            if (availableDestinations.Count == 0)
-            {
-                // Fallback: allow any endpoint except source
-                availableDestinations = endpointNodes.Where(e => e != fromEndpoint).ToList();
-            }
-            
+            var availableDestinations = endpointNodes.Where(e => e != fromEndpoint).ToList();
             if (availableDestinations.Count == 0) return;
             
             int destinationEndpoint = availableDestinations[Random.Range(0, availableDestinations.Count)];
@@ -468,17 +494,37 @@ namespace BranchingLEDAnimator.Animation
             // Setup audio - CreateAudioSource will create container if needed
             if (enableAudio)
             {
-                float srcFreq = endpointFrequencies.ContainsKey(fromEndpoint) ? endpointFrequencies[fromEndpoint] : baseFrequency;
-                float dstFreq = endpointFrequencies.ContainsKey(destinationEndpoint) ? endpointFrequencies[destinationEndpoint] : baseFrequency * 1.5f;
+                bool needsDest = audioBlendMode != AudioBlendMode.SourceOnly;
                 
-                newPath.sourceAudio = CreateAudioSource($"Path{newPath.id}_Src", srcFreq);
-                newPath.destAudio = CreateAudioSource($"Path{newPath.id}_Dst", dstFreq);
+                if (audioMode == AudioMode.CustomClips && endpointClips.Count > 0)
+                {
+                    AudioClip srcClip = endpointClips.ContainsKey(fromEndpoint) ? endpointClips[fromEndpoint] : null;
+                    
+                    if (srcClip != null)
+                        newPath.sourceAudio = CreateAudioSource($"Path{newPath.id}_Src", srcClip, loopCustomClips);
+                    if (needsDest)
+                    {
+                        AudioClip dstClip = endpointClips.ContainsKey(destinationEndpoint) ? endpointClips[destinationEndpoint] : null;
+                        if (dstClip != null)
+                            newPath.destAudio = CreateAudioSource($"Path{newPath.id}_Dst", dstClip, loopCustomClips);
+                    }
+                }
+                else
+                {
+                    float srcFreq = endpointFrequencies.ContainsKey(fromEndpoint) ? endpointFrequencies[fromEndpoint] : baseFrequency;
+                    newPath.sourceAudio = CreateAudioSource($"Path{newPath.id}_Src", srcFreq);
+                    if (needsDest)
+                    {
+                        float dstFreq = endpointFrequencies.ContainsKey(destinationEndpoint) ? endpointFrequencies[destinationEndpoint] : baseFrequency * 1.5f;
+                        newPath.destAudio = CreateAudioSource($"Path{newPath.id}_Dst", dstFreq);
+                    }
+                }
                 
-                newPath.sourceAudio.Play();
-                newPath.destAudio.Play();
+                if (newPath.sourceAudio != null) newPath.sourceAudio.Play();
+                if (newPath.destAudio != null) newPath.destAudio.Play();
                 
                 newPath.targetSourceVol = 1f;
-                newPath.targetDestVol = 0f;
+                newPath.targetDestVol = (audioBlendMode == AudioBlendMode.HoldBoth) ? 1f : 0f;
             }
             
             activePaths.Add(newPath);
@@ -527,11 +573,10 @@ namespace BranchingLEDAnimator.Animation
             }
         }
         
-        void StartRecede(ActivePath path, int triggeredEndpoint, bool wasTriggered = true)
+        void StartRecede(ActivePath path)
         {
             path.state = PathState.Receding;
             path.stateChangeTime = Time.time;
-            path.wasDestinationTriggered = wasTriggered;
             
             // Fade out audio
             path.targetSourceVol = 0f;
@@ -539,11 +584,8 @@ namespace BranchingLEDAnimator.Animation
             
             if (showPathDebug)
             {
-                Debug.Log($"🔙 Path {path.id} receding (triggered={wasTriggered})");
+                Debug.Log($"🔙 Path {path.id} receding");
             }
-            
-            // Store the endpoint for potential new path start
-            path.destinationEndpoint = triggeredEndpoint;
         }
         
         List<int> FindPath(int start, int end)
@@ -595,7 +637,6 @@ namespace BranchingLEDAnimator.Animation
         {
             foreach (var path in activePaths.ToList())
             {
-                // Update audio
                 UpdatePathAudio(path, time, deltaTime);
                 
                 switch (path.state)
@@ -604,24 +645,9 @@ namespace BranchingLEDAnimator.Animation
                         float expandProgress = (time - path.startTime) / pathDuration;
                         if (expandProgress >= 1f)
                         {
-                            path.state = PathState.Waiting;
-                            path.stateChangeTime = time;
                             if (showPathDebug)
-                            {
-                                Debug.Log($"🎯 Path {path.id} arrived at destination {path.destinationEndpoint}");
-                            }
-                        }
-                        break;
-                        
-                    case PathState.Waiting:
-                        if (destinationWindow > 0f && time - path.stateChangeTime > destinationWindow)
-                        {
-                            // Timeout - start receding (NOT triggered, so won't auto-start new path)
-                            StartRecede(path, path.destinationEndpoint, wasTriggered: false);
-                            if (showPathDebug)
-                            {
-                                Debug.Log($"⏰ Path {path.id} timeout - receding (will not auto-continue)");
-                            }
+                                Debug.Log($"🎯 Path {path.id} reached destination {path.destinationEndpoint} — auto-receding");
+                            StartRecede(path);
                         }
                         break;
                         
@@ -629,42 +655,15 @@ namespace BranchingLEDAnimator.Animation
                         float recedeProgress = (time - path.stateChangeTime) / recedeDuration;
                         if (recedeProgress >= 1f)
                         {
-                            // Check if we should start a new path from where this one ended
-                            int nextSource = path.destinationEndpoint;
-                            bool wasTriggered = path.wasDestinationTriggered;
-                            
-                            // Mark this path as complete
                             path.state = PathState.Complete;
                             
-                            // Clean up audio
                             if (path.sourceAudio != null)
-                            {
                                 Object.DestroyImmediate(path.sourceAudio.gameObject);
-                            }
                             if (path.destAudio != null)
-                            {
                                 Object.DestroyImmediate(path.destAudio.gameObject);
-                            }
                             
                             if (showPathDebug)
-                            {
-                                Debug.Log($"✅ Path {path.id} complete (triggered={wasTriggered})");
-                            }
-                            
-                            // Only auto-start new path if destination was manually triggered (not timeout)
-                            // AND we're below the max path limit (count -1 because this path is about to be removed)
-                            if (wasTriggered && nextSource >= 0 && endpointNodes.Contains(nextSource))
-                            {
-                                int currentCount = activePaths.Count(p => p.state != PathState.Complete);
-                                if (currentCount < maxSimultaneousPaths)
-                                {
-                                    StartNewPath(nextSource);
-                                }
-                                else if (showPathDebug)
-                                {
-                                    Debug.Log($"⚠️ Not auto-starting: at max paths ({currentCount}/{maxSimultaneousPaths})");
-                                }
-                            }
+                                Debug.Log($"✅ Path {path.id} complete");
                         }
                         break;
                 }
@@ -673,33 +672,46 @@ namespace BranchingLEDAnimator.Animation
         
         void UpdatePathAudio(ActivePath path, float time, float deltaTime)
         {
-            if (!enableAudio || path.sourceAudio == null) return;
+            if (!enableAudio) return;
+            if (path.sourceAudio == null && path.destAudio == null) return;
             
             float attackSpeed = 1f / Mathf.Max(0.01f, audioAttack);
             float releaseSpeed = 1f / Mathf.Max(0.01f, audioRelease);
             
-            // Update source volume
+            if (path.state == PathState.Expanding)
+            {
+                switch (audioBlendMode)
+                {
+                    case AudioBlendMode.HoldBoth:
+                        path.targetSourceVol = 1f;
+                        path.targetDestVol = 1f;
+                        break;
+                    case AudioBlendMode.SourceOnly:
+                        path.targetSourceVol = 1f;
+                        path.targetDestVol = 0f;
+                        break;
+                    default:
+                        float progress = Mathf.Clamp01((time - path.startTime) / pathDuration);
+                        path.targetSourceVol = 1f - progress * 0.7f;
+                        path.targetDestVol = progress;
+                        break;
+                }
+            }
+            
             if (path.currentSourceVol < path.targetSourceVol)
                 path.currentSourceVol = Mathf.Min(path.currentSourceVol + attackSpeed * deltaTime, path.targetSourceVol);
             else
                 path.currentSourceVol = Mathf.Max(path.currentSourceVol - releaseSpeed * deltaTime, path.targetSourceVol);
             
-            // Update dest volume
             if (path.currentDestVol < path.targetDestVol)
                 path.currentDestVol = Mathf.Min(path.currentDestVol + attackSpeed * deltaTime, path.targetDestVol);
             else
                 path.currentDestVol = Mathf.Max(path.currentDestVol - releaseSpeed * deltaTime, path.targetDestVol);
             
-            // Blend based on progress during expansion
-            if (path.state == PathState.Expanding)
-            {
-                float progress = Mathf.Clamp01((time - path.startTime) / pathDuration);
-                path.targetSourceVol = 1f - progress * 0.7f;
-                path.targetDestVol = progress;
-            }
-            
-            path.sourceAudio.volume = path.currentSourceVol * audioVolume;
-            path.destAudio.volume = path.currentDestVol * audioVolume;
+            if (path.sourceAudio != null)
+                path.sourceAudio.volume = path.currentSourceVol * audioVolume;
+            if (path.destAudio != null)
+                path.destAudio.volume = path.currentDestVol * audioVolume;
         }
         
         void RenderIdleEndpoints(float time, Color[] colors)
@@ -711,7 +723,54 @@ namespace BranchingLEDAnimator.Animation
                 if (activeEndpoints.Contains(endpoint)) continue;
                 
                 float pulse = 1f + idlePulseAmount * Mathf.Sin(time * idlePulseSpeed * Mathf.PI * 2f + endpoint * 0.5f);
-                colors[endpoint] = idleEndpointColor * pulse;
+                
+                if (enableEndpointGlow && endpointGlowRadius > 0)
+                {
+                    Color legColor = endpointColors.ContainsKey(endpoint)
+                        ? endpointColors[endpoint]
+                        : idleEndpointColor;
+
+                    // BFS glow spread from endpoint
+                    var visited = new Dictionary<int, int>(); // node -> distance
+                    var queue = new Queue<int>();
+                    queue.Enqueue(endpoint);
+                    visited[endpoint] = 0;
+
+                    while (queue.Count > 0)
+                    {
+                        int current = queue.Dequeue();
+                        int dist = visited[current];
+
+                        float t = (float)dist / endpointGlowRadius;
+                        float intensity = Mathf.Pow(1f - t, endpointGlowFalloff) * pulse;
+                        Color glowColor = legColor * intensity;
+
+                        // Blend with existing color (take the brighter of the two)
+                        if (glowColor.r > colors[current].r ||
+                            glowColor.g > colors[current].g ||
+                            glowColor.b > colors[current].b)
+                        {
+                            colors[current] = Color.Lerp(colors[current], glowColor,
+                                Mathf.Clamp01(intensity));
+                        }
+
+                        if (dist < endpointGlowRadius && adjacency.ContainsKey(current))
+                        {
+                            foreach (int neighbor in adjacency[current])
+                            {
+                                if (!visited.ContainsKey(neighbor))
+                                {
+                                    visited[neighbor] = dist + 1;
+                                    queue.Enqueue(neighbor);
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    colors[endpoint] = idleEndpointColor * pulse;
+                }
             }
         }
         
@@ -727,12 +786,6 @@ namespace BranchingLEDAnimator.Animation
                 case PathState.Expanding:
                     float expandProgress = Mathf.Clamp01((time - path.startTime) / pathDuration);
                     fillPosition = expandProgress * (pathLength - 1);
-                    RenderExpandingFill(path, fillPosition, time, colors);
-                    break;
-                    
-                case PathState.Waiting:
-                    // Full fill, possibly pulsing
-                    fillPosition = pathLength - 1;
                     RenderExpandingFill(path, fillPosition, time, colors);
                     break;
                     
@@ -953,10 +1006,10 @@ namespace BranchingLEDAnimator.Animation
         public int GetActivePathCount() => activePaths.Count;
         public bool IsEndpointActive(int endpoint) => IsEndpointInUse(endpoint);
         
-        public List<int> GetWaitingDestinations()
+        public List<int> GetRecedingEndpoints()
         {
             return activePaths
-                .Where(p => p.state == PathState.Waiting)
+                .Where(p => p.state == PathState.Receding)
                 .Select(p => p.destinationEndpoint)
                 .ToList();
         }

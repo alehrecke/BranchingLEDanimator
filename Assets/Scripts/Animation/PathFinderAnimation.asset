@@ -22,13 +22,12 @@ MonoBehaviour:
   enhanceColors: 1
   duration: 10
   loop: 1
-  pathDuration: 5.12
-  recedeDuration: 1.267
-  fillStyle: 3
+  pathDuration: 1.03
+  recedeDuration: 0.52
+  fillStyle: 0
   leadingEdgeWidth: 8
   trailPersistence: 0.8
-  maxSimultaneousPaths: 2
-  avoidActiveEndpoints: 1
+  maxSimultaneousPaths: 6
   colorMode: 1
   sourceColor: {r: 0.2, g: 0.8, b: 1, a: 1}
   destinationColor: {r: 1, g: 0, b: 0.08282852, a: 1}
@@ -41,16 +40,27 @@ MonoBehaviour:
   idleEndpointColor: {r: 0.1, g: 0.2, b: 0.3, a: 1}
   idlePulseSpeed: 1.07
   idlePulseAmount: 0.105
+  enableEndpointGlow: 1
+  endpointGlowRadius: 36
+  endpointGlowFalloff: 1
   chaseParticleCount: 7
   chaseSpeed: 1.5
   chaseSpacing: 0.2
   enableAudio: 1
+  audioMode: 1
+  audioBlendMode: 2
+  customClips:
+  - {fileID: 8300000, guid: 6f99726ad41d3464f85712cf73a200ad, type: 3}
+  - {fileID: 8300000, guid: 4303794798386cf41820643e8f2c3794, type: 3}
+  - {fileID: 8300000, guid: 2890325cb7cf59c4a95bef385dc285eb, type: 3}
+  - {fileID: 8300000, guid: c8d53527c658d1a489abedf6ce7ab600, type: 3}
+  - {fileID: 8300000, guid: 870afc35560c9f440acb5b7a95d8908b, type: 3}
+  - {fileID: 8300000, guid: 45bd4d66b0c6e1940a10030d7d96246b, type: 3}
+  loopCustomClips: 0
   baseFrequency: 220
-  audioVolume: 0.415
+  audioVolume: 1
   audioAttack: 0.3
   audioRelease: 1
-  destinationWindow: 4.81
-  anyEndpointCanStart: 1
   highlightDestination: 1
   destinationPulseSpeed: 7.35
   showPathDebug: 1

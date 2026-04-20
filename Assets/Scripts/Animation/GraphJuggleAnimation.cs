@@ -656,6 +656,13 @@ namespace BranchingLEDAnimator.Animation
                 colors[i] = inactiveColor;
             }
             
+            // Re-init if audio container was destroyed mid-session
+            if (audioInitialized && audioContainer == null)
+            {
+                audioInitialized = false;
+                initializedThisSession = false;
+            }
+            
             // Initialize
             int currentSessionId = Application.isPlaying ? Time.frameCount / 10000 : -1;
             bool isNewSession = !initializedThisSession || 
@@ -830,7 +837,7 @@ namespace BranchingLEDAnimator.Animation
             if (audioContainer == null)
             {
                 audioContainer = new GameObject("BloomAudio");
-                // Don't hide - we want to see if it exists
+                audioContainer.hideFlags = HideFlags.DontSave;
                 
                 // Tone source for melodic hits
                 var toneGO = new GameObject("ToneSource");

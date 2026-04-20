@@ -8,8 +8,8 @@ namespace BranchingLEDAnimator.Animation
 {
     /// <summary>
     /// Simulates multiple people interacting with the PathFinderAnimation.
-    /// People will try to "catch" destination endpoints and redirect paths,
-    /// while also starting new paths from idle endpoints.
+    /// People touch endpoints to start new paths, maintaining a target
+    /// level of activity on the sculpture.
     /// </summary>
     public class PathFinderSimulator : MonoBehaviour
     {
@@ -24,14 +24,7 @@ namespace BranchingLEDAnimator.Animation
         [SerializeField] private bool autoSimulate = true;
         
         [Header("Behavior Settings")]
-        [Tooltip("How likely a person is to successfully catch a destination")]
-        [Range(0f, 1f)]
-        [SerializeField] private float catchSuccessRate = 0.8f;
-        
-        [Tooltip("Reaction time range after fill arrives (seconds)")]
-        [SerializeField] private Vector2 reactionTimeRange = new Vector2(0.1f, 0.8f);
-        
-        [Tooltip("How often someone starts a new path from an idle endpoint")]
+        [Tooltip("How often someone starts a new path")]
         [SerializeField] private float newPathInterval = 1.5f;
         
         [Tooltip("Chance of starting a new path each interval")]
@@ -44,9 +37,9 @@ namespace BranchingLEDAnimator.Animation
         
         public enum SimulationMode
         {
-            Cooperative,        // People focus on catching destinations
-            Exploratory,        // People wander and start paths randomly
-            Balanced,           // Mix of catching and starting new paths
+            Cooperative,        // Lower activity, measured interactions
+            Exploratory,        // People wander and start paths frequently
+            Balanced,           // Moderate interaction rate
             HighActivity        // Many simultaneous paths, high interaction rate
         }
         
@@ -56,22 +49,19 @@ namespace BranchingLEDAnimator.Animation
         [Header("Debug")]
         [SerializeField] private bool showSimulationDebug = true;
         
-        // Simulated person
         private class SimulatedPerson
         {
             public int id;
-            public int watchingEndpoint = -1;
+            public int targetEndpoint = -1;
             public float nextActionTime;
-            public bool isWaitingToReact;
             public PersonState state = PersonState.Idle;
         }
         
         private enum PersonState
         {
-            Idle,               // Looking for something to do
-            WatchingDestination,// Waiting to catch a destination
-            MovingToEndpoint,   // Moving to touch an endpoint
-            Resting             // Taking a break
+            Idle,
+            MovingToEndpoint,
+            Resting
         }
         
         private List<SimulatedPerson> people = new List<SimulatedPerson>();
@@ -151,16 +141,11 @@ namespace BranchingLEDAnimator.Animation
             endpoints = targetAnimation.GetEndpointNodes();
             if (endpoints.Count == 0) return;
             
-            // Get current waiting destinations
-            var waitingDestinations = targetAnimation.GetWaitingDestinations();
-            
-            // Update each person
             foreach (var person in people)
             {
-                UpdatePerson(person, waitingDestinations);
+                UpdatePerson(person);
             }
             
-            // Periodically try to start new paths
             if (Time.time - lastNewPathAttempt > newPathInterval)
             {
                 lastNewPathAttempt = Time.time;
@@ -168,109 +153,35 @@ namespace BranchingLEDAnimator.Animation
             }
         }
         
-        void UpdatePerson(SimulatedPerson person, List<int> waitingDestinations)
+        void UpdatePerson(SimulatedPerson person)
         {
             switch (person.state)
             {
                 case PersonState.Idle:
-                    // Look for something to do
-                    if (waitingDestinations.Count > 0 && ShouldWatchDestination())
+                    if (ShouldExplore() || targetAnimation.GetActivePathCount() < targetActivePaths)
                     {
-                        // Try to watch an unwatched destination
-                        var unwatched = waitingDestinations
-                            .Where(d => !people.Any(p => p.watchingEndpoint == d && p != person))
-                            .ToList();
-                        
-                        if (unwatched.Count > 0)
-                        {
-                            person.watchingEndpoint = unwatched[Random.Range(0, unwatched.Count)];
-                            person.state = PersonState.WatchingDestination;
-                            person.isWaitingToReact = false;
-                            
-                            if (showSimulationDebug)
-                            {
-                                Debug.Log($"👤 Person {person.id} watching destination {person.watchingEndpoint}");
-                            }
-                        }
-                    }
-                    else if (ShouldExplore() || targetAnimation.GetActivePathCount() < targetActivePaths)
-                    {
-                        // Pick a random idle endpoint to touch
-                        var idleEndpoints = endpoints
-                            .Where(e => !targetAnimation.IsEndpointActive(e))
-                            .ToList();
-                        
-                        if (idleEndpoints.Count > 0)
-                        {
-                            person.watchingEndpoint = idleEndpoints[Random.Range(0, idleEndpoints.Count)];
-                            person.state = PersonState.MovingToEndpoint;
-                            // Faster movement when below target paths
-                            float moveDelay = targetAnimation.GetActivePathCount() < targetActivePaths 
-                                ? Random.Range(0.2f, 0.8f) 
-                                : Random.Range(0.5f, 1.5f);
-                            person.nextActionTime = Time.time + moveDelay;
-                        }
-                    }
-                    break;
-                    
-                case PersonState.WatchingDestination:
-                    // Check if our destination is still waiting
-                    if (!waitingDestinations.Contains(person.watchingEndpoint))
-                    {
-                        // Destination was taken or timed out
-                        person.state = PersonState.Idle;
-                        person.watchingEndpoint = -1;
-                        break;
-                    }
-                    
-                    // Set up reaction if not already
-                    if (!person.isWaitingToReact)
-                    {
-                        person.isWaitingToReact = true;
-                        person.nextActionTime = Time.time + Random.Range(reactionTimeRange.x, reactionTimeRange.y);
-                    }
-                    
-                    // Try to catch
-                    if (Time.time >= person.nextActionTime)
-                    {
-                        if (Random.value < catchSuccessRate)
-                        {
-                            TouchEndpoint(person.watchingEndpoint);
-                            if (showSimulationDebug)
-                            {
-                                Debug.Log($"👤 Person {person.id} caught destination {person.watchingEndpoint}!");
-                            }
-                        }
-                        else
-                        {
-                            if (showSimulationDebug)
-                            {
-                                Debug.Log($"👤 Person {person.id} missed destination {person.watchingEndpoint}");
-                            }
-                        }
-                        
-                        person.state = PersonState.Resting;
-                        person.nextActionTime = Time.time + Random.Range(0.3f, 0.8f);
-                        person.watchingEndpoint = -1;
-                        person.isWaitingToReact = false;
+                        person.targetEndpoint = endpoints[Random.Range(0, endpoints.Count)];
+                        person.state = PersonState.MovingToEndpoint;
+                        float moveDelay = targetAnimation.GetActivePathCount() < targetActivePaths 
+                            ? Random.Range(0.2f, 0.8f) 
+                            : Random.Range(0.5f, 1.5f);
+                        person.nextActionTime = Time.time + moveDelay;
                     }
                     break;
                     
                 case PersonState.MovingToEndpoint:
                     if (Time.time >= person.nextActionTime)
                     {
-                        if (person.watchingEndpoint >= 0 && !targetAnimation.IsEndpointActive(person.watchingEndpoint))
+                        if (person.targetEndpoint >= 0)
                         {
-                            TouchEndpoint(person.watchingEndpoint);
+                            TouchEndpoint(person.targetEndpoint);
                             if (showSimulationDebug)
-                            {
-                                Debug.Log($"👤 Person {person.id} started new path from {person.watchingEndpoint}");
-                            }
+                                Debug.Log($"👤 Person {person.id} touched endpoint {person.targetEndpoint}");
                         }
                         
                         person.state = PersonState.Resting;
                         person.nextActionTime = Time.time + Random.Range(0.3f, 1f);
-                        person.watchingEndpoint = -1;
+                        person.targetEndpoint = -1;
                     }
                     break;
                     
@@ -283,29 +194,12 @@ namespace BranchingLEDAnimator.Animation
             }
         }
         
-        bool ShouldWatchDestination()
-        {
-            switch (simulationMode)
-            {
-                case SimulationMode.Cooperative:
-                    return true;
-                case SimulationMode.Exploratory:
-                    return Random.value < 0.3f;
-                case SimulationMode.Balanced:
-                    return Random.value < 0.6f;
-                case SimulationMode.HighActivity:
-                    return Random.value < 0.5f;
-                default:
-                    return true;
-            }
-        }
-        
         bool ShouldExplore()
         {
             switch (simulationMode)
             {
                 case SimulationMode.Cooperative:
-                    return Random.value < 0.2f;
+                    return Random.value < 0.3f;
                 case SimulationMode.Exploratory:
                     return Random.value < 0.7f;
                 case SimulationMode.Balanced:
@@ -356,28 +250,12 @@ namespace BranchingLEDAnimator.Animation
         
         void TriggerRandomEndpoint()
         {
-            // Find idle endpoints
-            var idleEndpoints = endpoints
-                .Where(e => !targetAnimation.IsEndpointActive(e))
-                .ToList();
+            if (endpoints.Count == 0) return;
+            
+            int endpoint = endpoints[Random.Range(0, endpoints.Count)];
             
             if (showSimulationDebug)
-            {
-                Debug.Log($"🔍 TriggerRandomEndpoint: {idleEndpoints.Count} idle endpoints out of {endpoints.Count}, active paths: {targetAnimation.GetActivePathCount()}");
-            }
-            
-            if (idleEndpoints.Count == 0)
-            {
-                if (showSimulationDebug) Debug.Log($"⚠️ No idle endpoints available");
-                return;
-            }
-            
-            int endpoint = idleEndpoints[Random.Range(0, idleEndpoints.Count)];
-            
-            if (showSimulationDebug)
-            {
-                Debug.Log($"🚀 Simulator triggering endpoint {endpoint}");
-            }
+                Debug.Log($"🚀 Simulator triggering endpoint {endpoint} (active paths: {targetAnimation.GetActivePathCount()})");
             
             TouchEndpoint(endpoint);
         }
@@ -435,15 +313,14 @@ namespace BranchingLEDAnimator.Animation
             TriggerRandomEndpoint();
         }
         
-        [ContextMenu("Trigger All Waiting Destinations")]
-        public void TriggerAllWaiting()
+        [ContextMenu("Trigger All Endpoints")]
+        public void TriggerAllEndpoints()
         {
             if (!initialized) return;
             
-            var waiting = targetAnimation.GetWaitingDestinations();
-            foreach (int dest in waiting)
+            foreach (int endpoint in endpoints)
             {
-                TouchEndpoint(dest);
+                TouchEndpoint(endpoint);
             }
         }
     }

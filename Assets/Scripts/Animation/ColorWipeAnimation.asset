@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae84e2abba53c5468791e487a71af36, type: 3}
+  m_Name: ColorWipeAnimation
+  m_EditorClassIdentifier: 
+  animationName: Color Wipe
+  speed: 1
+  primaryColor: {r: 1, g: 0, b: 0, a: 1}
+  secondaryColor: {r: 0, g: 0, b: 1, a: 1}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
+  brightness: 1
+  saturation: 1
+  enhanceColors: 1
+  duration: 10
+  loop: 1
+  wipeSpeed: 40
+  hueIncrement: 0.197
+  colorSaturation: 1
+  colorValue: 1
+  junctionColor: {r: 0.15, g: 0.15, b: 0.2, a: 1}
+  enableInteriorPropagation: 1
+  interiorWipeDelay: 0.3
+  interiorWipeSpeed: 30
+  enableAudio: 1
+  audioMode: 1
+  customClips:
+  - {fileID: 8300000, guid: 53d41bebd16bd2d4ab4a02f314907235, type: 3}
+  - {fileID: 8300000, guid: da28e09b1a9275b46ae7ecca75b1016f, type: 3}
+  - {fileID: 8300000, guid: 06357b8386155484a8b6fcf49020eabc, type: 3}
+  loopCustomClips: 0
+  baseFrequency: 220
+  audioVolume: 0.4
+  audioAttack: 0.05
+  audioRelease: 0.5
+  showDebugInfo: 1

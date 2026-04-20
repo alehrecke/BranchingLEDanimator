@@ -279,7 +279,7 @@ namespace BranchingLEDAnimator.Animation
             if (audioContainer == null)
             {
                 audioContainer = new GameObject("ChordTouchAudio");
-                audioContainer.hideFlags = HideFlags.HideAndDontSave;
+                audioContainer.hideFlags = HideFlags.DontSave;
             }
             
             // Sort endpoints by height for clip assignment
@@ -294,7 +294,7 @@ namespace BranchingLEDAnimator.Animation
                 {
                     var go = new GameObject($"Tone_{endpoint}");
                     go.transform.SetParent(audioContainer.transform);
-                    go.hideFlags = HideFlags.HideAndDontSave;
+                    go.hideFlags = HideFlags.DontSave;
                     
                     var source = go.AddComponent<AudioSource>();
                     source.playOnAwake = false;
@@ -630,7 +630,7 @@ namespace BranchingLEDAnimator.Animation
         {
             // Create a simple test tone to verify audio is working
             var testGO = new GameObject("TestTone");
-            testGO.hideFlags = HideFlags.HideAndDontSave;
+            testGO.hideFlags = HideFlags.DontSave;
             var source = testGO.AddComponent<AudioSource>();
             
             // Generate a simple 440Hz tone
